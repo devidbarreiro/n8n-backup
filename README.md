@@ -1,9 +1,3 @@
-¡Claro! Aquí tienes un borrador de un archivo `README.md` que puedes usar para tu repositorio de GitHub. Solo necesitas copiar el texto y pegarlo en un nuevo archivo llamado `README.md` en la raíz de tu repositorio.
-
----
-
-### README.md
-
 # N8N Workflow Backup
 
 Este repositorio se utiliza para guardar una copia de seguridad automática de todos los flujos de trabajo de n8n. Utilizando un flujo de trabajo de n8n, se hace un "snapshot" de cada workflow y se guarda como un archivo JSON en este repositorio. Esto permite tener un control de versiones de todos los flujos de trabajo.

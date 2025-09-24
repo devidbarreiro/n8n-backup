@@ -547,6 +547,7 @@
     },
     {
       "parameters": {
+        "model": "text-embedding-3-large",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
@@ -556,7 +557,13 @@
         1472
       ],
       "id": "6fdfb66f-d18f-4e59-8d71-de8caa7a546f",
-      "name": "Embeddings OpenAI"
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
     },
     {
       "parameters": {
@@ -761,7 +768,13 @@
         1520
       ],
       "id": "e1d63d61-a110-42be-b98f-52b41c8f9b7d",
-      "name": "Download a video"
+      "name": "Download a video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {},
@@ -829,7 +842,13 @@
         1712
       ],
       "id": "5ea446b0-efab-4773-9aa6-fad72b7312e3",
-      "name": "Generate audio"
+      "name": "Generate audio",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
     },
     {
       "parameters": {
@@ -852,7 +871,13 @@
         976
       ],
       "id": "35ae1978-f3ce-4a11-8e22-043bff089a0d",
-      "name": "Generate an image"
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -925,6 +950,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-24T11:33:19.000Z",
-  "versionId": "e2f4a82e-216c-45a7-826d-d804f80662df"
+  "updatedAt": "2025-09-24T15:07:44.000Z",
+  "versionId": "43cdb359-a7c2-47b0-9418-854831fa0a41"
 }

@@ -597,8 +597,8 @@
     {
       "parameters": {
         "content": "## Main workflow loop",
-        "height": 434.88564057365943,
-        "width": 886.4410237965205,
+        "height": 435,
+        "width": 1014,
         "color": 7
       },
       "id": "65460ef7-0f88-4f35-817e-c83426a4b49e",
@@ -706,7 +706,7 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
         -32,
-        1056
+        1072
       ],
       "typeVersion": 1.1
     },
@@ -803,8 +803,9 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "={{ $json.id }}",
-          "mode": "id"
+          "value": "={{ $workflow.id }}",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/=%7B%7B%20$workflow.id%20%7D%7D"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -820,8 +821,8 @@
       "name": "Call 'n8n backup'",
       "type": "n8n-nodes-base.executeWorkflow",
       "position": [
-        976,
-        320
+        1072,
+        336
       ],
       "typeVersion": 1.2
     }
@@ -849,6 +850,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-24T11:02:51.000Z",
-  "versionId": "cda5ddd9-b400-429a-ba43-e48e8a8d267f"
+  "updatedAt": "2025-09-24T11:23:37.000Z",
+  "versionId": "c38ffecd-a208-453c-aae0-3ac6dac294c7"
 }

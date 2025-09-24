@@ -515,7 +515,13 @@
         192
       ],
       "typeVersion": 1,
-      "webhookId": "72cc43b0-2914-4e3d-908b-a2725f742c1a"
+      "webhookId": "72cc43b0-2914-4e3d-908b-a2725f742c1a",
+      "credentials": {
+        "githubApi": {
+          "id": "32RKGnsxXplo5ytx",
+          "name": "GitHub account"
+        }
+      }
     },
     {
       "parameters": {
@@ -580,6 +586,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-24T09:55:28.000Z",
-  "versionId": "429a8af8-ca88-403a-8e84-b9af3576b850"
+  "updatedAt": "2025-09-24T10:20:08.000Z",
+  "versionId": "c49fc85b-e4b7-44a4-82d2-2bf7e193b594"
 }

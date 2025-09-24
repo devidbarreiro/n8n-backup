@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "On clicking 'execute'": {
       "main": [
@@ -564,7 +564,8 @@
         "rule": {
           "interval": [
             {
-              "triggerAtHour": 7
+              "field": "hours",
+              "hoursInterval": 2
             }
           ]
         }
@@ -829,7 +830,8 @@
   ],
   "pinData": {},
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "shared": [
     {
@@ -840,7 +842,13 @@
       "projectId": "k1NZeG3qHb8L8scP"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": [
+        14
+      ]
+    }
+  },
   "tags": [
     {
       "createdAt": "2025-09-24T09:17:54.150Z",
@@ -849,7 +857,7 @@
       "name": "backup"
     }
   ],
-  "triggerCount": 0,
-  "updatedAt": "2025-09-24T11:32:41.000Z",
-  "versionId": "0cb02363-446e-41fb-9064-de1165f31bb2"
+  "triggerCount": 1,
+  "updatedAt": "2025-09-24T11:39:06.000Z",
+  "versionId": "c931c3c4-b71f-49ba-9410-25c8051af578"
 }

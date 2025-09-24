@@ -1,0 +1,28 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-09-24T11:17:18.766Z",
+  "id": "5zVqWPGefssrzFP3",
+  "isArchived": false,
+  "meta": null,
+  "name": "prueba",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-24T11:17:18.769Z",
+      "updatedAt": "2025-09-24T11:17:18.769Z",
+      "role": "workflow:owner",
+      "workflowId": "5zVqWPGefssrzFP3",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-24T11:17:18.766Z",
+  "versionId": "1a5ebec3-1637-44d2-bcea-339b9ef62801"
+}

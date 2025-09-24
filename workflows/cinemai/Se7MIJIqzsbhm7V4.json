@@ -1,0 +1,930 @@
+{
+  "active": false,
+  "connections": {
+    "Setup Heygen": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Create Avatar Video WITH Background Video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Avatar Video WITHOUT Background Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Avatar Video WITH Background Video": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Avatar Video WITHOUT Background Video": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Get Avatar Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Avatar Video": {
+      "main": [
+        [
+          {
+            "node": "If Video Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Video Done": {
+      "main": [
+        [
+          {
+            "node": "If Finish",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload your file here": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Data Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Writer",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "AI Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Writer": {
+      "main": [
+        [
+          {
+            "node": "Setup Heygen",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out Video Prompts",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Writer",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate a video": {
+      "main": [
+        [
+          {
+            "node": "Merge Video Urls",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download a video": {
+      "main": [
+        [
+          {
+            "node": "If Finish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Video Urls": {
+      "main": [
+        [
+          {
+            "node": "Merge Video Urls",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Split Out Video Prompts": {
+      "main": [
+        [
+          {
+            "node": "Generate a video",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Download a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate audio": {
+      "main": [
+        [
+          {
+            "node": "If Finish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Create Avatar Video WITH Background Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-24T10:50:33.215Z",
+  "id": "Se7MIJIqzsbhm7V4",
+  "isArchived": false,
+  "meta": null,
+  "name": "Modulo 01",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "https://help.blotato.com/api/templates/3-hackernews-to-ai-clone-videos",
+        "height": 80,
+        "width": 544,
+        "color": 6
+      },
+      "id": "652f0c4e-11bb-4f45-80d4-eaa74f26e7f3",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        288,
+        1440
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"heygen_api_key\": \"NTgzYWI2NWJmNDU1NGQ0Zjg5YmY5YTQzYzNjNzRlZGQtMTc1ODUzMTY1Mw==\",\n  \"avatar_id\": \"Kristin_public_2_20240108\",\n  \"voice_id\": \"7dde95cac3cf4d888f8e27db7b44ee75\",\n  \"has_background_video\": true,\n  \"background_video_url\": \"https://database.blotato.io/storage/v1/object/public/public_media/4ddd33eb-e811-4ab5-93e1-2cd0b7e8fb3f/videogen2-render-e6b398a2-5859-4a77-88ef-2345bcefdc98.mp4\"\n}\n",
+        "options": {}
+      },
+      "id": "4308b15d-1105-45dd-9db9-a67dd9b82218",
+      "name": "Setup Heygen",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2032,
+        1120
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "73001c6b-fae2-48cd-b0a6-aa453b837902",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "leftValue": "={{ $json.has_background_video }}",
+              "rightValue": ""
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "13b22708-945d-49de-a16a-89a8de100c30",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        2208,
+        1120
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "NTgzYWI2NWJmNDU1NGQ0Zjg5YmY5YTQzYzNjNzRlZGQtMTc1ODUzMTY1Mw==",
+              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"{{ $('Setup Heygen').item.json.avatar_id }}\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('AI Writer').item.json.output.intro_avatar.script }}\",\n        \"voice_id\": \"{{ $('Setup Heygen').item.json.voice_id }}\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 720,\n    \"height\": 1280\n  },\n  \"aspect_ratio\": \"9:16\",\n  \"caption\": \"false\",\n  \"title\": \"{{ $('AI Writer').item.json.output.intro_avatar.title }}\"\n}",
+        "options": {}
+      },
+      "id": "756f1890-d95e-400a-95b4-b86d0ae9d498",
+      "name": "Create Avatar Video WITH Background Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2432,
+        1024
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"{{ $('Setup Heygen').item.json.avatar_id }}\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('AI Writer').item.json.output.intro_avatar.script }}\",\n        \"voice_id\": \"{{ $('Setup Heygen').item.json.voice_id }}\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 720,\n    \"height\": 1280\n  },\n  \"aspect_ratio\": \"9:16\",\n  \"caption\": \"false\",\n  \"title\": \"{{ $('AI Writer').item.json.output.intro_avatar.title }}\"\n}",
+        "options": {}
+      },
+      "id": "ae4dc156-f57b-4016-85b5-d7d0ce491f61",
+      "name": "Create Avatar Video WITHOUT Background Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2432,
+        1216
+      ],
+      "typeVersion": 4.2,
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "d1e0ac6f-b70d-4ac5-ae70-9a1d820f1bba",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "position": [
+        2656,
+        1120
+      ],
+      "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "id": "19c87ba1-9036-4e90-b02d-56cbe8c7d786",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        2880,
+        1120
+      ],
+      "webhookId": "d9404622-0a06-4a65-959e-badd4fd87465",
+      "typeVersion": 1.1,
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "url": "https://api.heygen.com/v1/video_status.get",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "video_id",
+              "value": "={{ $('Merge').item.json.data.video_id }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d6f7922a-a91e-4385-a098-4ef35363fbbb",
+      "name": "Get Avatar Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        3104,
+        1056
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "version": 2,
+            "leftValue": "",
+            "caseSensitive": true,
+            "typeValidation": "loose"
+          },
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "e511deb8-8e4c-45db-aa35-18f43a0552b6",
+              "operator": {
+                "name": "filter.operator.equals",
+                "type": "string",
+                "operation": "equals"
+              },
+              "leftValue": "={{ $('Get Avatar Video').item.json.data.status }}",
+              "rightValue": "completed"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "52d59509-5e4f-4ab3-91f5-5b639a279694",
+      "name": "If Video Done",
+      "type": "n8n-nodes-base.if",
+      "position": [
+        3328,
+        1120
+      ],
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "formTitle": "Upload your data to test RAG",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload your file(s)",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf, .csv",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        1136
+      ],
+      "id": "3b835d2a-70fe-42b1-bc63-33e7a561bbae",
+      "name": "Upload your file here",
+      "webhookId": "82848bc4-5ea2-4e5a-8bb6-3c09b94a8c5d"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1088,
+        1472
+      ],
+      "id": "6fdfb66f-d18f-4e59-8d71-de8caa7a546f",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1152,
+        1328
+      ],
+      "id": "c59645ff-3167-454e-95b5-735fabd62412",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "content": "### 📚 Load Data Flow",
+        "height": 460,
+        "width": 700,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        912,
+        1040
+      ],
+      "typeVersion": 1,
+      "id": "ddd64200-93fb-489a-a87c-658fffb21e75",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        1104,
+        1136
+      ],
+      "id": "fe6f5acb-5ae0-43ac-a1ce-55e96293e8df",
+      "name": "Insert Data to Store",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Use this knowledge base to answer questions from the user",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        1536,
+        1408
+      ],
+      "id": "0909016e-ca87-4585-b3e5-96595930533f",
+      "name": "Query Data Tool"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1504,
+        1584
+      ],
+      "id": "15acc99c-9514-4595-95ef-8f37c6049761",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### Readme\nLoad your data into a vector database with the 📚 **Load Data** flow, and then use your data as chat context with the 🐕 **Retriever** flow.\n\n**Quick start**\n1. Click on the `Execute Workflow` button to run the 📚 **Load Data** flow.\n2. Click on `Open Chat` button to run the 🐕 **Retriever** flow. Then ask a question about content from your document(s)\n\n\nFor more info, check [our docs on RAG in n8n](https://docs.n8n.io/advanced-ai/rag-in-n8n/).",
+        "height": 300,
+        "width": 440,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        336,
+        1104
+      ],
+      "typeVersion": 1,
+      "id": "52246ffa-0b5d-44cd-87f7-9e82ed1f432a",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "### 🐕 2. Retriever Flow",
+        "height": 460,
+        "width": 680,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        944,
+        1248
+      ],
+      "typeVersion": 1,
+      "id": "6397f899-152a-4c72-8b81-52f8dc0e8557",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        912
+      ],
+      "id": "382379ae-e244-448c-85ef-ac0f5c934490",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "# TASK 1: INTRO DEL AVATAR\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **guion hablado del avatar para la Presentación del Caso** en el **MÓDULO 01: TRAILER**.\n3. Genera además una **descripción breve de la imagen de fondo** que acompañará el video del avatar.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración máxima del guion: 30 segundos al ser leído en voz alta.\n- Primera frase: debe generar curiosidad inmediata (curiosity gap).\n- El guion debe sonar como una presentación académica breve y profesional.\n- Menciona solo lo esencial del caso: nombre, tema central y dilema estratégico clave.\n- Tono: profesional, motivador y con autoridad, invitando al análisis y la reflexión.\n- Finaliza con una transición corta hacia la discusión del caso.\n- La descripción de la **imagen de fondo** debe ser breve, visual, realista y relacionada con el contexto del caso.\n- **NO** incluyas notas técnicas, explicaciones internas ni formato JSON.\n- Devuelve únicamente el guion y la descripción de la imagen.\n\n# OUTPUT\nGuion + descripción de imagen de fondo.\n\n---\n\n# TASK 2: TRAILER CINEMATOGRÁFICO (DIVIDIDO EN ESCENAS DE 8s)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **texto narrado del TRAILER** para el **MÓDULO 01**, incluyendo **indicaciones de escenas**.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración total: mínimo 1 minuto y máximo 90 segundos al ser leído en voz alta.\n- Estilo narrativo, cinematográfico e inmersivo, como un tráiler.\n- Divide el guion en una lista de escenas secuenciales, cada una de aprox. 6–8 segundos.\n- Cada escena debe tener dos campos:\n   - **NARRADOR**: lo que dice la voz en off.\n   - **ESCENA**: lo que se muestra visualmente (ej. “Plano de oficina de madrugada”, “Gráfico animado de crecimiento de ventas”, “Primer plano del protagonista preocupado”).\n- Inicio: situar al protagonista (nombre, edad, cargo) en un momento de tensión.\n- Incluir 2–3 datos duros y espectaculares (ventas, márgenes, cifras clave).\n- Crear contraste entre éxito aparente y conflicto estratégico oculto.\n- Cierre: plantear el dilema en forma de pregunta que deja intriga para los estudiantes.\n- Tono: dramático, frases cortas, ritmo de suspenso.\n- **NO** resumas todo el caso ni expliques soluciones; solo genera tensión.\n- **NO** incluyas notas técnicas ni formato JSON.\n- Devuelve únicamente el guion dividido en escenas numeradas.\n\n# OUTPUT\nUn guion estructurado como lista de escenas:\n- Escena 1: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 2: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 3: { \"narrador\": \"...\", \"escena\": \"...\" }\n... hasta cubrir el tiempo total.\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1504,
+        1136
+      ],
+      "id": "dc1e2c6e-fbbf-4696-bf36-4353add79f7d",
+      "name": "AI Writer"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"intro_avatar\": {\n    \"title\": \"Título breve de la introducción\",\n    \"script\": \"Guion hablado del avatar para la Presentación del Caso (máx. 30s)\",\n    \"background_image\": \"Descripción breve de la imagen de fondo relacionada con el caso\"\n  },\n  \"trailer\": {\n    \"title\": \"Título breve del tráiler\",\n    \"total_scenes\": 2,\n    \"narration_with_scenes\": [\n      {\n        \"escena_num\": 1,\n        \"narrador\": \"Texto de la voz en off (6-8s)\",\n        \"escena\": \"Descripción visual de la escena\"\n      },\n      {\n        \"escena_num\": 2,\n        \"narrador\": \"Texto de la voz en off (6-8s)\",\n        \"escena\": \"Descripción visual de la escena\"\n      }\n    ]\n  }\n}\n",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1776,
+        1440
+      ],
+      "id": "5beb8904-b70b-426d-99aa-050a2029854a",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "modelId": {
+          "__rl": true,
+          "value": "models/veo-2.0-generate-001",
+          "mode": "id"
+        },
+        "prompt": "=You are a cinematic video generator.  \nGenerate a short video clip for a single scene from a trailer, based on the structured content below:  \n\nScene number: {{ $json.escena_num }} of {{ $('AI Writer').item.json.output.trailer.total_scenes }}  \nNarration: {{ $json[\"narrador\"] }}  \nVisuals: {{ $json[\"escena\"] }}  \n\n# STYLE\n- Tone: cinematic, dramatic, immersive.  \n- Duration: around 6 to 8 seconds.  \n- Show realistic environments, office settings, data visualizations, and emotional tension in the protagonist.  \n- Use dynamic camera movements and lighting to increase drama.  \n- Sync visuals with the narration.  \n- The scene must feel like part of a larger MBA case study trailer.  \n\n# OUTPUT\nGenerate a single video clip (6–8 seconds) for this scene only.  \nDo not add captions, text overlays, or subtitles to the video.",
+        "returnAs": "url",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2064,
+        1296
+      ],
+      "id": "d1ba0812-cd89-4734-bebf-71feeb4e8514",
+      "name": "Generate a video",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "download",
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2368,
+        1520
+      ],
+      "id": "e1d63d61-a110-42be-b98f-52b41c8f9b7d",
+      "name": "Download a video"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2608,
+        1472
+      ],
+      "id": "a3edee96-c2b5-4ca6-84e6-bd31cdfb61a2",
+      "name": "Merge Video Urls"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.trailer.narration_with_scenes",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1888,
+        1280
+      ],
+      "id": "356620b7-fa8f-4ef9-a18c-850d994d0937",
+      "name": "Split Out Video Prompts"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "url",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        2192,
+        1568
+      ],
+      "id": "0abc7503-409e-4174-a530-73aaa9bd7f24",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {},
+      "type": "@elevenlabs/n8n-nodes-elevenlabs.elevenLabs",
+      "typeVersion": 1,
+      "position": [
+        2224,
+        1904
+      ],
+      "id": "86fff2bb-5c46-4160-a4b6-eb8649ca0487",
+      "name": "Convert text to speech",
+      "credentials": {}
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "model": "tts-1-hd",
+        "input": "={{ $json.narrador }}",
+        "voice": "nova",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        2192,
+        1712
+      ],
+      "id": "5ea446b0-efab-4773-9aa6-fad72b7312e3",
+      "name": "Generate audio"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/imagen-4.0-ultra-generate-001",
+          "mode": "list",
+          "cachedResultName": "models/imagen-4.0-ultra-generate-001"
+        },
+        "prompt": "={{ $json.output.intro_avatar.background_image }}",
+        "options": {
+          "binaryPropertyOutput": "data"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        1936,
+        976
+      ],
+      "id": "35ae1978-f3ce-4a11-8e22-043bff089a0d",
+      "name": "Generate an image"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1648,
+        912
+      ],
+      "id": "b28fbbd6-7e75-4e3c-885e-3d5076028327",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "97e11d2b-bf84-4f91-86e6-1166576fd1f9",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3648,
+        1472
+      ],
+      "id": "2ceebb9d-1932-4cd6-8493-c48bc478047b",
+      "name": "If Finish"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-24T10:50:33.223Z",
+      "updatedAt": "2025-09-24T10:50:33.223Z",
+      "role": "workflow:owner",
+      "workflowId": "Se7MIJIqzsbhm7V4",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-09-24T11:33:18.062Z",
+      "updatedAt": "2025-09-24T11:33:18.062Z",
+      "id": "s3oioWupiIU7HETp",
+      "name": "cinemai"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-24T11:33:19.000Z",
+  "versionId": "e2f4a82e-216c-45a7-826d-d804f80662df"
+}

@@ -159,7 +159,7 @@
         [],
         [
           {
-            "node": "Execute Workflow",
+            "node": "Call 'n8n backup'",
             "type": "main",
             "index": 0
           }
@@ -215,17 +215,6 @@
         ]
       ]
     },
-    "Execute Workflow": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "/": {
       "main": [
         [
@@ -249,6 +238,17 @@
         [
           {
             "node": "Globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'n8n backup'": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -304,6 +304,7 @@
         320
       ],
       "typeVersion": 1,
+      "alwaysOutputData": true,
       "credentials": {
         "n8nApi": {
           "id": "Rkr233UNCAfkxrec",
@@ -615,8 +616,8 @@
         "operation": "get",
         "owner": {
           "__rl": true,
-          "mode": "name",
-          "value": "={{ $json.repo.owner }}"
+          "value": "={{ $json.repo.owner }}",
+          "mode": "name"
         },
         "repository": {
           "__rl": true,
@@ -711,33 +712,6 @@
     },
     {
       "parameters": {
-        "workflowId": {
-          "__rl": true,
-          "mode": "id",
-          "value": "={{ $workflow.id }}"
-        },
-        "workflowInputs": {
-          "value": {},
-          "schema": [],
-          "mappingMode": "defineBelow",
-          "matchingColumns": [],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": true
-        },
-        "mode": "each",
-        "options": {}
-      },
-      "id": "3390469c-3d4e-4cc8-9b3a-ef03b5a25eea",
-      "name": "Execute Workflow",
-      "type": "n8n-nodes-base.executeWorkflow",
-      "position": [
-        976,
-        320
-      ],
-      "typeVersion": 1.2
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
@@ -824,6 +798,32 @@
         880
       ],
       "typeVersion": 3.2
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "id": "3390469c-3d4e-4cc8-9b3a-ef03b5a25eea",
+      "name": "Call 'n8n backup'",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        976,
+        320
+      ],
+      "typeVersion": 1.2
     }
   ],
   "pinData": {},
@@ -849,6 +849,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-24T09:21:14.000Z",
-  "versionId": "a01d1599-0c02-4537-958b-2b4dddc24185"
+  "updatedAt": "2025-09-24T11:02:51.000Z",
+  "versionId": "cda5ddd9-b400-429a-ba43-e48e8a8d267f"
 }

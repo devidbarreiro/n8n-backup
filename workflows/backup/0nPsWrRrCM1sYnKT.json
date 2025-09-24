@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Manual Trigger": {
       "main": [
@@ -598,6 +598,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-09-24T11:10:03.000Z",
+  "updatedAt": "2025-09-24T11:13:00.000Z",
   "versionId": "2b659be6-8cb5-4c80-9974-20c575f95d8f"
 }

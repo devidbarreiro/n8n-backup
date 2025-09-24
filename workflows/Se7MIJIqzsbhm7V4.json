@@ -807,8 +807,8 @@
       "type": "@elevenlabs/n8n-nodes-elevenlabs.elevenLabs",
       "typeVersion": 1,
       "position": [
-        2144,
-        1936
+        2224,
+        1904
       ],
       "id": "86fff2bb-5c46-4160-a4b6-eb8649ca0487",
       "name": "Convert text to speech",
@@ -918,6 +918,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-24T11:16:08.000Z",
-  "versionId": "fbbc4830-9c76-4d93-aade-2fe1c1b180e5"
+  "updatedAt": "2025-09-24T11:25:28.000Z",
+  "versionId": "fd12347b-b227-467c-90b1-6b0026611fae"
 }

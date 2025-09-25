@@ -1,0 +1,176 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-25T12:01:20.980Z",
+  "id": "iQU6e9LhGQ4TbLOL",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Supabase + IA",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "5c53ed68-be97-44a9-9799-3d70e0b9ef7b",
+      "name": "When chat message received",
+      "webhookId": "161ee4a5-19bd-43c3-83fc-1dea2d07cd9a"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a helpful assistant, we will insert data on my supabase database.\nMy schema is:\n-- Crear tipos ENUM\nCREATE TYPE sexo_enum AS ENUM ('masculino', 'femenino', 'otro');\nCREATE TYPE tipo_deporte_enum AS ENUM ('correr', 'nadar', 'ciclismo', 'nutricion');\nCREATE TYPE estado_entrenamiento_enum AS ENUM ('pendiente', 'completado', 'no_completado');\nCREATE TYPE especialidad_agente_enum AS ENUM ('correr', 'nadar', 'ciclismo', 'nutricion');\n\n-- Tabla USUARIOS\nCREATE TABLE usuarios (\n    id SERIAL PRIMARY KEY,\n    nombre VARCHAR(100) NOT NULL,\n    apellidos VARCHAR(100) NOT NULL,\n    email VARCHAR(255) UNIQUE NOT NULL,\n    password_hash VARCHAR(255) NOT NULL,\n    fecha_nacimiento DATE NOT NULL,\n    peso DECIMAL(5,2), -- ej: 75.50 kg\n    altura DECIMAL(4,2), -- ej: 1.75 m\n    sexo sexo_enum NOT NULL,\n    fecha_registro TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    activo BOOLEAN DEFAULT true,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Tabla AGENTES_IA\nCREATE TABLE agentes_ia (\n    id SERIAL PRIMARY KEY,\n    especialidad especialidad_agente_enum NOT NULL UNIQUE,\n    nombre VARCHAR(100) NOT NULL,\n    descripcion TEXT,\n    activo BOOLEAN DEFAULT true,\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Tabla PLANES_ENTRENAMIENTO\nCREATE TABLE planes_entrenamiento (\n    id SERIAL PRIMARY KEY,\n    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,\n    agente_creador_id INTEGER NOT NULL REFERENCES agentes_ia(id),\n    nombre VARCHAR(200) NOT NULL,\n    descripcion TEXT,\n    fecha_inicio DATE NOT NULL,\n    fecha_fin DATE NOT NULL,\n    activo BOOLEAN DEFAULT true,\n    fecha_creacion TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Tabla ENTRENAMIENTOS\nCREATE TABLE entrenamientos (\n    id SERIAL PRIMARY KEY,\n    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,\n    plan_id INTEGER REFERENCES planes_entrenamiento(id) ON DELETE SET NULL,\n    tipo_deporte tipo_deporte_enum NOT NULL,\n    titulo VARCHAR(200) NOT NULL,\n    descripcion TEXT,\n    fecha_planificada DATE NOT NULL,\n    fecha_inicio TIMESTAMP WITH TIME ZONE,\n    fecha_fin TIMESTAMP WITH TIME ZONE,\n    estado estado_entrenamiento_enum DEFAULT 'pendiente',\n    duracion_minutos INTEGER,\n    notas TEXT,\n    metricas_basicas JSONB,\n    fecha_creacion TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Tabla OBJETIVOS\nCREATE TABLE objetivos (\n    id SERIAL PRIMARY KEY,\n    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,\n    titulo VARCHAR(200) NOT NULL,\n    descripcion TEXT,\n    tipo_deporte tipo_deporte_enum,\n    fecha_objetivo DATE,\n    completado BOOLEAN DEFAULT false,\n    fecha_creacion TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Tabla CONVERSACIONES_IA\nCREATE TABLE conversaciones_ia (\n    id SERIAL PRIMARY KEY,\n    usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,\n    agente_ia_id INTEGER NOT NULL REFERENCES agentes_ia(id),\n    mensaje_usuario TEXT NOT NULL,\n    respuesta_ia TEXT NOT NULL,\n    timestamp TIMESTAMP WITH TIME ZONE DEFAULT NOW(),\n    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()\n);\n\n-- Crear índices para optimizar consultas\nCREATE INDEX idx_usuarios_email ON usuarios(email);\nCREATE INDEX idx_usuarios_activo ON usuarios(activo);\n\nCREATE INDEX idx_entrenamientos_usuario ON entrenamientos(usuario_id);\nCREATE INDEX idx_entrenamientos_fecha ON entrenamientos(fecha_planificada);\nCREATE INDEX idx_entrenamientos_estado ON entrenamientos(estado);\nCREATE INDEX idx_entrenamientos_tipo ON entrenamientos(tipo_deporte);\n\nCREATE INDEX idx_planes_usuario ON planes_entrenamiento(usuario_id);\nCREATE INDEX idx_planes_activo ON planes_entrenamiento(activo);\n\nCREATE INDEX idx_objetivos_usuario ON objetivos(usuario_id);\nCREATE INDEX idx_objetivos_completado ON objetivos(completado);\n\nCREATE INDEX idx_conversaciones_usuario ON conversaciones_ia(usuario_id);\nCREATE INDEX idx_conversaciones_agente ON conversaciones_ia(agente_ia_id);\nCREATE INDEX idx_conversaciones_timestamp ON conversaciones_ia(timestamp);\n\n-- Función para actualizar updated_at automáticamente\nCREATE OR REPLACE FUNCTION update_updated_at_column()\nRETURNS TRIGGER AS $$\nBEGIN\n    NEW.updated_at = NOW();\n    RETURN NEW;\nEND;\n$$ language 'plpgsql';\n\n-- Triggers para updated_at\nCREATE TRIGGER update_usuarios_updated_at BEFORE UPDATE ON usuarios\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\nCREATE TRIGGER update_entrenamientos_updated_at BEFORE UPDATE ON entrenamientos\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\nCREATE TRIGGER update_planes_updated_at BEFORE UPDATE ON planes_entrenamiento\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\nCREATE TRIGGER update_objetivos_updated_at BEFORE UPDATE ON objetivos\n    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();\n\n-- Insertar agentes IA por defecto\nINSERT INTO agentes_ia (especialidad, nombre, descripcion) VALUES \n('correr', 'Coach Running', 'Especialista en entrenamientos de carrera y running'),\n('nadar', 'Coach Swimming', 'Experto en técnicas y entrenamientos de natación'),\n('ciclismo', 'Coach Cycling', 'Especialista en ciclismo de ruta y entrenamiento'),\n('nutricion', 'Nutricionista AI', 'Asesor nutricional especializado en deportes');\n\n-- Habilitar Row Level Security (RLS) para seguridad\nALTER TABLE usuarios ENABLE ROW LEVEL SECURITY;\nALTER TABLE entrenamientos ENABLE ROW LEVEL SECURITY;\nALTER TABLE planes_entrenamiento ENABLE ROW LEVEL SECURITY;\nALTER TABLE objetivos ENABLE ROW LEVEL SECURITY;\nALTER TABLE conversaciones_ia ENABLE ROW LEVEL SECURITY;\n\n-- Políticas RLS básicas (los usuarios solo ven sus propios datos)\nCREATE POLICY \"Usuarios pueden ver solo sus datos\" ON usuarios\n    FOR ALL USING (auth.uid()::text = id::text);\n\nCREATE POLICY \"Usuarios pueden ver solo sus entrenamientos\" ON entrenamientos\n    FOR ALL USING (auth.uid()::text = usuario_id::text);\n\nCREATE POLICY \"Usuarios pueden ver solo sus planes\" ON planes_entrenamiento\n    FOR ALL USING (auth.uid()::text = usuario_id::text);\n\nCREATE POLICY \"Usuarios pueden ver solo sus objetivos\" ON objetivos\n    FOR ALL USING (auth.uid()::text = usuario_id::text);\n\nCREATE POLICY \"Usuarios pueden ver solo sus conversaciones\" ON conversaciones_ia\n    FOR ALL USING (auth.uid()::text = usuario_id::text);\n\n-- Agentes IA son de solo lectura para todos los usuarios autenticados\nALTER TABLE agentes_ia ENABLE ROW LEVEL SECURITY;\nCREATE POLICY \"Agentes IA visibles para usuarios autenticados\" ON agentes_ia\n    FOR SELECT USING (auth.role() = 'authenticated');\n\n-- Comentarios para documentación\nCOMMENT ON TABLE usuarios IS 'Información básica de los usuarios de la aplicación';\nCOMMENT ON TABLE agentes_ia IS 'Definición de los diferentes agentes IA especializados';\nCOMMENT ON TABLE entrenamientos IS 'Registro de todos los entrenamientos planificados y realizados';\nCOMMENT ON TABLE planes_entrenamiento IS 'Planes de entrenamiento generados por la IA';\nCOMMENT ON TABLE objetivos IS 'Objetivos deportivos definidos por los usuarios';\nCOMMENT ON TABLE conversaciones_ia IS 'Historial de conversaciones con los agentes IA';\n\nCOMMENT ON COLUMN entrenamientos.metricas_basicas IS 'JSON con métricas específicas según el tipo de deporte';\nCOMMENT ON COLUMN entrenamientos.estado IS 'Estado del entrenamiento: pendiente, completado o no_completado';"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c2746e97-4f86-4fb0-b144-baef98236b7c",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        208
+      ],
+      "id": "f5a39d58-23bb-47bd-91d2-0f612e9b0a18",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "planes_entrenamiento",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "usuario_id"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        560,
+        0
+      ],
+      "id": "85e70cc0-6173-40df-9ea3-065a528b583d",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hQzQNzIN13lv1Hrz",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"id\": 1,\n  \"usuario_id\": 42,\n  \"agente_creador_id\": 3,\n  \"nombre\": \"Plan de fuerza inicial\",\n  \"descripcion\": \"Rutina de entrenamiento enfocada en fuerza y resistencia.\",\n  \"fecha_inicio\": \"2025-10-01\",\n  \"fecha_fin\": \"2025-12-31\",\n  \"activo\": true,\n  \"fecha_creacion\": \"2025-09-25T14:30:00Z\",\n  \"created_at\": \"2025-09-25T14:30:00Z\",\n  \"updated_at\": \"2025-09-25T14:30:00Z\"\n}\n",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        208
+      ],
+      "id": "7a252688-1fab-4bf3-afd2-fe33963e553f",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-25T12:01:20.992Z",
+      "updatedAt": "2025-09-25T12:01:20.992Z",
+      "role": "workflow:owner",
+      "workflowId": "iQU6e9LhGQ4TbLOL",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-25T12:12:46.000Z",
+  "versionId": "e86b681a-8462-44c4-a0d6-4e07a5c79c2c"
+}

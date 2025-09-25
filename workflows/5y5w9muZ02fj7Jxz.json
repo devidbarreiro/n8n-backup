@@ -27,82 +27,7 @@
       "main": [
         [
           {
-            "node": "IF Runner",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "IF Swimmer",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "IF Cyclist",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "IF Triathlon",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "IF Nutritionist",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF Runner": {
-      "main": [
-        [
-          {
-            "node": "Runner Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF Swimmer": {
-      "main": [
-        [
-          {
-            "node": "Swimmer Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF Cyclist": {
-      "main": [
-        [
-          {
-            "node": "Cyclist Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF Triathlon": {
-      "main": [
-        [
-          {
-            "node": "Triathlon Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF Nutritionist": {
-      "main": [
-        [
-          {
-            "node": "Nutritionist Agent",
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -140,72 +65,6 @@
         ]
       ]
     },
-    "Runner Agent": {
-      "main": [
-        [
-          {
-            "node": "Create Plan",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Swimmer Agent": {
-      "main": [
-        [
-          {
-            "node": "Create Plan",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Cyclist Agent": {
-      "main": [
-        [
-          {
-            "node": "Create Plan",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Triathlon Agent": {
-      "main": [
-        [
-          {
-            "node": "Create Plan",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Nutritionist Agent": {
-      "main": [
-        [
-          {
-            "node": "Create Plan",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create Plan": {
-      "main": [
-        [
-          {
-            "node": "Save Conversation",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "OpenAI Model": {
       "ai_languageModel": [
         [
@@ -238,6 +97,11 @@
             "node": "Nutritionist Agent",
             "type": "ai_languageModel",
             "index": 0
+          },
+          {
+            "node": "Agents Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
           }
         ]
       ]
@@ -252,6 +116,45 @@
           }
         ]
       ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Runner Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Swimmer Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Cyclist Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Triathlon Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Nutritionist Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-25T10:56:04.291Z",
@@ -260,7 +163,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Sistema Deportivo - Workflow Completo con Todos los Agentes",
+  "name": "My workflow test",
   "nodes": [
     {
       "parameters": {
@@ -269,10 +172,10 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.3,
       "position": [
-        -1072,
-        -512
+        -432,
+        -64
       ],
-      "id": "37970ac0-5904-42eb-9bec-486532dcb281",
+      "id": "20fc50e9-3259-447f-9ecd-0b9aea3c37c9",
       "name": "When chat message received",
       "webhookId": "f634dda0-34d5-47c1-9ef5-a5e7cede59ec"
     },
@@ -299,23 +202,23 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -784,
-        -512
+        -144,
+        -64
       ],
-      "id": "1b3d729a-6057-4b01-a65c-29f979216d65",
+      "id": "26851825-073d-415f-a8b5-a32447dc258a",
       "name": "Edit Fields"
     },
     {
       "parameters": {
-        "jsonSchemaExample": "{\n  \"agente_seleccionado\": \"runner | swimmer | cyclist | triathlon | nutritionist\",\n  \"razonamiento\": \"Por que seleccione este agente\",\n  \"urgencia\": \"alta | media | baja\"\n}"
+        "jsonSchemaExample": "{\n  \"agente_seleccionado\": \"runner\",\n  \"razonamiento\": \"Detecte la palabra maraton en la consulta\",\n  \"urgencia\": \"media\"\n}"
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        -256,
-        -48
+        384,
+        400
       ],
-      "id": "278c2ef8-69d4-4618-8030-1e3860dfe4ac",
+      "id": "fcfbeb22-375c-467f-8f72-911f677d9f26",
       "name": "Routing Parser"
     },
     {
@@ -324,256 +227,112 @@
         "text": "={{ $json.content }}",
         "hasOutputParser": true,
         "options": {
-          "systemMessage": "Eres el ORQUESTADOR. Analiza esta consulta y decide que agente debe responder:\n\nAgentes disponibles:\n- runner: Para running, maratones, 5K, 10K, correr, medio maraton, maraton\n- swimmer: Para natacion, piscina, estilos, crol, nadar\n- cyclist: Para ciclismo, bici, potencia, FTP, cadencia\n- triathlon: Para triatlon, ironman, brick, combinacion deportes\n- nutritionist: Para nutricion, dieta, peso, alimentacion, suplementos\n\nAnaliza las palabras clave:\n- Si menciona maraton, medio maraton, 5K, 10K, correr → runner\n- Si menciona nadar, piscina, crol, espalda, natacion → swimmer\n- Si menciona bici, ciclismo, FTP, potencia, cadencia → cyclist\n- Si menciona triatlon, ironman, brick, combinacion → triathlon\n- Si menciona nutricion, dieta, peso, comer, alimentacion → nutritionist"
+          "systemMessage": "Analiza esta consulta del usuario y decide que agente deportivo debe responder.\n\nConsulta: \"{{ $json.content }}\"\n\nAgentes disponibles:\n- runner: Para running, carreras, maratones, 5K, 10K, correr\n- swimmer: Para natacion, piscina, estilos, nadar\n- cyclist: Para ciclismo, bici, potencia, FTP\n- triathlon: Para triatlon, ironman, brick\n- nutritionist: Para nutricion, dieta, alimentacion\n\nReglas de decision:\n- Si menciona \"maraton\", \"correr\", \"5K\", \"10K\" → runner\n- Si menciona \"nadar\", \"piscina\", \"crol\" → swimmer\n- Si menciona \"bici\", \"ciclismo\", \"FTP\" → cyclist\n- Si menciona \"triatlon\", \"ironman\" → triathlon\n- Si menciona \"nutricion\", \"dieta\", \"comer\" → nutritionist\n\nResponde SOLO en formato JSON valido."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        -432,
-        -352
+        208,
+        96
       ],
-      "id": "694b30c1-4ae8-495a-bb23-2c3e8a88d1dc",
+      "id": "bdd69bfd-52e9-4e0d-a3bf-c9b40e98b313",
       "name": "Orquestador"
     },
     {
       "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.output.agente_seleccionado }}",
-              "value2": "runner"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        -144,
-        -400
-      ],
-      "id": "00ae36b5-5442-4479-a798-587034454395",
-      "name": "IF Runner"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.output.agente_seleccionado }}",
-              "value2": "swimmer"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        -144,
-        -288
-      ],
-      "id": "cb0a87cb-e298-4c33-a7f2-2dbbc5b14a74",
-      "name": "IF Swimmer"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.output.agente_seleccionado }}",
-              "value2": "cyclist"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        -144,
-        -192
-      ],
-      "id": "52a98d19-5aef-47ee-abd0-160be2b88bbb",
-      "name": "IF Cyclist"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.output.agente_seleccionado }}",
-              "value2": "triathlon"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        -144,
-        -96
-      ],
-      "id": "d74639d0-a189-4157-8c6a-d5798193612e",
-      "name": "IF Triathlon"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.output.agente_seleccionado }}",
-              "value2": "nutritionist"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        -144,
-        16
-      ],
-      "id": "8320cb4f-dc33-4d87-9ff9-3fba4cdbe699",
-      "name": "IF Nutritionist"
-    },
-    {
-      "parameters": {
-        "jsonSchemaExample": "{\n  \"respuesta_principal\": \"Plan detallado de entrenamiento\",\n  \"tipo_respuesta\": \"plan_entrenamiento\",\n  \"deporte\": \"correr\",\n  \"plan_semanal\": {\n    \"duracion_total_semanas\": 21,\n    \"frecuencia_semanal\": 4\n  },\n  \"consejos_adicionales\": [\"Lista de consejos\"]\n}"
+        "jsonSchemaExample": "{\n  \"id\": 1,\n  \"usuario_id\": 42,\n  \"agente_creador_id\": 3,\n  \"nombre\": \"Plan de fuerza inicial\",\n  \"descripcion\": \"Rutina de entrenamiento enfocada en fuerza y resistencia.\",\n  \"fecha_inicio\": \"2025-10-01\",\n  \"fecha_fin\": \"2025-12-31\",\n  \"activo\": true,\n  \"fecha_creacion\": \"2025-09-25T14:30:00Z\",\n  \"created_at\": \"2025-09-25T14:30:00Z\",\n  \"updated_at\": \"2025-09-25T14:30:00Z\"\n}\n",
+        "autoFix": true,
+        "customizeRetryPrompt": true
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        320,
-        176
+        912,
+        624
       ],
-      "id": "57543d50-cdce-4d70-8fed-7c6bd42531d2",
+      "id": "ec89f338-ce7c-4864-ade7-184a78475fef",
       "name": "Agents Output Parser"
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "text": "Eres un entrenador experto en RUNNING. Analiza esta consulta y crea un plan personalizado.\n\nConsulta: \"{{ $node['Edit Fields'].json.content }}\"\n\nTu expertise:\n- Planes para 5K, 10K, medio maraton, maraton\n- Periodizacion progresiva\n- Prevencion de lesiones\n- Tecnica de carrera\n\nTipos de entrenamiento (solo estos 3):\n- base: aerobico suave (Z1-Z2)\n- series: intervalos velocidad (Z4-Z5)  \n- long: entrenamientos largos\n\nEstructura tipica:\n- 3-4 entrenamientos/semana\n- Progresion gradual de volumen\n- Balance 60% base, 25% series, 15% long\n\nCrea un plan detallado y responde en formato JSON.",
         "hasOutputParser": true,
-        "options": {
-          "systemMessage": "Eres un ENTRENADOR DE RUNNING especializado con 15 anos de experiencia.\n\nAnaliza esta consulta: \"{{$node['Edit Fields'].json.content}}\"\n\nTu expertise:\n- Planes progresivos para 5K, 10K, medio maraton, maraton\n- Periodizacion inteligente\n- Prevencion de lesiones\n- Tecnica de carrera\n\nSubtipos obligatorios (solo estos 3):\n- base: entrenamientos aerobicos suaves (Z1-Z2)\n- series: intervalos de velocidad (Z4-Z5)\n- long: entrenamientos largos de resistencia\n\nEstructura semanal tipica:\n- 3-4 entrenamientos/semana\n- Balance: 60% base, 25% series, 15% long\n\nResponde con plan detallado usando formato JSON estructurado."
-        }
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        48,
-        -400
+        688,
+        48
       ],
-      "id": "c555460c-7426-4619-aa54-1421bdb8876b",
+      "id": "229e266c-40b1-48d9-87dc-eb4507ec50f5",
       "name": "Runner Agent"
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "text": "Eres un entrenador experto en NATACION. Analiza esta consulta y crea un plan personalizado.\n\nConsulta: \"{{ $node['Edit Fields'].json.content }}\"\n\nTu expertise:\n- Tecnica de 4 estilos (libre, espalda, pecho, mariposa)\n- Entrenamientos en piscina estructurados\n- Analisis de ritmos por 100m\n- Respiracion bilateral\n\nTipos de entrenamiento (solo estos 3):\n- base: nado continuo aerobico\n- series: intervalos velocidad y tecnica\n- long: entrenamientos largos resistencia\n\nEstructura tipica:\n- 3-4 sesiones/semana\n- Combinar tecnica con resistencia\n- Progresion de volumen gradual\n\nCrea un plan detallado y responde en formato JSON.",
         "hasOutputParser": true,
-        "options": {
-          "systemMessage": "Eres un ENTRENADOR DE NATACION especializado con certificaciones internacionales.\n\nAnaliza esta consulta: \"{{$node['Edit Fields'].json.content}}\"\n\nTu expertise:\n- Tecnica de 4 estilos (libre, espalda, pecho, mariposa)\n- Entrenamientos estructurados en piscina\n- Analisis de ritmos por 100m\n- Respiracion bilateral y eficiencia\n\nSubtipos obligatorios (solo estos 3):\n- base: nado continuo aerobico suave\n- series: intervalos de velocidad y tecnica\n- long: entrenamientos largos de resistencia\n\nEstructura tipica:\n- 3-4 sesiones/semana\n- Combinar tecnica con resistencia\n- Progresion gradual de volumen\n\nResponde con plan detallado usando formato JSON estructurado."
-        }
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        48,
-        -288
+        688,
+        160
       ],
-      "id": "9cd805f7-2586-4611-a018-1741d7c35018",
+      "id": "ef7bfd47-8b2a-4c54-b595-5739e6fb822b",
       "name": "Swimmer Agent"
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "text": "Eres un entrenador experto en CICLISMO. Analiza esta consulta y crea un plan personalizado.\n\nConsulta: \"{{ $node['Edit Fields'].json.content }}\"\n\nTu expertise:\n- Entrenamientos basados en FTP\n- Analisis de potencia y cadencia\n- Tecnica de pedaleo\n- Planificacion ruta/montana\n\nTipos de entrenamiento (solo estos 3):\n- base: rodajes aerobicos suaves\n- series: intervalos de potencia\n- long: entrenamientos largos\n\nEstructura tipica:\n- 3-5 sesiones/semana\n- Balance volumen/intensidad\n- Periodizacion de potencia\n\nCrea un plan detallado y responde en formato JSON.",
         "hasOutputParser": true,
-        "options": {
-          "systemMessage": "Eres un ENTRENADOR DE CICLISMO especializado en rendimiento y potencia.\n\nAnaliza esta consulta: \"{{$node['Edit Fields'].json.content}}\"\n\nTu expertise:\n- Entrenamientos basados en FTP (Functional Threshold Power)\n- Analisis de metricas (potencia, cadencia, FC)\n- Tecnica de pedaleo y aerodinamica\n- Planificacion para ruta y montana\n\nSubtipos obligatorios (solo estos 3):\n- base: rodajes aerobicos suaves (Z1-Z2)\n- series: intervalos de potencia (Z4-Z5)\n- long: entrenamientos largos de resistencia\n\nEstructura tipica:\n- 3-5 sesiones/semana\n- Balance volumen/intensidad\n- Periodizacion de potencia\n\nResponde con plan detallado usando formato JSON estructurado."
-        }
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        48,
-        -192
+        688,
+        256
       ],
-      "id": "93bc320c-2b74-4c6c-9ebf-face0aed1315",
+      "id": "43374751-2fc6-40ad-88e3-fb178f5aba57",
       "name": "Cyclist Agent"
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "text": "Eres un entrenador experto en TRIATLON. Analiza esta consulta y crea un plan personalizado.\n\nConsulta: \"{{ $node['Edit Fields'].json.content }}\"\n\nTu expertise:\n- Integracion natacion-ciclismo-carrera\n- Entrenamientos BRICK (bici+carrera)\n- Transiciones T1 y T2\n- Periodizacion multi-disciplinar\n\nTipos de entrenamiento:\n- base: aerobico suave por disciplina\n- series: intervalos velocidad/potencia\n- long: entrenamientos largos\n- brick: combinados (especial triatlon)\n\nEstructura tipica:\n- 6-8 sesiones/semana\n- Balance entre 3 disciplinas\n- Enfoque en transiciones\n\nCrea un plan detallado y responde en formato JSON.",
         "hasOutputParser": true,
-        "options": {
-          "systemMessage": "Eres un ENTRENADOR DE TRIATLON especializado con experiencia en Ironman.\n\nAnaliza esta consulta: \"{{$node['Edit Fields'].json.content}}\"\n\nTu expertise:\n- Integracion de natacion, ciclismo y carrera\n- Entrenamientos BRICK (bici+carrera)\n- Planificacion de transiciones T1 y T2\n- Periodizacion multi-disciplinar\n- Estrategias de competicion\n\nSubtipos por disciplina (solo estos 3 + brick):\n- base: entrenamientos aerobicos suaves\n- series: intervalos de velocidad/potencia\n- long: entrenamientos largos de resistencia\n- brick: entrenamientos combinados (especial triatlon)\n\nEstructura tipica:\n- 6-8 sesiones/semana distribuidas\n- Balance entre 3 disciplinas\n- Enfoque en transiciones\n\nResponde con plan detallado usando formato JSON estructurado."
-        }
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        48,
-        -96
+        688,
+        352
       ],
-      "id": "6a0a85c4-f4d5-4c09-bca0-53b7e18192bf",
+      "id": "46d9b58c-f70f-4de3-8048-fc3a321522f4",
       "name": "Triathlon Agent"
     },
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $('When chat message received').item.json.chatInput }}",
+        "text": "Eres un NUTRICIONISTA DEPORTIVO experto. Analiza esta consulta y crea un plan personalizado.\n\nConsulta: \"{{ $node['Edit Fields'].json.content }}\"\n\nTu expertise:\n- Nutricion periodizada por fases\n- Composicion corporal optima\n- Hidratacion y electrolitos\n- Suplementacion evidence-based\n- Estrategias pre/durante/post ejercicio\n\nAreas de enfoque:\n- Analisis nutricional personalizado\n- Planificacion de comidas\n- Estrategias de hidratacion\n- Recomendaciones suplementacion\n- Timing de nutrientes\n\nEstructura tipica:\n- Plan nutricional semanal\n- Estrategias competicion\n- Monitoreo composicion corporal\n\nCrea un plan nutricional detallado y responde en formato JSON.",
         "hasOutputParser": true,
-        "options": {
-          "systemMessage": "=Eres un NUTRICIONISTA DEPORTIVO especializado en deportes de resistencia.\n\nAnaliza esta consulta: \"{{$node['Edit Fields'].json.content}}\"\n\nTu expertise:\n- Nutricion periodizada segun fases de entrenamiento\n- Composicion corporal optima para rendimiento\n- Hidratacion y balance electrolitico\n- Suplementacion basada en evidencia\n- Estrategias pre/durante/post ejercicio\n\nAreas de enfoque:\n- Analisis nutricional personalizado\n- Planificacion de comidas por objetivos\n- Estrategias de hidratacion\n- Recomendaciones de suplementacion\n- Periodizacion nutricional\n\nEstructura tipica:\n- Plan nutricional semanal\n- Timing de nutrientes\n- Estrategias de competicion\n- Monitoreo de composicion corporal\n\nResponde con plan nutricional detallado usando formato JSON estructurado."
-        }
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        48,
-        16
+        688,
+        464
       ],
-      "id": "f717986b-5247-4176-8bd7-e47b093f0bc9",
+      "id": "394f42ac-b8bd-48fb-bebb-fbb620ecbd74",
       "name": "Nutritionist Agent"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        304,
-        -192
-      ],
-      "id": "72c03203-1216-41cd-ae3a-2f6667d59317",
-      "name": "Create Plan",
-      "credentials": {
-        "supabaseApi": {
-          "id": "hQzQNzIN13lv1Hrz",
-          "name": "Supabase account"
-        }
-      },
-      "disabled": true
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        448,
-        -192
-      ],
-      "id": "17f78ad0-32c6-4a6a-838a-8e8e3c77840b",
-      "name": "Save Conversation",
-      "credentials": {
-        "supabaseApi": {
-          "id": "hQzQNzIN13lv1Hrz",
-          "name": "Supabase account"
-        }
-      },
-      "disabled": true
     },
     {
       "parameters": {
@@ -588,10 +347,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -544,
-        -128
+        448,
+        864
       ],
-      "id": "71c74c4d-c152-4136-b1ec-63ab9de37004",
+      "id": "42866402-d8e4-434d-8f3c-9507f8c90475",
       "name": "OpenAI Model",
       "credentials": {
         "openAiApi": {
@@ -599,6 +358,137 @@
           "name": "OpenAi account"
         }
       }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.agente_seleccionado }}",
+                    "rightValue": "runner",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "06bb4578-6c65-414e-a289-d7dc1d6a4ddd"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e38a1b85-bc35-45a9-997f-9530aecf9aca",
+                    "leftValue": "={{ $json.output.agente_seleccionado }}",
+                    "rightValue": "swimmer",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "50095b47-ee89-4b9b-ba34-1b6b4abc5e40",
+                    "leftValue": "={{ $json.output.agente_seleccionado }}",
+                    "rightValue": "cyclist",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5d0beadb-fe36-4374-9697-1399ef23c1bb",
+                    "leftValue": "={{ $json.output.agente_seleccionado }}",
+                    "rightValue": "triathlon",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "643245d3-bd6c-4c77-8de2-4b0b7eead7fe",
+                    "leftValue": "={{ $json.output.agente_seleccionado }}",
+                    "rightValue": "nutritionist",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        480,
+        80
+      ],
+      "id": "6bc7fe20-c4e6-4b1d-88e1-689eaa3e0da3",
+      "name": "Switch"
     }
   ],
   "pinData": {},
@@ -617,6 +507,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-25T11:59:46.000Z",
-  "versionId": "2da571d4-c05f-47e7-b2f5-62b36b8fc7bc"
+  "updatedAt": "2025-09-25T13:43:49.000Z",
+  "versionId": "28a253a3-5381-449a-adfa-bf2a0b80b50f"
 }

@@ -5,36 +5,12 @@
       "main": [
         [
           {
-            "node": "If",
+            "node": "Create Avatar Video",
             "type": "main",
             "index": 0
-          }
-        ]
-      ]
-    },
-    "If": {
-      "main": [
-        [
+          },
           {
-            "node": "Create Avatar Video WITH Background Video",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Create Avatar Video WITHOUT Background Video",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Create Avatar Video WITH Background Video": {
-      "main": [
-        [
-          {
-            "node": "Merge",
+            "node": "Create Case Summary",
             "type": "main",
             "index": 0
           }
@@ -43,13 +19,7 @@
     },
     "Create Avatar Video WITHOUT Background Video": {
       "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
+        []
       ]
     },
     "Merge": {
@@ -289,9 +259,14 @@
     },
     "Generate an image": {
       "main": [
+        []
+      ]
+    },
+    "Create Avatar Video": {
+      "main": [
         [
           {
-            "node": "Setup Heygen",
+            "node": "Merge",
             "type": "main",
             "index": 0
           }
@@ -326,79 +301,17 @@
     {
       "parameters": {
         "mode": "raw",
-        "jsonOutput": "{\n  \"heygen_api_key\": \"NTgzYWI2NWJmNDU1NGQ0Zjg5YmY5YTQzYzNjNzRlZGQtMTc1ODUzMTY1Mw==\",\n  \"avatar_id\": \"Kristin_public_2_20240108\",\n  \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n  \"has_background_video\": true,\n  \"background_video_url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n}\n",
+        "jsonOutput": "{\n  \"heygen_api_key\": \"ZTY1MzdhODZkMWQ2NGY5OThjYmNiMGI4M2U5ZGI5MjQtMTc1ODgxMDgwNw==\",\n  \"avatar_id\": \"Kristin_public_2_20240108\",\n  \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n  \"has_background_video\": true,\n  \"background_video_url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n}\n",
         "options": {}
       },
       "id": "4308b15d-1105-45dd-9db9-a67dd9b82218",
       "name": "Setup Heygen",
       "type": "n8n-nodes-base.set",
       "position": [
-        2016,
-        1120
+        2064,
+        1136
       ],
       "typeVersion": 3.4
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "73001c6b-fae2-48cd-b0a6-aa453b837902",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              },
-              "leftValue": "={{ $json.has_background_video }}",
-              "rightValue": ""
-            }
-          ],
-          "combinator": "and"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "id": "13b22708-945d-49de-a16a-89a8de100c30",
-      "name": "If",
-      "type": "n8n-nodes-base.if",
-      "position": [
-        2208,
-        1120
-      ],
-      "typeVersion": 2.2
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.heygen.com/v2/video/generate",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "X-Api-Key",
-              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
-            }
-          ]
-        },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"Kristin_public_2_20240108\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"¿Qué pasaría si un pequeño cambio en la estrategia pudiera definir el futuro de una empresa? Hoy exploraremos el caso de RoboTech, una innovadora compañía en el ámbito de la robótica, que en 2017 enfrentó un dilema estratégico crucial: ¿debería continuar invirtiendo en el desarrollo de nuevos dispositivos a pesar de sus recientes pérdidas significativa? Prepárense para analizar los desafíos y oportunidades que se despliegan ante Pat Chen, CEO de RoboTech, mientras navegamos por este complejo panorama.\",\n        \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      },\n      \"background\": {\n        \"type\": \"image\",\n        \"url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  },\n  \"aspect_ratio\": \"16:9\",\n  \"caption\": \"false\",\n  \"title\": \"Presentación del Caso RoboTech\"\n}\n",
-        "options": {}
-      },
-      "id": "756f1890-d95e-400a-95b4-b86d0ae9d498",
-      "name": "Create Avatar Video WITH Background Video",
-      "type": "n8n-nodes-base.httpRequest",
-      "position": [
-        2432,
-        1024
-      ],
-      "typeVersion": 4.2
     },
     {
       "parameters": {
@@ -422,10 +335,11 @@
       "name": "Create Avatar Video WITHOUT Background Video",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        2432,
-        1216
+        2128,
+        672
       ],
-      "typeVersion": 4.2
+      "typeVersion": 4.2,
+      "disabled": true
     },
     {
       "parameters": {},
@@ -434,9 +348,10 @@
       "type": "n8n-nodes-base.merge",
       "position": [
         2656,
-        1120
+        1040
       ],
-      "typeVersion": 3.2
+      "typeVersion": 3.2,
+      "disabled": true
     },
     {
       "parameters": {
@@ -452,7 +367,8 @@
       ],
       "webhookId": "d9404622-0a06-4a65-959e-badd4fd87465",
       "typeVersion": 1.1,
-      "alwaysOutputData": false
+      "alwaysOutputData": false,
+      "disabled": true
     },
     {
       "parameters": {
@@ -484,7 +400,8 @@
         3104,
         1056
       ],
-      "typeVersion": 4.2
+      "typeVersion": 4.2,
+      "disabled": true
     },
     {
       "parameters": {
@@ -519,7 +436,8 @@
         3328,
         1120
       ],
-      "typeVersion": 2.2
+      "typeVersion": 2.2,
+      "disabled": true
     },
     {
       "parameters": {
@@ -706,7 +624,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "# TASK 1: INTRO DEL AVATAR\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **guion hablado del avatar para la Presentación del Caso** en el **MÓDULO 01: TRAILER**.\n3. Genera además una **descripción breve de la imagen de fondo** que acompañará el video del avatar.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración máxima del guion: 30 segundos al ser leído en voz alta.\n- Primera frase: debe generar curiosidad inmediata (curiosity gap).\n- El guion debe sonar como una presentación académica breve y profesional.\n- Menciona solo lo esencial del caso: nombre, tema central y dilema estratégico clave.\n- Tono: profesional, motivador y con autoridad, invitando al análisis y la reflexión.\n- Finaliza con una transición corta hacia la discusión del caso.\n- La descripción de la **imagen de fondo** debe ser breve, visual, realista y relacionada con el contexto del caso.\n- **NO** incluyas notas técnicas, explicaciones internas ni formato JSON.\n- Devuelve únicamente el guion y la descripción de la imagen.\n\n# OUTPUT\nGuion + descripción de imagen de fondo.\n\n---\n\n# TASK 2: TRAILER CINEMATOGRÁFICO (DIVIDIDO EN ESCENAS DE 8s)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **texto narrado del TRAILER** para el **MÓDULO 01**, incluyendo **indicaciones de escenas**.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración total: mínimo 1 minuto y máximo 90 segundos al ser leído en voz alta.\n- Estilo narrativo, cinematográfico e inmersivo, como un tráiler.\n- Divide el guion en una lista de escenas secuenciales, cada una de aprox. 6–8 segundos.\n- Cada escena debe tener dos campos:\n   - **NARRADOR**: lo que dice la voz en off.\n   - **ESCENA**: lo que se muestra visualmente (ej. “Plano de oficina de madrugada”, “Gráfico animado de crecimiento de ventas”, “Primer plano del protagonista preocupado”).\n- Inicio: situar al protagonista (nombre, edad, cargo) en un momento de tensión.\n- Incluir 2–3 datos duros y espectaculares (ventas, márgenes, cifras clave).\n- Crear contraste entre éxito aparente y conflicto estratégico oculto.\n- Cierre: plantear el dilema en forma de pregunta que deja intriga para los estudiantes.\n- Tono: dramático, frases cortas, ritmo de suspenso.\n- **NO** resumas todo el caso ni expliques soluciones; solo genera tensión.\n- **NO** incluyas notas técnicas ni formato JSON.\n- Devuelve únicamente el guion dividido en escenas numeradas.\n\n# OUTPUT\nUn guion estructurado como lista de escenas:\n- Escena 1: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 2: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 3: { \"narrador\": \"...\", \"escena\": \"...\" }\n... hasta cubrir el tiempo total.\n",
+        "text": "# TASK 1: INTRO DEL AVATAR\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **guion hablado del avatar para la Presentación del Caso** en el **MÓDULO 01: TRAILER**.\n3. Genera además una **descripción breve de la imagen de fondo** que acompañará el video del avatar.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración máxima del guion: 30 segundos al ser leído en voz alta.\n- Primera frase: debe generar curiosidad inmediata (curiosity gap).\n- El guion debe sonar como una presentación académica breve y profesional.\n- Menciona solo lo esencial del caso: nombre, tema central y dilema estratégico clave.\n- Tono: profesional, motivador y con autoridad, invitando al análisis y la reflexión.\n- Finaliza con una transición corta hacia la discusión del caso.\n- La descripción de la **imagen de fondo** debe ser breve, visual, realista y relacionada con el contexto del caso.\n- **NO** incluyas notas técnicas, explicaciones internas ni formato JSON.\n- Devuelve únicamente el guion y la descripción de la imagen.\n\n# OUTPUT\nGuion + descripción de imagen de fondo.\n\n---\n\n# TASK 2: TRAILER CINEMATOGRÁFICO (DIVIDIDO EN ESCENAS DE 8s)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **texto narrado del TRAILER** para el **MÓDULO 01**, incluyendo **indicaciones de escenas**.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración total: mínimo 1 minuto y máximo 90 segundos al ser leído en voz alta.\n- Estilo narrativo, cinematográfico e inmersivo, como un tráiler.\n- Divide el guion en una lista de escenas secuenciales, cada una de aprox. 6–8 segundos.\n- Cada escena debe tener dos campos:\n   - **NARRADOR**: lo que dice la voz en off.\n   - **ESCENA**: lo que se muestra visualmente (ej. “Plano de oficina de madrugada”, “Gráfico animado de crecimiento de ventas”, “Primer plano del protagonista preocupado”).\n- Inicio: situar al protagonista (nombre, edad, cargo) en un momento de tensión.\n- Incluir 2–3 datos duros y espectaculares (ventas, márgenes, cifras clave).\n- Crear contraste entre éxito aparente y conflicto estratégico oculto.\n- Cierre: plantear el dilema en forma de pregunta que deja intriga para los estudiantes.\n- Tono: dramático, frases cortas, ritmo de suspenso.\n- **NO** resumas todo el caso ni expliques soluciones; solo genera tensión.\n- **NO** incluyas notas técnicas ni formato JSON.\n- Devuelve únicamente el guion dividido en escenas numeradas.\n\n# OUTPUT\nUn guion estructurado como lista de escenas:\n- Escena 1: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 2: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 3: { \"narrador\": \"...\", \"escena\": \"...\" }\n... hasta cubrir el tiempo total.\n\n\n# TASK 3: RESUMEN E INTRODUCCIÓN DEL CASO (AVATAR METODOLÓGICO)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe el **guion hablado del avatar** para el **Resumen e Introducción del Caso**.\n3. Este guion debe preparar a los estudiantes para el análisis y explicar la metodología que se utilizará en el curso.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración: entre 2 y 3 minutos al ser leído en voz alta.\n- Tono: académico, claro, motivador y con autoridad docente.\n- Estilo narrativo: frases cortas, con pausas dramáticas, repeticiones retóricas y enumeraciones que generen énfasis. Debe sonar como un discurso que mezcla explicación académica con storytelling.\n- Inicio: enfatiza que **“esta no es una decisión cualquiera”**, recordando una apuesta estratégica previa de la empresa (ej. inversión de 45 millones en I+D cuando apenas generaba flujo de caja).\n- Desarrollo: describe cómo ahora los competidores reaccionan (menciona nombres concretos de rivales relevantes en la industria).\n- Metodología: explica explícitamente qué herramientas se usarán:\n  - PESTEL (entorno regulatorio y macroeconómico).\n  - Cinco Fuerzas de Porter (competencia e industria).\n  - DAFO (fortalezas, debilidades, oportunidades, amenazas).\n  - Matriz CAME (generación de alternativas estratégicas).\n- Innovación pedagógica: destaca que se usará ChatGPT como apoyo, no para decidir por los estudiantes, sino para generar alternativas estratégicas y nuevas perspectivas.\n- Cierre: debe motivar al estudiante con preguntas retóricas e invitación al reto académico. Termina con un llamado inspirador: **“Comencemos con la historia de…”**.\n- **NO** incluyas notas técnicas ni formato JSON.\n- Devuelve únicamente el guion del avatar, con párrafos cortos y estilo oratorio.\n\n",
         "hasOutputParser": true,
         "options": {}
       },
@@ -721,7 +639,7 @@
     },
     {
       "parameters": {
-        "jsonSchemaExample": "{\n  \"intro_avatar\": {\n    \"title\": \"Título breve de la introducción\",\n    \"script\": \"Guion hablado del avatar para la Presentación del Caso (máx. 30s)\",\n    \"background_image\": \"Descripción breve de la imagen de fondo relacionada con el caso\"\n  },\n  \"trailer\": {\n    \"title\": \"Título breve del tráiler\",\n    \"total_scenes\": 2,\n    \"narration_with_scenes\": [\n      {\n        \"escena_num\": 1,\n        \"narrador\": \"Texto de la voz en off (6-8s)\",\n        \"escena\": \"Descripción visual de la escena\"\n      },\n      {\n        \"escena_num\": 2,\n        \"narrador\": \"Texto de la voz en off (6-8s)\",\n        \"escena\": \"Descripción visual de la escena\"\n      }\n    ]\n  }\n}\n",
+        "jsonSchemaExample": "{\n  \"intro_avatar\": {\n    \"title\": \"Presentación inicial del caso RoboTech\",\n    \"script\": \"Bienvenidos, estudiantes. Hoy nos adentraremos en un caso fascinante: RoboTech, una empresa que desafió a los gigantes de la industria médica con innovación y coraje. ¿Podrá mantener su liderazgo frente a competidores globales dispuestos a todo? Acompáñenme en esta historia y prepárense para analizar una de las decisiones más trascendentales en dirección estratégica.\",\n    \"background_image\": \"Vista panorámica nocturna de un distrito financiero en Singapur, con rascacielos iluminados y una atmósfera de tensión empresarial.\"\n  },\n  \"trailer\": {\n    \"title\": \"El dilema de RoboTech\",\n    \"total_scenes\": 3,\n    \"narration_with_scenes\": [\n      {\n        \"escena_num\": 1,\n        \"narrador\": \"Singapur, dos de la madrugada. Pat Chen, ingeniera y CEO de RoboTech, revisa cifras que podrían decidir el futuro de su compañía.\",\n        \"escena\": \"Plano de oficina moderna con luz tenue; Pat Chen frente a una pantalla llena de gráficos financieros.\"\n      },\n      {\n        \"escena_num\": 2,\n        \"narrador\": \"En apenas tres años, las ventas crecieron de 22 a 117 millones de dólares. Los márgenes se dispararon hasta el 53%. Todo parece éxito absoluto.\",\n        \"escena\": \"Gráficos animados de crecimiento exponencial, superpuestos con titulares de prensa sobre el auge de RoboTech.\"\n      },\n      {\n        \"escena_num\": 3,\n        \"narrador\": \"Pero detrás del brillo, surge la amenaza: gigantes como Medtronic y Johnson & Johnson entran en la cirugía robótica. ¿Deberá RoboTech arriesgarlo todo una vez más?\",\n        \"escena\": \"Transición a imágenes de quirófanos robóticos avanzados, seguidas por un primer plano del rostro de Pat Chen en tensión.\"\n      }\n    ]\n  },\n  \"case_summary\": {\n    \"title\": \"Resumen e introducción al caso y la metodología\",\n    \"script\": \"Esta no es una decisión cualquiera. Estamos frente a un dilema estratégico que puede definir la supervivencia de RoboTech, una empresa que ya arriesgó todo una vez al invertir 45 millones en investigación y desarrollo cuando apenas generaba flujo de caja positivo. Esa apuesta la llevó a convertirse en líder mundial en cirugía robótica espinal. Pero hoy el tablero ha cambiado: Medtronic, Johnson & Johnson, Stryker… todos los gigantes de la industria médica están entrando con fuerza en este mercado.\\n\\nDurante este curso, analizaremos este caso desde múltiples perspectivas. Para comprender el entorno regulatorio y macroeconómico aplicaremos el análisis PESTEL. Para evaluar la intensidad competitiva y la dinámica de la industria, utilizaremos las Cinco Fuerzas de Porter. Para identificar fortalezas internas, debilidades y oportunidades externas, recurriremos al análisis DAFO. Y, finalmente, emplearemos la matriz CAME para transformar este diagnóstico en alternativas estratégicas viables.\\n\\nPero este caso tiene un componente innovador: ustedes no solo usarán las herramientas clásicas de dirección estratégica, también integrarán la inteligencia artificial como apoyo. Con ChatGPT explorarán posibles estrategias, no para que la IA tome decisiones en su lugar, sino para ayudarlos a plantear opciones, descubrir ángulos nuevos y cuestionar sus propias hipótesis. El verdadero aprendizaje estará en cómo formulan las preguntas, cómo interpretan las respuestas y cómo aplican un juicio crítico fundamentado en la teoría y en la evidencia.\\n\\nAl final de este viaje, no solo habrán practicado con rigor las metodologías de análisis estratégico, sino que también habrán vivido lo que significa estar en la piel de un CEO: tomar decisiones bajo presión, con información incompleta y con múltiples stakeholders atentos a cada movimiento.\\n\\n¿Están listos para ponerse en los zapatos de Pat Chen? ¿Listos para decidir si RoboTech debe volver a apostar todo frente a competidores mucho más grandes? Si la respuesta es sí, entonces comencemos. Comencemos con la historia de cómo una ingeniera visionaria transformó la incertidumbre en liderazgo global. Comencemos con RoboTech.\"\n  }\n}",
         "autoFix": true
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
@@ -758,7 +676,8 @@
           "id": "X30UB2LkpOZovf9c",
           "name": "Google Gemini(PaLM) Api account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -780,7 +699,8 @@
           "id": "X30UB2LkpOZovf9c",
           "name": "Google Gemini(PaLM) Api account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {},
@@ -791,7 +711,8 @@
         1472
       ],
       "id": "a3edee96-c2b5-4ca6-84e6-bd31cdfb61a2",
-      "name": "Merge Video Urls"
+      "name": "Merge Video Urls",
+      "disabled": true
     },
     {
       "parameters": {
@@ -805,7 +726,8 @@
         1280
       ],
       "id": "356620b7-fa8f-4ef9-a18c-850d994d0937",
-      "name": "Split Out Video Prompts"
+      "name": "Split Out Video Prompts",
+      "disabled": true
     },
     {
       "parameters": {
@@ -819,7 +741,8 @@
         1568
       ],
       "id": "0abc7503-409e-4174-a530-73aaa9bd7f24",
-      "name": "Split Out"
+      "name": "Split Out",
+      "disabled": true
     },
     {
       "parameters": {
@@ -842,7 +765,8 @@
           "id": "nmk2GFM41ZOhRE5f",
           "name": "OpenAi account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -861,8 +785,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        1840,
-        1008
+        1856,
+        976
       ],
       "id": "35ae1978-f3ce-4a11-8e22-043bff089a0d",
       "name": "Generate an image",
@@ -871,7 +795,8 @@
           "id": "X30UB2LkpOZovf9c",
           "name": "Google Gemini(PaLM) Api account"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -918,7 +843,63 @@
         1472
       ],
       "id": "2ceebb9d-1932-4cd6-8493-c48bc478047b",
-      "name": "If Finish"
+      "name": "If Finish",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"Kristin_public_2_20240108\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('AI Writer').item.json.output.case_summary.script }}\",\n        \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      },\n      \"background\": {\n        \"type\": \"image\",\n        \"url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  },\n  \"aspect_ratio\": \"16:9\",\n  \"caption\": \"true\",\n  \"title\": \"{{ $('AI Writer').item.json.output.case_summary.title }}\"\n}\n",
+        "options": {}
+      },
+      "id": "f3cefa4b-ff4a-4c70-9efe-7ccd209e980b",
+      "name": "Create Case Summary",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2448,
+        1200
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"Kristin_public_2_20240108\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('AI Writer').item.json.output.intro_avatar.script }}\",\n        \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      },\n      \"background\": {\n        \"type\": \"image\",\n        \"url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  },\n  \"aspect_ratio\": \"16:9\",\n  \"caption\": \"false\",\n  \"title\": \"{{ $('AI Writer').item.json.output.intro_avatar.title }}\"\n}\n",
+        "options": {}
+      },
+      "id": "756f1890-d95e-400a-95b4-b86d0ae9d498",
+      "name": "Create Avatar Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2448,
+        960
+      ],
+      "typeVersion": 4.2,
+      "disabled": true
     }
   ],
   "pinData": {},
@@ -944,6 +925,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-25T10:21:54.000Z",
-  "versionId": "b2d08b3f-81db-4ef9-b2a0-1d8b2516c393"
+  "updatedAt": "2025-09-25T14:45:41.000Z",
+  "versionId": "eebe3464-a44f-4bd6-b740-15e1d69607ae"
 }

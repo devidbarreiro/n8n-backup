@@ -311,8 +311,7 @@
         2064,
         1136
       ],
-      "typeVersion": 3.4,
-      "disabled": true
+      "typeVersion": 3.4
     },
     {
       "parameters": {
@@ -658,8 +657,9 @@
         "resource": "video",
         "modelId": {
           "__rl": true,
-          "value": "models/veo-2.0-generate-001",
-          "mode": "id"
+          "value": "models/veo-3.0-fast-generate-preview",
+          "mode": "list",
+          "cachedResultName": "models/veo-3.0-fast-generate-preview"
         },
         "prompt": "=You are a cinematic video generator.  \nGenerate a short video clip for a single scene from a trailer, based on the structured content below:  \n\nScene number: {{ $json.escena_num }} of {{ $('AI Writer').item.json.output.trailer.total_scenes }}  \nNarration: {{ $json[\"narrador\"] }}  \nVisuals: {{ $json[\"escena\"] }}  \n\n# STYLE\n- Tone: cinematic, dramatic, immersive.  \n- Duration: around 6 to 8 seconds.  \n- Show realistic environments, office settings, data visualizations, and emotional tension in the protagonist.  \n- Use dynamic camera movements and lighting to increase drama.  \n- Sync visuals with the narration.  \n- The scene must feel like part of a larger MBA case study trailer.  \n\n# OUTPUT\nGenerate a single video clip (6–8 seconds) for this scene only.  \nDo not add captions, text overlays, or subtitles to the video.",
         "returnAs": "url",
@@ -700,8 +700,7 @@
           "id": "X30UB2LkpOZovf9c",
           "name": "Google Gemini(PaLM) Api account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {},
@@ -741,8 +740,7 @@
         1568
       ],
       "id": "0abc7503-409e-4174-a530-73aaa9bd7f24",
-      "name": "Split Out",
-      "disabled": true
+      "name": "Split Out"
     },
     {
       "parameters": {
@@ -870,8 +868,7 @@
         2448,
         1200
       ],
-      "typeVersion": 4.2,
-      "disabled": true
+      "typeVersion": 4.2
     },
     {
       "parameters": {
@@ -898,8 +895,7 @@
         2448,
         960
       ],
-      "typeVersion": 4.2,
-      "disabled": true
+      "typeVersion": 4.2
     }
   ],
   "pinData": {},
@@ -925,6 +921,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-25T15:56:07.000Z",
-  "versionId": "56ef899a-8217-4fac-b809-fad229510a50"
+  "updatedAt": "2025-09-25T16:28:43.000Z",
+  "versionId": "7ff913e3-3daa-4f3d-9d0d-9f356e535f72"
 }

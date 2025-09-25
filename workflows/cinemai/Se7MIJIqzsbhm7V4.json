@@ -291,7 +291,7 @@
       "main": [
         [
           {
-            "node": "Create Avatar Video WITH Background Video",
+            "node": "Setup Heygen",
             "type": "main",
             "index": 0
           }
@@ -302,7 +302,9 @@
   "createdAt": "2025-09-24T10:50:33.215Z",
   "id": "Se7MIJIqzsbhm7V4",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Modulo 01",
   "nodes": [
     {
@@ -324,14 +326,14 @@
     {
       "parameters": {
         "mode": "raw",
-        "jsonOutput": "{\n  \"heygen_api_key\": \"NTgzYWI2NWJmNDU1NGQ0Zjg5YmY5YTQzYzNjNzRlZGQtMTc1ODUzMTY1Mw==\",\n  \"avatar_id\": \"Kristin_public_2_20240108\",\n  \"voice_id\": \"7dde95cac3cf4d888f8e27db7b44ee75\",\n  \"has_background_video\": true,\n  \"background_video_url\": \"https://database.blotato.io/storage/v1/object/public/public_media/4ddd33eb-e811-4ab5-93e1-2cd0b7e8fb3f/videogen2-render-e6b398a2-5859-4a77-88ef-2345bcefdc98.mp4\"\n}\n",
+        "jsonOutput": "{\n  \"heygen_api_key\": \"NTgzYWI2NWJmNDU1NGQ0Zjg5YmY5YTQzYzNjNzRlZGQtMTc1ODUzMTY1Mw==\",\n  \"avatar_id\": \"Kristin_public_2_20240108\",\n  \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n  \"has_background_video\": true,\n  \"background_video_url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n}\n",
         "options": {}
       },
       "id": "4308b15d-1105-45dd-9db9-a67dd9b82218",
       "name": "Setup Heygen",
       "type": "n8n-nodes-base.set",
       "position": [
-        2032,
+        2016,
         1120
       ],
       "typeVersion": 3.4
@@ -379,14 +381,14 @@
         "headerParameters": {
           "parameters": [
             {
-              "name": "NTgzYWI2NWJmNDU1NGQ0Zjg5YmY5YTQzYzNjNzRlZGQtMTc1ODUzMTY1Mw==",
+              "name": "X-Api-Key",
               "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
             }
           ]
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"{{ $('Setup Heygen').item.json.avatar_id }}\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('AI Writer').item.json.output.intro_avatar.script }}\",\n        \"voice_id\": \"{{ $('Setup Heygen').item.json.voice_id }}\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 720,\n    \"height\": 1280\n  },\n  \"aspect_ratio\": \"9:16\",\n  \"caption\": \"false\",\n  \"title\": \"{{ $('AI Writer').item.json.output.intro_avatar.title }}\"\n}",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"Kristin_public_2_20240108\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"¿Qué pasaría si un pequeño cambio en la estrategia pudiera definir el futuro de una empresa? Hoy exploraremos el caso de RoboTech, una innovadora compañía en el ámbito de la robótica, que en 2017 enfrentó un dilema estratégico crucial: ¿debería continuar invirtiendo en el desarrollo de nuevos dispositivos a pesar de sus recientes pérdidas significativa? Prepárense para analizar los desafíos y oportunidades que se despliegan ante Pat Chen, CEO de RoboTech, mientras navegamos por este complejo panorama.\",\n        \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      },\n      \"background\": {\n        \"type\": \"image\",\n        \"url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  },\n  \"aspect_ratio\": \"16:9\",\n  \"caption\": \"false\",\n  \"title\": \"Presentación del Caso RoboTech\"\n}\n",
         "options": {}
       },
       "id": "756f1890-d95e-400a-95b4-b86d0ae9d498",
@@ -413,7 +415,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"{{ $('Setup Heygen').item.json.avatar_id }}\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('AI Writer').item.json.output.intro_avatar.script }}\",\n        \"voice_id\": \"{{ $('Setup Heygen').item.json.voice_id }}\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 720,\n    \"height\": 1280\n  },\n  \"aspect_ratio\": \"9:16\",\n  \"caption\": \"false\",\n  \"title\": \"{{ $('AI Writer').item.json.output.intro_avatar.title }}\"\n}",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"{{ $('Setup Heygen').item.json.avatar_id }}\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('AI Writer').item.json.output.intro_avatar.script }}\",\n        \"voice_id\": \"{{ $('Setup Heygen').item.json.voice_id }}\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  },\n  \"aspect_ratio\": \"16:9\",\n  \"caption\": \"true\",\n  \"title\": \"{{ $('AI Writer').item.json.output.intro_avatar.title }}\"\n}",
         "options": {}
       },
       "id": "ae4dc156-f57b-4016-85b5-d7d0ce491f61",
@@ -423,8 +425,7 @@
         2432,
         1216
       ],
-      "typeVersion": 4.2,
-      "disabled": true
+      "typeVersion": 4.2
     },
     {
       "parameters": {},
@@ -747,12 +748,17 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        2064,
-        1296
+        2080,
+        1280
       ],
       "id": "d1ba0812-cd89-4734-bebf-71feeb4e8514",
       "name": "Generate a video",
-      "disabled": true
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     },
     {
       "parameters": {
@@ -816,18 +822,6 @@
       "name": "Split Out"
     },
     {
-      "parameters": {},
-      "type": "@elevenlabs/n8n-nodes-elevenlabs.elevenLabs",
-      "typeVersion": 1,
-      "position": [
-        2224,
-        1904
-      ],
-      "id": "86fff2bb-5c46-4160-a4b6-eb8649ca0487",
-      "name": "Convert text to speech",
-      "credentials": {}
-    },
-    {
       "parameters": {
         "resource": "audio",
         "model": "tts-1-hd",
@@ -855,11 +849,11 @@
         "resource": "image",
         "modelId": {
           "__rl": true,
-          "value": "models/imagen-4.0-ultra-generate-001",
+          "value": "models/gemini-2.5-flash-image-preview",
           "mode": "list",
-          "cachedResultName": "models/imagen-4.0-ultra-generate-001"
+          "cachedResultName": "models/gemini-2.5-flash-image-preview (Nano Banana)"
         },
-        "prompt": "={{ $json.output.intro_avatar.background_image }}",
+        "prompt": "={{ $json.output.intro_avatar.background_image }}\nLa imagen debe ser de aspecto 16:9",
         "options": {
           "binaryPropertyOutput": "data"
         }
@@ -867,8 +861,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        1936,
-        976
+        1840,
+        1008
       ],
       "id": "35ae1978-f3ce-4a11-8e22-043bff089a0d",
       "name": "Generate an image",
@@ -887,7 +881,7 @@
       "typeVersion": 3.4,
       "position": [
         1648,
-        912
+        896
       ],
       "id": "b28fbbd6-7e75-4e3c-885e-3d5076028327",
       "name": "Edit Fields"
@@ -950,6 +944,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-09-24T15:07:44.000Z",
-  "versionId": "43cdb359-a7c2-47b0-9418-854831fa0a41"
+  "updatedAt": "2025-09-25T10:21:54.000Z",
+  "versionId": "b2d08b3f-81db-4ef9-b2a0-1d8b2516c393"
 }

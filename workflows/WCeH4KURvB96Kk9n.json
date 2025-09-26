@@ -1,0 +1,237 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "HeyGen Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "HeyGen Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "HeyGen Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HeyGen Agent": {
+      "main": [
+        [
+          {
+            "node": "Setup Heygen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Setup Heygen": {
+      "main": [
+        [
+          {
+            "node": "Create Case Intro",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create Case Close",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-26T10:57:08.225Z",
+  "id": "WCeH4KURvB96Kk9n",
+  "isArchived": false,
+  "meta": null,
+  "name": "Sub HeyGen Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        144
+      ],
+      "id": "567b3999-ea18-452f-bd54-0eca78ac7b92",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        296,
+        368
+      ],
+      "id": "425393b8-14d6-44d0-8964-68c2bb4ddb7c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"intro_video\": {\n    \"title\": \"Introducción al Avatar Virtual\",\n    \"voice\": {\n      \"input_text\": \"Hola, bienvenidos a este video de prueba. ¡Estoy muy emocionada de compartir esta demo contigo!\"\n    }\n  },\n  \"close_video\": {\n    \"title\": \"Cierre del Video\",\n    \"voice\": {\n      \"input_text\": \"Gracias por ver este video. ¡Espero que te haya gustado y nos vemos en la próxima!\"\n    }\n  }\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        424,
+        368
+      ],
+      "id": "64e87efe-5eee-4303-9f6d-cfa6f1c67d6b",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "# TASK 1: INTRO DEL AVATAR\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **guion hablado del avatar para la Presentación del Caso** en el **MÓDULO 01: TRAILER**.\n3. Genera además una **descripción breve de la imagen de fondo** que acompañará el video del avatar.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración máxima del guion: 30 segundos al ser leído en voz alta.\n- Primera frase: debe generar curiosidad inmediata (curiosity gap).\n- El guion debe sonar como una presentación académica breve y profesional.\n- Menciona solo lo esencial del caso: nombre, tema central y dilema estratégico clave.\n- Tono: profesional, motivador y con autoridad, invitando al análisis y la reflexión.\n- Finaliza con una transición corta hacia la discusión del caso.\n- La descripción de la **imagen de fondo** debe ser breve, visual, realista y relacionada con el contexto del caso.\n- **NO** incluyas notas técnicas, explicaciones internas ni formato JSON.\n- Devuelve únicamente el guion y la descripción de la imagen.\n\n# OUTPUT\nGuion + descripción de imagen de fondo.\n\n---\n\n\n# TASK 2: RESUMEN E INTRODUCCIÓN DEL CASO (AVATAR METODOLÓGICO)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe el **guion hablado del avatar** para el **Resumen e Introducción del Caso**.\n3. Este guion debe preparar a los estudiantes para el análisis y explicar la metodología que se utilizará en el curso.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración: entre 2 y 3 minutos al ser leído en voz alta.\n- Tono: académico, claro, motivador y con autoridad docente.\n- Estilo narrativo: frases cortas, con pausas dramáticas, repeticiones retóricas y enumeraciones que generen énfasis. Debe sonar como un discurso que mezcla explicación académica con storytelling.\n- Inicio: enfatiza que **“esta no es una decisión cualquiera”**, recordando una apuesta estratégica previa de la empresa (ej. inversión de 45 millones en I+D cuando apenas generaba flujo de caja).\n- Desarrollo: describe cómo ahora los competidores reaccionan (menciona nombres concretos de rivales relevantes en la industria).\n- Metodología: explica explícitamente qué herramientas se usarán:\n  - PESTEL (entorno regulatorio y macroeconómico).\n  - Cinco Fuerzas de Porter (competencia e industria).\n  - DAFO (fortalezas, debilidades, oportunidades, amenazas).\n  - Matriz CAME (generación de alternativas estratégicas).\n- Innovación pedagógica: destaca que se usará ChatGPT como apoyo, no para decidir por los estudiantes, sino para generar alternativas estratégicas y nuevas perspectivas.\n- Cierre: debe motivar al estudiante con preguntas retóricas e invitación al reto académico. Termina con un llamado inspirador: **“Comencemos con la historia de…”**.\n- **NO** incluyas notas técnicas ni formato JSON.\n- Devuelve únicamente el guion del avatar, con párrafos cortos y estilo oratorio.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        288,
+        144
+      ],
+      "id": "e58071b6-edbc-4229-8df5-c590123ba9bd",
+      "name": "HeyGen Agent"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"heygen_api_key\": \"ZTY1MzdhODZkMWQ2NGY5OThjYmNiMGI4M2U5ZGI5MjQtMTc1ODgxMDgwNw==\",\n  \"avatar_id\": \"Kristin_public_2_20240108\",\n  \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n  \"has_background_video\": true,\n  \"background_video_url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n}\n",
+        "options": {}
+      },
+      "id": "a71c996c-ef3d-4f78-9ec8-3dc5e69633c9",
+      "name": "Setup Heygen",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        640,
+        144
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"Kristin_public_2_20240108\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('HeyGen Agent').item.json.output.intro_video.voice.input_text }}\",\n        \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      },\n      \"background\": {\n        \"type\": \"image\",\n        \"url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  },\n  \"aspect_ratio\": \"16:9\",\n  \"caption\": \"true\",\n  \"title\": \"{{ $('HeyGen Agent').item.json.output.intro_video.title }}\"\n}\n",
+        "options": {}
+      },
+      "id": "371ea387-7143-458a-b162-a25e60a0f290",
+      "name": "Create Case Intro",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        864,
+        48
+      ],
+      "typeVersion": 4.2,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.heygen.com/v2/video/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Api-Key",
+              "value": "={{ $('Setup Heygen').item.json.heygen_api_key }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"video_inputs\": [\n    {\n      \"character\": {\n        \"type\": \"avatar\",\n        \"avatar_id\": \"Kristin_public_2_20240108\",\n        \"avatar_style\": \"normal\",\n        \"scale\": 1.0\n      },\n      \"voice\": {\n        \"type\": \"text\",\n        \"input_text\": \"{{ $('HeyGen Agent').item.json.output.close_video.voice.input_text }}\",\n        \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n        \"speed\": 1.1,\n        \"pitch\": 50,\n        \"emotion\": \"Excited\"\n      },\n      \"background\": {\n        \"type\": \"image\",\n        \"url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n      }\n    }\n  ],\n  \"dimension\": {\n    \"width\": 1280,\n    \"height\": 720\n  },\n  \"aspect_ratio\": \"16:9\",\n  \"caption\": \"true\",\n  \"title\": \"{{ $('HeyGen Agent').item.json.output.close_video.title }}\"\n}\n",
+        "options": {}
+      },
+      "id": "b03671f5-e35b-4098-ad5d-4bb12028c367",
+      "name": "Create Case Close",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        864,
+        240
+      ],
+      "typeVersion": 4.2,
+      "disabled": true
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "query": "Subject: Checking In\n\nHi Nate,\n\nI hope this message finds you well. How are you doing?\n\nLooking forward to hearing from you.\n\nBest regards,"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-26T10:57:08.231Z",
+      "updatedAt": "2025-09-26T10:57:08.231Z",
+      "role": "workflow:owner",
+      "workflowId": "WCeH4KURvB96Kk9n",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-26T11:31:13.000Z",
+  "versionId": "3d569cf2-2106-4924-9599-638d3d5b2902"
+}

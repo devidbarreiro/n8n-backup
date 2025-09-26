@@ -12,6 +12,99 @@
         ]
       ]
     },
+    "Email Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recipie Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HeyGen Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GoogleVideo Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload your file here": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Data Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "OpenAI Chat Model": {
       "ai_languageModel": [
         [
@@ -39,7 +132,7 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.3,
       "position": [
-        0,
+        -64,
         0
       ],
       "id": "d2ad0186-d901-416f-a3e0-d240ae444737",
@@ -48,12 +141,14 @@
     },
     {
       "parameters": {
-        "options": {}
+        "options": {
+          "systemMessage": "You are an orchestrator agent, you dont have to do the task.\nJust pass user query to a subagent.\n"
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        208,
+        160,
         0
       ],
       "id": "acb839b0-963c-46bd-a8b7-5f3cc4f4fdf9",
@@ -61,18 +156,217 @@
     },
     {
       "parameters": {
+        "description": "=Call this tool to take any email actions",
+        "workflowId": {
+          "__rl": true,
+          "value": "WCY59Vt63AjhevyY",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/WCY59Vt63AjhevyY",
+          "cachedResultName": "Sub Hey Gen"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        608,
+        208
+      ],
+      "id": "ddd6d9d7-122f-4392-8ef3-7a33a9425030",
+      "name": "Email Agent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any recipie actions",
+        "workflowId": {
+          "__rl": true,
+          "value": "uozIGPtmE2KWJ6Bt",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/uozIGPtmE2KWJ6Bt",
+          "cachedResultName": "Sub Recipie Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        512,
+        208
+      ],
+      "id": "743794bb-4f67-4365-bfe1-ef3f772f3e3f",
+      "name": "Recipie Agent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any video with HeyGen actions",
+        "workflowId": {
+          "__rl": true,
+          "value": "WCeH4KURvB96Kk9n",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/WCeH4KURvB96Kk9n",
+          "cachedResultName": "Sub HeyGen Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        208
+      ],
+      "id": "ac2b510d-550f-4caf-8350-0ba19303bd60",
+      "name": "HeyGen Agent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any video with Google (or \"trailer\" video) actions",
+        "workflowId": {
+          "__rl": true,
+          "value": "Fc3PxqA4LXB5u1rw",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/Fc3PxqA4LXB5u1rw",
+          "cachedResultName": "Sub GoogleVideo Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        304,
+        208
+      ],
+      "id": "5b1556cd-15fc-4f97-b307-4cc1bc865332",
+      "name": "GoogleVideo Agent"
+    },
+    {
+      "parameters": {
+        "formTitle": "Upload your data to test RAG",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload your file(s)",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf, .csv",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -384,
+        224
+      ],
+      "id": "eee1c7c7-cbcc-46c2-8aaf-12d3984cfba0",
+      "name": "Upload your file here",
+      "webhookId": "82848bc4-5ea2-4e5a-8bb6-3c09b94a8c5d"
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -112,
+        368
+      ],
+      "id": "6339864c-e646-4b30-bcc7-2be623ca56c7",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        224
+      ],
+      "id": "8f4166b0-e0e3-4aef-bf86-5e8f366091cd",
+      "name": "Insert Data to Store",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Use this knowledge base to answer questions from the user",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        384
+      ],
+      "id": "0fef6d60-0720-4ceb-b0c2-cc3a59ff961c",
+      "name": "Query Data Tool"
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-large",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        480
+      ],
+      "id": "e77c3190-e593-4f80-9536-d7dd04ccfcd7",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
         "model": {
           "__rl": true,
-          "value": "gpt-5",
+          "value": "gpt-4.1-mini",
           "mode": "list",
-          "cachedResultName": "gpt-5"
+          "cachedResultName": "gpt-4.1-mini"
         },
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        80,
+        160,
         208
       ],
       "id": "d23cc177-1f14-4ef5-ae2b-59e1e6fa4088",
@@ -83,19 +377,6 @@
           "name": "OpenAi account"
         }
       }
-    },
-    {
-      "parameters": {
-        "description": "Cuando necesitamos generar un vídeo con HeyGen."
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
-      "typeVersion": 2.2,
-      "position": [
-        272,
-        240
-      ],
-      "id": "ddd6d9d7-122f-4392-8ef3-7a33a9425030",
-      "name": "Call n8n Workflow Tool"
     }
   ],
   "pinData": {},
@@ -114,6 +395,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T09:47:44.000Z",
-  "versionId": "87ce828c-f06d-4a67-a684-b3c331fbdbf4"
+  "updatedAt": "2025-09-26T11:26:58.000Z",
+  "versionId": "2cd1e1c1-a147-44a0-ad32-2b0c94d73763"
 }

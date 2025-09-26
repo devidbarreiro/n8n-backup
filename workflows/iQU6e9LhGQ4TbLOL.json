@@ -49,6 +49,61 @@
           }
         ]
       ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Create a row1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row1": {
+      "main": [
+        [
+          {
+            "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Create a row1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-25T12:01:20.980Z",
@@ -153,6 +208,202 @@
       ],
       "id": "7a252688-1fab-4bf3-afd2-fe33963e553f",
       "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-3.5-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "hola, responde solo con un nombre aleatorio, tu respuesta solo debe contener un nombre aleatorio."
+            },
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        176,
+        1088
+      ],
+      "id": "04251802-d076-4698-8fd2-08dc9c681652",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        1072
+      ],
+      "id": "065df1c3-000d-4eea-ad80-44b9ff020cbb",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://desktop.captions.ai/api",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        256,
+        896
+      ],
+      "id": "0705a075-d398-4792-9e12-b04bef011d22",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "KZ4vS1qcpNcldqDi",
+          "name": "Unnamed credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        48,
+        1312
+      ],
+      "id": "376bca3b-7214-430c-b5b4-b0fb69cbf2a4",
+      "name": "GensPark"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        48,
+        1472
+      ],
+      "id": "072b28cb-4364-4426-8926-8304e41992ef",
+      "name": "Manus"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "prueba",
+        "returnAll": true
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        832,
+        1056
+      ],
+      "id": "7ce07ca3-b359-4150-89f4-8977182b702b",
+      "name": "Get many rows",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hQzQNzIN13lv1Hrz",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "prueba",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "name",
+              "fieldValue": "={{ $json.message.content }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        608,
+        1056
+      ],
+      "id": "15dd1a78-af76-4fd7-b5f3-255481550eea",
+      "name": "Create a row1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hQzQNzIN13lv1Hrz",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You recieve this names: {{ $json.name }}\nWrite one more name that is not on the list\nThe answer is just a name",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a helpful assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1152,
+        1056
+      ],
+      "id": "f8094adf-a397-4012-b70c-41a7e819cdbf",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1120,
+        1280
+      ],
+      "id": "dafb8f33-0ee4-4867-884d-021152dcd629",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Este es el otro que tenía ->"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -384,
+        896
+      ],
+      "typeVersion": 1,
+      "id": "41aa57cb-f581-4b77-883b-b4cf883b2198",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -171,6 +422,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-25T12:12:46.000Z",
-  "versionId": "e86b681a-8462-44c4-a0d6-4e07a5c79c2c"
+  "updatedAt": "2025-09-26T09:49:11.000Z",
+  "versionId": "191744b7-2cc0-466b-b912-e5dea179963e"
 }

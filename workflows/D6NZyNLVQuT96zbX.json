@@ -73,7 +73,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow",
+  "name": "Supabase",
   "nodes": [
     {
       "parameters": {
@@ -275,6 +275,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-25T08:15:35.000Z",
-  "versionId": "cb287929-6ba8-40ee-bb77-6227303e4437"
+  "updatedAt": "2025-09-26T09:38:48.000Z",
+  "versionId": "fc85b2e4-5f81-481a-8ca0-52f265f33a99"
 }

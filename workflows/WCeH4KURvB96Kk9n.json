@@ -93,7 +93,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        296,
+        304,
         368
       ],
       "id": "425393b8-14d6-44d0-8964-68c2bb4ddb7c",
@@ -112,7 +112,7 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        424,
+        432,
         368
       ],
       "id": "64e87efe-5eee-4303-9f6d-cfa6f1c67d6b",
@@ -176,8 +176,7 @@
         864,
         48
       ],
-      "typeVersion": 4.2,
-      "disabled": true
+      "typeVersion": 4.2
     },
     {
       "parameters": {
@@ -204,8 +203,7 @@
         864,
         240
       ],
-      "typeVersion": 4.2,
-      "disabled": true
+      "typeVersion": 4.2
     }
   ],
   "pinData": {
@@ -232,6 +230,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T11:31:13.000Z",
-  "versionId": "3d569cf2-2106-4924-9599-638d3d5b2902"
+  "updatedAt": "2025-09-26T12:37:36.000Z",
+  "versionId": "c3d04d5b-825c-48c0-a656-5e0ef502cbd0"
 }

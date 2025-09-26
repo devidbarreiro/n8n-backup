@@ -159,8 +159,8 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.3,
       "position": [
-        -144,
-        0
+        -192,
+        -272
       ],
       "id": "d2ad0186-d901-416f-a3e0-d240ae444737",
       "name": "When chat message received",
@@ -171,14 +171,14 @@
         "promptType": "define",
         "text": "={{ $json.message.text }}",
         "options": {
-          "systemMessage": "You are an orchestrator agent, you dont have to do the task.\nJust pass user query to a subagent.\n- If you need Supabase contact info go to the Supabase agent\n"
+          "systemMessage": "You are an orchestrator agent, you dont have to do the task.Use your agents outputs.\nJust pass user query to a subagent.\n- If you need contact info or is a Mail request use the Contact Agent\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
         160,
-        0
+        -128
       ],
       "id": "acb839b0-963c-46bd-a8b7-5f3cc4f4fdf9",
       "name": "AI Agent"
@@ -205,7 +205,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        608,
+        352,
         208
       ],
       "id": "ddd6d9d7-122f-4392-8ef3-7a33a9425030",
@@ -229,8 +229,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        512,
-        208
+        96,
+        96
       ],
       "id": "743794bb-4f67-4365-bfe1-ef3f772f3e3f",
       "name": "Recipie Agent"
@@ -253,8 +253,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        400,
-        208
+        224,
+        96
       ],
       "id": "ac2b510d-550f-4caf-8350-0ba19303bd60",
       "name": "HeyGen Agent"
@@ -277,8 +277,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        304,
-        208
+        352,
+        96
       ],
       "id": "5b1556cd-15fc-4f97-b307-4cc1bc865332",
       "name": "GoogleVideo Agent"
@@ -301,8 +301,8 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -384,
-        224
+        -192,
+        400
       ],
       "id": "eee1c7c7-cbcc-46c2-8aaf-12d3984cfba0",
       "name": "Upload your file here",
@@ -316,8 +316,8 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        -112,
-        368
+        272,
+        608
       ],
       "id": "6339864c-e646-4b30-bcc7-2be623ca56c7",
       "name": "Default Data Loader"
@@ -335,8 +335,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        -160,
-        224
+        224,
+        400
       ],
       "id": "8f4166b0-e0e3-4aef-bf86-5e8f366091cd",
       "name": "Insert Data to Store",
@@ -356,8 +356,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        224,
-        384
+        480,
+        96
       ],
       "id": "0fef6d60-0720-4ceb-b0c2-cc3a59ff961c",
       "name": "Query Data Tool"
@@ -370,8 +370,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -160,
-        480
+        480,
+        512
       ],
       "id": "e77c3190-e593-4f80-9536-d7dd04ccfcd7",
       "name": "Embeddings OpenAI",
@@ -395,7 +395,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        160,
+        -48,
         208
       ],
       "id": "d23cc177-1f14-4ef5-ae2b-59e1e6fa4088",
@@ -425,7 +425,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        704,
+        224,
         208
       ],
       "id": "635c2022-739b-418c-9cd6-165f5a46cc8e",
@@ -441,7 +441,7 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -48,
+        -192,
         -128
       ],
       "id": "c722a858-c14b-4ca4-98e2-a9c9b69b6bb8",
@@ -463,8 +463,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        544,
-        0
+        672,
+        -128
       ],
       "id": "3e540f91-d4a6-4943-ab55-5df1b4f97431",
       "name": "Send a text message",
@@ -493,6 +493,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-09-26T12:18:47.000Z",
-  "versionId": "412561fe-4fd0-4a4f-a8a4-21979e9f3e8c"
+  "updatedAt": "2025-09-26T12:35:31.000Z",
+  "versionId": "09b361c4-13c8-498b-a56d-af8893c24dfe"
 }

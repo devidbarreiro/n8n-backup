@@ -222,7 +222,7 @@
     "When Executed by Another Workflow": [
       {
         "json": {
-          "query": "dame el contacto de david"
+          "query": ""
         }
       }
     ]
@@ -242,6 +242,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-28T17:56:33.000Z",
-  "versionId": "4b32feee-8f78-43db-8b4f-21841d318a1e"
+  "updatedAt": "2025-09-28T18:08:35.000Z",
+  "versionId": "e9a66c8f-2143-46bf-a4d2-48b811b89d45"
 }

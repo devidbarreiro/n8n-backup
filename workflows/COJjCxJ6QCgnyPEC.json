@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "When chat message received": {
       "main": [
@@ -149,6 +149,17 @@
           {
             "node": "AI Agent",
             "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -488,7 +499,10 @@
       }
     },
     {
-      "parameters": {},
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.message.chat.id }}"
+      },
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
@@ -497,6 +511,30 @@
       ],
       "id": "ca4141fa-2e2c-4c0b-9339-82c52d6cc099",
       "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any chat with user action",
+        "workflowId": {
+          "__rl": true,
+          "value": "vxfdsQZdqixA7XFq",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/vxfdsQZdqixA7XFq",
+          "cachedResultName": "Sub Chat Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        464,
+        208
+      ],
+      "id": "d6aa517f-1928-4750-91e0-fde5b1954d2c",
+      "name": "Chat Agent"
     }
   ],
   "pinData": {},
@@ -515,6 +553,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-09-28T17:58:48.000Z",
-  "versionId": "a8c76d86-4da9-4769-83ad-9d8ad14b4fcc"
+  "updatedAt": "2025-09-28T18:03:10.000Z",
+  "versionId": "e3037a62-fb8f-47db-a6ed-b6281b933d28"
 }

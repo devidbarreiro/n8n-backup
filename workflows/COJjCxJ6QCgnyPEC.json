@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "When chat message received": {
       "main": [
@@ -142,6 +142,17 @@
           }
         ]
       ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-26T09:44:54.200Z",
@@ -229,7 +240,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        96,
+        160,
         96
       ],
       "id": "743794bb-4f67-4365-bfe1-ef3f772f3e3f",
@@ -253,7 +264,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        224,
+        256,
         96
       ],
       "id": "ac2b510d-550f-4caf-8350-0ba19303bd60",
@@ -475,6 +486,17 @@
           "name": "Telegram account"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        208
+      ],
+      "id": "ca4141fa-2e2c-4c0b-9339-82c52d6cc099",
+      "name": "Simple Memory"
     }
   ],
   "pinData": {},
@@ -493,6 +515,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-09-26T12:35:31.000Z",
-  "versionId": "09b361c4-13c8-498b-a56d-af8893c24dfe"
+  "updatedAt": "2025-09-28T17:58:48.000Z",
+  "versionId": "a8c76d86-4da9-4769-83ad-9d8ad14b4fcc"
 }

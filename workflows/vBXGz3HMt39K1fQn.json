@@ -23,17 +23,6 @@
         ]
       ]
     },
-    "Get Contacts Email": {
-      "ai_tool": [
-        [
-          {
-            "node": "Supabase Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Create a row in Supabase": {
       "ai_tool": [
         [
@@ -46,6 +35,17 @@
       ]
     },
     "Delete a row in Supabase": {
+      "ai_tool": [
+        [
+          {
+            "node": "Supabase Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Contact": {
       "ai_tool": [
         [
           {
@@ -107,46 +107,17 @@
         "promptType": "define",
         "text": "={{ $json.query }}",
         "options": {
-          "systemMessage": "Look for the contact and return his email information"
+          "systemMessage": "You are an agent that looks and modifys info in my supabase database.\nDatabase fields:\n- name\n- surname\n- mail"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        280,
+        288,
         80
       ],
       "id": "9a66ea4a-89b2-496a-90d9-b0cb76c8f7b5",
       "name": "Supabase Agent"
-    },
-    {
-      "parameters": {
-        "operation": "getAll",
-        "tableId": "contacts",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "name",
-              "condition": "ilike",
-              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Value', ``, 'string') }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabaseTool",
-      "typeVersion": 1,
-      "position": [
-        288,
-        304
-      ],
-      "id": "09e7c992-4dbd-4d43-bdf4-67d6edec8960",
-      "name": "Get Contacts Email",
-      "credentials": {
-        "supabaseApi": {
-          "id": "hQzQNzIN13lv1Hrz",
-          "name": "Supabase account"
-        }
-      }
     },
     {
       "parameters": {
@@ -216,6 +187,35 @@
           "name": "Supabase account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "contacts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "name",
+              "condition": "ilike",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Value', ``, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        416,
+        464
+      ],
+      "id": "09e7c992-4dbd-4d43-bdf4-67d6edec8960",
+      "name": "Get Contact",
+      "credentials": {
+        "supabaseApi": {
+          "id": "hQzQNzIN13lv1Hrz",
+          "name": "Supabase account"
+        }
+      }
     }
   ],
   "pinData": {
@@ -242,6 +242,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T12:07:49.000Z",
-  "versionId": "7866a224-aae1-4258-aa24-6cd6d72b2b36"
+  "updatedAt": "2025-09-28T17:56:33.000Z",
+  "versionId": "4b32feee-8f78-43db-8b4f-21841d318a1e"
 }

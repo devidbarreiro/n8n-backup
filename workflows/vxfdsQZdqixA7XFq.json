@@ -28,7 +28,7 @@
   "id": "vxfdsQZdqixA7XFq",
   "isArchived": false,
   "meta": null,
-  "name": "Sub Chat Agent",
+  "name": "Chat Agent",
   "nodes": [
     {
       "parameters": {
@@ -109,6 +109,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-28T17:59:59.000Z",
-  "versionId": "9c617c3a-6079-48f3-85eb-7d50d8e993e2"
+  "updatedAt": "2025-09-29T07:26:17.000Z",
+  "versionId": "3981c3cc-57c7-407a-b9ce-02ba3e89c40f"
 }

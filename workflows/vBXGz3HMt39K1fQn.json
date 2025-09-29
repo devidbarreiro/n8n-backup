@@ -63,7 +63,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Sub Supabase Agent",
+  "name": "Supabase Agent",
   "nodes": [
     {
       "parameters": {
@@ -242,6 +242,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-28T18:08:35.000Z",
-  "versionId": "e9a66c8f-2143-46bf-a4d2-48b811b89d45"
+  "updatedAt": "2025-09-29T07:26:06.000Z",
+  "versionId": "ce78130d-9a34-4422-856f-3db095e20c58"
 }

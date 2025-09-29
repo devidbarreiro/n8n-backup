@@ -354,7 +354,7 @@
           "value": "vBXGz3HMt39K1fQn",
           "mode": "list",
           "cachedResultUrl": "/workflow/vBXGz3HMt39K1fQn",
-          "cachedResultName": "Sub Supabase Agent"
+          "cachedResultName": "Supabase Agent"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -517,6 +517,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-09-29T09:05:15.000Z",
-  "versionId": "8a4f872a-bd1c-42ba-a154-d3751a9ba083"
+  "updatedAt": "2025-09-29T13:41:43.000Z",
+  "versionId": "4424898b-81a1-4667-b666-8a3bd8da8175"
 }

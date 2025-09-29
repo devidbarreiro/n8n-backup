@@ -6,11 +6,6 @@
         []
       ]
     },
-    "Generate Video with Veo": {
-      "main": [
-        []
-      ]
-    },
     "OpenAI Chat Model": {
       "ai_languageModel": [
         [
@@ -59,12 +54,12 @@
       "main": [
         [
           {
-            "node": "Generate a video",
+            "node": "Veo Generate",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Generate audio",
+            "node": "Generate a video",
             "type": "main",
             "index": 0
           }
@@ -125,6 +120,62 @@
           }
         ]
       ]
+    },
+    "Veo Generate": {
+      "main": [
+        [
+          {
+            "node": "Veo Poll",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF Done": {
+      "main": [
+        [
+          {
+            "node": "Download Video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait 10s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 10s": {
+      "main": [
+        [
+          {
+            "node": "Veo Poll",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "IF Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Veo Poll": {
+      "main": [
+        [
+          {
+            "node": "IF Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-29T12:35:41.932Z",
@@ -156,35 +207,11 @@
       "typeVersion": 2.3,
       "position": [
         960,
-        368
+        656
       ],
       "id": "5218d685-a0be-4470-9d07-8808d13404f0",
       "name": "On form submission",
       "webhookId": "d1fc0339-c49f-4a88-b6e3-9df7ddbc3bd0"
-    },
-    {
-      "parameters": {
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "url": "https://us-central1-aiplatform.googleapis.com/v1/projects/YOUR_PROJECT_ID/locations/us-central1/publishers/google/models/veo-2.0-generate-exp:predictLongRunning",
-        "options": {
-          "timeout": 60000
-        }
-      },
-      "id": "804103a9-e210-489d-ac4e-9efe16f86039",
-      "name": "Generate Video with Veo",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 2,
-      "position": [
-        -240,
-        -256
-      ],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "P3CkcQfBL77gpXLN",
-          "name": "Header Auth account"
-        }
-      }
     },
     {
       "parameters": {
@@ -198,7 +225,7 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1120,
+        960,
         -208
       ],
       "id": "37092a61-3433-4f16-9aa9-3dd134cc7529",
@@ -216,8 +243,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1120,
-        -16
+        976,
+        16
       ],
       "id": "a3038a20-885c-4d07-bff0-34a7302e570c",
       "name": "OpenAI Chat Model",
@@ -235,8 +262,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        1264,
-        -16
+        1104,
+        16
       ],
       "id": "68713a0b-e9f8-450c-a8c2-e7b97f454cbe",
       "name": "Structured Output Parser"
@@ -258,7 +285,7 @@
       "typeVersion": 1,
       "position": [
         1760,
-        -32
+        240
       ],
       "id": "15736e37-b656-4c06-9587-bc8c0d6b7606",
       "name": "Generate a video",
@@ -279,8 +306,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        2320,
-        -32
+        2208,
+        240
       ],
       "id": "104f3bbf-3383-4d20-81a0-f5a96894885a",
       "name": "Download a video",
@@ -300,7 +327,7 @@
       "typeVersion": 1,
       "position": [
         1536,
-        80
+        336
       ],
       "id": "dc1c4631-b6f7-4b71-a68d-d30917b4cc64",
       "name": "Split Out Video Prompts"
@@ -313,8 +340,8 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        1968,
-        -32
+        1984,
+        240
       ],
       "id": "808843de-3b94-4461-af5d-53ef58694d08",
       "name": "Split Out"
@@ -331,7 +358,7 @@
       "typeVersion": 1.8,
       "position": [
         1760,
-        160
+        432
       ],
       "id": "70ec01c9-574f-47e8-abf7-bfff87cd01c9",
       "name": "Generate audio",
@@ -350,8 +377,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2544,
-        -32
+        2432,
+        240
       ],
       "id": "6e508913-f8b6-4883-a622-ebb266f21b84"
     },
@@ -367,8 +394,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1168,
-        448
+        1200,
+        560
       ],
       "id": "e5a4ff5e-e511-4487-808e-71e89543f14d",
       "name": "OpenAI Chat Model1",
@@ -386,8 +413,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        1296,
-        448
+        1328,
+        560
       ],
       "id": "75903112-f29b-4275-b3bc-d8660b7f7c67",
       "name": "Structured Output Parser1"
@@ -398,7 +425,7 @@
       "typeVersion": 1,
       "position": [
         960,
-        176
+        336
       ],
       "id": "56fb5fde-4d1f-4656-985e-aeba6c5079cd",
       "name": "When clicking ‘Execute workflow’"
@@ -415,11 +442,130 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        1168,
-        224
+        1184,
+        336
       ],
       "id": "41afc577-62f7-4630-8606-27a217ca526f",
       "name": "Podcast Agent"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/veo-3.0-generate-001:predictLongRunning",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-goog-api-key",
+              "value": "AIzaSyAcYXvtzmOwO1FAXZZiKXDu5jwr0telckE"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n          \"instances\": [\n            {\n              \"prompt\": \"A close up of two people staring at a cryptic drawing on a wall, torchlight flickering. A man murmurs, \\\"This must be it. That's the secret code.\\\" The woman looks at him and whispers excitedly, \\\"What did you find?\\\"\"\n            }\n          ]\n        }",
+        "options": {
+          "response": {}
+        }
+      },
+      "name": "Veo Generate",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1808,
+        688
+      ],
+      "id": "57275aec-65ec-422c-b20f-b5fc3ab3616d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.done }}",
+              "operation": "equal",
+              "value2": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "IF Done",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        2144,
+        736
+      ],
+      "id": "cc5c9ef3-3fbf-4719-98bf-84dd47cdd747"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "name": "Wait 10s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2368,
+        736
+      ],
+      "id": "0dd75a86-b46a-4e54-8e2b-6ea0568ec0f5",
+      "webhookId": "a11e28e0-eb41-4f59-b270-a21b45ea8cfa"
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Veo Poll').item.json.response.generateVideoResponse.generatedSamples[0].video.uri }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-goog-api-key",
+              "value": "AIzaSyAcYXvtzmOwO1FAXZZiKXDu5jwr0telckE"
+            }
+          ]
+        },
+        "options": {
+          "response": {}
+        }
+      },
+      "name": "Download Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2368,
+        912
+      ],
+      "id": "de8f95fa-9a8b-4b74-a2cb-490cce1e9ad0"
+    },
+    {
+      "parameters": {
+        "url": "=https://generativelanguage.googleapis.com/v1beta/{{ $node['Veo Generate'].json.name }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-goog-api-key",
+              "value": "AIzaSyAcYXvtzmOwO1FAXZZiKXDu5jwr0telckE"
+            }
+          ]
+        },
+        "options": {
+          "response": {}
+        }
+      },
+      "name": "Veo Poll",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1984,
+        688
+      ],
+      "id": "a00522f7-c292-4218-a120-df7e32504ae6"
     }
   ],
   "pinData": {
@@ -449,6 +595,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-29T13:44:01.000Z",
-  "versionId": "e52b94bf-452e-4941-96c9-c4eec23a8c3a"
+  "updatedAt": "2025-09-29T15:52:09.000Z",
+  "versionId": "a97c0000-b93d-4c40-ab98-91f2d30f0c02"
 }

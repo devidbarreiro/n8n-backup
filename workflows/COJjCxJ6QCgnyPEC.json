@@ -17,39 +17,6 @@
         ]
       ]
     },
-    "Recipie Agent": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HeyGen Agent": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GoogleVideo Agent": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Upload your file here": {
       "main": [
         [
@@ -204,7 +171,7 @@
       "typeVersion": 1.3,
       "position": [
         -192,
-        -352
+        -336
       ],
       "id": "d2ad0186-d901-416f-a3e0-d240ae444737",
       "name": "When chat message received",
@@ -249,83 +216,11 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        352,
-        208
+        336,
+        144
       ],
       "id": "ddd6d9d7-122f-4392-8ef3-7a33a9425030",
       "name": "Email Agent"
-    },
-    {
-      "parameters": {
-        "description": "Call this tool to take any recipie actions",
-        "workflowId": {
-          "__rl": true,
-          "value": "uozIGPtmE2KWJ6Bt",
-          "mode": "list",
-          "cachedResultUrl": "/workflow/uozIGPtmE2KWJ6Bt",
-          "cachedResultName": "Sub Recipie Agent"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {}
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
-      "typeVersion": 2.2,
-      "position": [
-        160,
-        96
-      ],
-      "id": "743794bb-4f67-4365-bfe1-ef3f772f3e3f",
-      "name": "Recipie Agent"
-    },
-    {
-      "parameters": {
-        "description": "Call this tool to take any video with HeyGen actions",
-        "workflowId": {
-          "__rl": true,
-          "value": "WCeH4KURvB96Kk9n",
-          "mode": "list",
-          "cachedResultUrl": "/workflow/WCeH4KURvB96Kk9n",
-          "cachedResultName": "Sub HeyGen Agent"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {}
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
-      "typeVersion": 2.2,
-      "position": [
-        256,
-        96
-      ],
-      "id": "ac2b510d-550f-4caf-8350-0ba19303bd60",
-      "name": "HeyGen Agent"
-    },
-    {
-      "parameters": {
-        "description": "Call this tool to take any video with Google (or \"trailer\" video) actions",
-        "workflowId": {
-          "__rl": true,
-          "value": "Fc3PxqA4LXB5u1rw",
-          "mode": "list",
-          "cachedResultUrl": "/workflow/Fc3PxqA4LXB5u1rw",
-          "cachedResultName": "Sub GoogleVideo Agent"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {}
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
-      "typeVersion": 2.2,
-      "position": [
-        352,
-        96
-      ],
-      "id": "5b1556cd-15fc-4f97-b307-4cc1bc865332",
-      "name": "GoogleVideo Agent"
     },
     {
       "parameters": {
@@ -469,8 +364,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        224,
-        208
+        208,
+        144
       ],
       "id": "635c2022-739b-418c-9cd6-165f5a46cc8e",
       "name": "Contacts Agent"
@@ -554,8 +449,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        464,
-        208
+        448,
+        144
       ],
       "id": "d6aa517f-1928-4750-91e0-fde5b1954d2c",
       "name": "Chat Agent"
@@ -599,8 +494,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        576,
-        208
+        560,
+        144
       ],
       "id": "e5618001-10fe-4a9f-a9f9-c79233c69d39",
       "name": "Image Analyzer Agent"
@@ -622,6 +517,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-09-29T07:46:13.000Z",
-  "versionId": "0ed6221b-e542-4039-83d9-e7b69387e6c6"
+  "updatedAt": "2025-09-29T09:05:15.000Z",
+  "versionId": "8a4f872a-bd1c-42ba-a154-d3751a9ba083"
 }

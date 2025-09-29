@@ -66,7 +66,7 @@
   "id": "WCeH4KURvB96Kk9n",
   "isArchived": false,
   "meta": null,
-  "name": "Sub HeyGen Agent",
+  "name": "HeyGen Agent",
   "nodes": [
     {
       "parameters": {
@@ -230,6 +230,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T12:37:36.000Z",
-  "versionId": "c3d04d5b-825c-48c0-a656-5e0ef502cbd0"
+  "updatedAt": "2025-09-29T07:26:26.000Z",
+  "versionId": "981f857b-231a-4c6b-88ee-4f5c14526b1d"
 }

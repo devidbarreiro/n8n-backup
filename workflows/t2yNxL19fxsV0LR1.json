@@ -1,0 +1,150 @@
+{
+  "active": false,
+  "connections": {
+    "Analyze video": {
+      "main": [
+        [
+          {
+            "node": "Analyze Image Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Analyze video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Analyze Image Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-29T07:44:54.247Z",
+  "id": "t2yNxL19fxsV0LR1",
+  "isArchived": false,
+  "meta": null,
+  "name": "Image Analyzer Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "You will analyze the image and generate metadata following a defined structure",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        144,
+        -16
+      ],
+      "id": "a5a50569-3ba8-4ccf-b905-db5b287739d5",
+      "name": "Analyze Image Agent"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        -16
+      ],
+      "id": "a74ca97f-4296-462f-9150-e4c595e84bd7",
+      "name": "Analyze video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -240,
+        -16
+      ],
+      "id": "6fc79aeb-dea4-4b6c-bb22-5e8fbe7c28c5",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        144,
+        176
+      ],
+      "id": "768aacda-571e-4f3a-a7c9-edf2258c8548",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "query": "dame el contacto de david"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-29T07:44:54.253Z",
+      "updatedAt": "2025-09-29T07:44:54.253Z",
+      "role": "workflow:owner",
+      "workflowId": "t2yNxL19fxsV0LR1",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-29T07:44:54.247Z",
+  "versionId": "a48e6a85-b487-411a-bdb6-0f6423f6041b"
+}

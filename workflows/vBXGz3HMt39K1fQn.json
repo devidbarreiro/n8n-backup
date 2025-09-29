@@ -72,10 +72,10 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -64,
-        80
+        -176,
+        -240
       ],
-      "id": "7197a0be-9b18-4ad8-948b-461245d84670",
+      "id": "09ba16fa-073a-4d0b-8ce3-b7b22e9fe6e8",
       "name": "When Executed by Another Workflow"
     },
     {
@@ -90,10 +90,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        160,
-        304
+        48,
+        -16
       ],
-      "id": "ff8c7d7a-aeee-461a-b53b-d0af3eedd733",
+      "id": "4434a2d3-3a7f-41c6-aed4-ab801ba13912",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
@@ -113,10 +113,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        288,
-        80
+        176,
+        -240
       ],
-      "id": "9a66ea4a-89b2-496a-90d9-b0cb76c8f7b5",
+      "id": "52682cb0-652f-4034-9e85-62e243fbb9f3",
       "name": "Supabase Agent"
     },
     {
@@ -142,10 +142,10 @@
       "type": "n8n-nodes-base.supabaseTool",
       "typeVersion": 1,
       "position": [
-        416,
-        304
+        304,
+        -16
       ],
-      "id": "2e89d79e-411a-4b36-964d-35afd8f4ccd5",
+      "id": "06a57f30-a86d-4850-8dd5-1f22c1a7fd7c",
       "name": "Create a row in Supabase",
       "credentials": {
         "supabaseApi": {
@@ -176,10 +176,10 @@
       "type": "n8n-nodes-base.supabaseTool",
       "typeVersion": 1,
       "position": [
-        544,
-        304
+        432,
+        -16
       ],
-      "id": "73a0a651-25d8-4582-8bad-5f39514b8cda",
+      "id": "214b00a3-be19-4246-b5fd-a636245f7dd7",
       "name": "Delete a row in Supabase",
       "credentials": {
         "supabaseApi": {
@@ -205,10 +205,10 @@
       "type": "n8n-nodes-base.supabaseTool",
       "typeVersion": 1,
       "position": [
-        416,
-        464
+        304,
+        160
       ],
-      "id": "09e7c992-4dbd-4d43-bdf4-67d6edec8960",
+      "id": "6ec10af5-2035-4c6a-862a-6baed037a52b",
       "name": "Get Contact",
       "credentials": {
         "supabaseApi": {
@@ -242,6 +242,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-29T07:26:06.000Z",
-  "versionId": "ce78130d-9a34-4422-856f-3db095e20c58"
+  "updatedAt": "2025-09-29T08:41:03.000Z",
+  "versionId": "e4de058f-80c9-4cab-aede-ee06081c7fb1"
 }

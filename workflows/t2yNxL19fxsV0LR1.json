@@ -1,22 +1,11 @@
 {
   "active": false,
   "connections": {
-    "Analyze video": {
-      "main": [
-        [
-          {
-            "node": "Analyze Image Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "When Executed by Another Workflow": {
       "main": [
         [
           {
-            "node": "Analyze video",
+            "node": "Analyze an image",
             "type": "main",
             "index": 0
           }
@@ -33,18 +22,48 @@
           }
         ]
       ]
+    },
+    "Analyze an image": {
+      "main": [
+        [
+          {
+            "node": "Analyze Image Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Analyze Image Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Image Agent": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2025-09-29T07:44:54.247Z",
   "id": "t2yNxL19fxsV0LR1",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Image Analyzer Agent",
   "nodes": [
     {
       "parameters": {
         "promptType": "define",
-        "text": "You will analyze the image and generate metadata following a defined structure",
+        "text": "=Given the image analysis you will output the analysis to the required format.\nAnalysis: {{ $json.content.parts[0].text }}",
+        "hasOutputParser": true,
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -55,33 +74,6 @@
       ],
       "id": "a5a50569-3ba8-4ccf-b905-db5b287739d5",
       "name": "Analyze Image Agent"
-    },
-    {
-      "parameters": {
-        "resource": "video",
-        "operation": "analyze",
-        "modelId": {
-          "__rl": true,
-          "value": "models/gemini-2.5-pro",
-          "mode": "list",
-          "cachedResultName": "models/gemini-2.5-pro"
-        },
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
-      "position": [
-        -32,
-        -16
-      ],
-      "id": "a74ca97f-4296-462f-9150-e4c595e84bd7",
-      "name": "Analyze video",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "X30UB2LkpOZovf9c",
-          "name": "Google Gemini(PaLM) Api account"
-        }
-      }
     },
     {
       "parameters": {
@@ -119,13 +111,82 @@
           "name": "OpenAi account"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro-preview-03-25",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro-preview-03-25"
+        },
+        "text": "Analiza esta imagen en profundidad y proporciona un análisis detallado en formato JSON. Debes extraer y generar todos los metadatos posibles siguiendo esta estructura:\n\n## INSTRUCCIONES:\n1. Examina cuidadosamente todos los elementos visuales de la imagen\n2. Identifica objetos, personas, textos, colores, composición y contexto\n3. Genera una respuesta ÚNICAMENTE en formato JSON válido, sin texto adicional\n4. Sé específico y detallado en todas las descripciones\n5. Asigna valores de confianza/certeza donde sea apropiado (0-1)\n\n## ESTRUCTURA JSON REQUERIDA:\n\n{\n  \"metadata\": {\n    \"analysis_timestamp\": \"FECHA_HORA_ACTUAL_ISO8601\",\n    \"confidence_score\": 0.0\n  },\n  \"content_description\": {\n    \"brief_summary\": \"Descripción breve en 1 frase\",\n    \"detailed_description\": \"Descripción detallada de 3-5 frases explicando qué muestra la imagen\",\n    \"alt_text\": \"Texto alternativo accesible para personas con discapacidad visual\",\n    \"story\": \"Narrativa o historia que cuenta la imagen\"\n  },\n  \"main_subjects\": [\n    {\n      \"type\": \"tipo_de_sujeto (persona/animal/objeto/edificio/etc)\",\n      \"description\": \"descripción específica\",\n      \"position\": \"ubicación en la imagen (centro/izquierda/derecha/superior/inferior)\",\n      \"size_relative\": \"porcentaje aproximado del espacio que ocupa\",\n      \"confidence\": 0.0\n    }\n  ],\n  \"objects_detected\": [\n    {\n      \"object\": \"nombre del objeto\",\n      \"quantity\": 0,\n      \"position\": \"ubicación\",\n      \"attributes\": [\"atributo1\", \"atributo2\"],\n      \"confidence\": 0.0\n    }\n  ],\n  \"people_analysis\": {\n    \"people_count\": 0,\n    \"demographics\": [\n      {\n        \"apparent_age_range\": \"rango de edad\",\n        \"apparent_gender\": \"género aparente\",\n        \"clothing_description\": \"descripción de vestimenta\",\n        \"pose\": \"postura o acción\",\n        \"facial_expression\": \"expresión facial\",\n        \"emotions\": [\"emoción1\", \"emoción2\"]\n      }\n    ]\n  },\n  \"text_content\": {\n    \"has_text\": true/false,\n    \"text_detected\": [\"texto1\", \"texto2\"],\n    \"text_language\": \"idioma del texto\",\n    \"text_type\": \"tipo (señalización/marca/título/etc)\",\n    \"readable_text\": \"texto legible completo\"\n  },\n  \"scene_analysis\": {\n    \"scene_type\": \"tipo de escena (interior/exterior/estudio/natural/urbano/etc)\",\n    \"location_type\": \"tipo de ubicación específica\",\n    \"setting\": \"descripción del entorno\",\n    \"time_of_day\": \"momento del día (mañana/tarde/noche/indeterminado)\",\n    \"weather\": \"condiciones climáticas aparentes\",\n    \"season\": \"estación del año aparente\",\n    \"atmosphere\": \"atmósfera o ambiente general\"\n  },\n  \"composition\": {\n    \"orientation\": \"horizontal/vertical/cuadrada\",\n    \"perspective\": \"perspectiva de la toma (frontal/cenital/lateral/angular/etc)\",\n    \"framing\": \"tipo de encuadre\",\n    \"depth_of_field\": \"profundidad de campo (baja/media/alta)\",\n    \"focal_point\": \"punto focal principal\",\n    \"rule_of_thirds\": \"si cumple la regla de los tercios\",\n    \"symmetry\": \"nivel de simetría\"\n  },\n  \"lighting\": {\n    \"type\": \"tipo de iluminación (natural/artificial/mixta)\",\n    \"quality\": \"calidad (suave/dura/difusa)\",\n    \"direction\": \"dirección de la luz\",\n    \"intensity\": \"intensidad (baja/media/alta)\",\n    \"mood_created\": \"estado de ánimo que crea la iluminación\"\n  },\n  \"color_analysis\": {\n    \"dominant_colors\": [\n      {\n        \"color\": \"nombre del color\",\n        \"hex\": \"#000000\",\n        \"percentage\": 0,\n        \"description\": \"dónde aparece predominantemente\"\n      }\n    ],\n    \"color_palette\": [\"color1\", \"color2\", \"color3\", \"color4\", \"color5\"],\n    \"color_harmony\": \"tipo de armonía (monocromática/análoga/complementaria/etc)\",\n    \"temperature\": \"temperatura de color (cálida/fría/neutral)\",\n    \"saturation_level\": \"nivel de saturación (baja/media/alta)\",\n    \"brightness_level\": \"nivel de brillo (oscuro/medio/brillante)\",\n    \"contrast\": \"nivel de contraste (bajo/medio/alto)\"\n  },\n  \"style_and_quality\": {\n    \"photography_style\": \"estilo fotográfico\",\n    \"artistic_style\": \"estilo artístico si aplica\",\n    \"quality_assessment\": \"evaluación de calidad (profesional/amateur/smartphone/etc)\",\n    \"image_quality\": {\n      \"sharpness\": \"nitidez (baja/media/alta)\",\n      \"noise_level\": \"nivel de ruido/grano\",\n      \"exposure\": \"exposición (subexpuesta/correcta/sobreexpuesta)\",\n      \"white_balance\": \"balance de blancos\"\n    },\n    \"professional_rating\": 0.0\n  },\n  \"categories_and_tags\": {\n    \"primary_category\": \"categoría principal\",\n    \"secondary_categories\": [\"categoría2\", \"categoría3\"],\n    \"keywords\": [\"palabra_clave_1\", \"palabra_clave_2\", \"...\"],\n    \"hashtags\": [\"#tag1\", \"#tag2\", \"#tag3\"],\n    \"topics\": [\"tema1\", \"tema2\"],\n    \"industries\": [\"industria relevante si aplica\"]\n  },\n  \"brand_and_commercial\": {\n    \"brands_detected\": [\"marca1\", \"marca2\"],\n    \"logos_present\": true/false,\n    \"products_visible\": [\"producto1\", \"producto2\"],\n    \"commercial_value\": \"valor comercial potencial\",\n    \"advertising_type\": \"tipo de publicidad si aplica\"\n  },\n  \"emotions_and_mood\": {\n    \"overall_mood\": \"estado de ánimo general\",\n    \"emotions_conveyed\": [\"emoción1\", \"emoción2\"],\n    \"psychological_impact\": \"impacto psicológico\",\n    \"viewer_feeling\": \"sentimiento que probablemente evoca en el espectador\"\n  },\n  \"technical_aspects\": {\n    \"estimated_camera_type\": \"tipo de cámara estimada\",\n    \"apparent_lens_type\": \"tipo de lente aparente\",\n    \"editing_detected\": \"edición detectada (ninguna/básica/avanzada/pesada)\",\n    \"filters_applied\": [\"filtro si se detecta\"],\n    \"post_processing\": \"nivel de postprocesamiento\"\n  },\n  \"context_and_usage\": {\n    \"likely_purpose\": \"propósito probable de la imagen\",\n    \"target_audience\": \"audiencia objetivo probable\",\n    \"best_use_cases\": [\"caso_de_uso_1\", \"caso_de_uso_2\"],\n    \"recommended_platforms\": [\"plataforma1\", \"plataforma2\"],\n    \"seo_title\": \"Título optimizado para SEO\",\n    \"seo_description\": \"Descripción optimizada para SEO\"\n  },\n  \"cultural_context\": {\n    \"cultural_elements\": [\"elemento cultural si aplica\"],\n    \"geographic_indicators\": [\"indicadores geográficos\"],\n    \"time_period_indicators\": \"indicadores de época/período\"\n  },\n  \"content_safety\": {\n    \"is_safe_for_work\": true/false,\n    \"age_appropriate\": \"apropiado para todas las edades / adultos / etc\",\n    \"sensitive_content\": true/false,\n    \"content_warnings\": [\"advertencia si aplica\"],\n    \"violence_level\": \"ninguno/bajo/medio/alto\",\n    \"adult_content\": true/false\n  },\n  \"accessibility\": {\n    \"color_blind_friendly\": true/false,\n    \"text_readability\": \"nivel de legibilidad del texto\",\n    \"visual_clarity\": \"claridad visual general\",\n    \"accessibility_score\": 0.0\n  },\n  \"ai_insights\": {\n    \"uniqueness_score\": 0.0,\n    \"memorability_score\": 0.0,\n    \"aesthetic_score\": 0.0,\n    \"engagement_potential\": \"bajo/medio/alto\",\n    \"virality_potential\": \"bajo/medio/alto\",\n    \"similar_image_concepts\": [\"concepto similar 1\", \"concepto similar 2\"],\n    \"improvement_suggestions\": [\"sugerencia1\", \"sugerencia2\"]\n  },\n  \"additional_notes\": \"Cualquier observación adicional relevante que no encaje en las categorías anteriores\"\n}\n\n## REGLAS IMPORTANTES:\n- Responde SOLO con el JSON, sin texto antes o después\n- Si no puedes determinar algo con certeza, indica \"indeterminado\" o usa un valor de confianza bajo\n- Sé lo más específico y descriptivo posible\n- Los arrays vacíos son válidos si no hay elementos de ese tipo\n- Los valores numéricos de confianza/score van de 0 a 1 (donde 1 es máxima confianza)\n- Para colores, proporciona tanto nombres descriptivos como códigos hex cuando sea posible\n- Si la imagen contiene texto, transcríbelo exactamente",
+        "imageUrls": "={{ $json.query }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        -16
+      ],
+      "id": "8b2e3278-ef70-4532-acf1-ee4841a198a7",
+      "name": "Analyze an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"file_name\": \"foto_producto_001.jpg\",\n  \"analyzed_at\": \"2025-09-29T14:30:00Z\",\n  \"description\": \"Zapatos deportivos rojos sobre fondo blanco\",\n  \"tags\": [\"zapatos\", \"deportivos\", \"rojo\", \"producto\", \"calzado\"],\n  \"category\": \"calzado deportivo\",\n  \"colors\": [\"rojo\", \"blanco\", \"negro\"],\n  \"objects\": [\"zapatos\", \"cordones\", \"suela\"],\n  \"quality\": \"alta\",\n  \"usable_for\": \"e-commerce\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        288,
+        176
+      ],
+      "id": "96c24431-c04b-464a-9aec-dd45c7b44ac7",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash-image-preview",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash-image-preview (Nano Banana)"
+        },
+        "prompt": "={{ $json.output.file_name }}\n{{ $json.output.description }}\n{{ $json.output.colors }}\n{{ $json.output.objects }}\n{{ $json.output.quality }}\nPero hazlo ultrarealista!",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -16
+      ],
+      "id": "5b0e8f18-5e7f-47ab-a365-63f6195fd60d",
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
     }
   ],
   "pinData": {
     "When Executed by Another Workflow": [
       {
         "json": {
-          "query": "dame el contacto de david"
+          "query": "https://i.pinimg.com/originals/e7/12/a4/e712a493df6b289b934a15fd8a543d18.jpg"
         }
       }
     ]
@@ -145,6 +206,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-29T07:44:54.247Z",
-  "versionId": "a48e6a85-b487-411a-bdb6-0f6423f6041b"
+  "updatedAt": "2025-09-29T08:44:58.000Z",
+  "versionId": "0dd3c4a4-5bd8-4d36-91b0-0256a1da61a8"
 }

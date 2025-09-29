@@ -1,0 +1,454 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission": {
+      "main": [
+        []
+      ]
+    },
+    "Generate Video with Veo": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Analyze Image Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Analyze Image Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate a video": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download a video": {
+      "main": [
+        [
+          {
+            "node": "Extraer Binary Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Video Prompts": {
+      "main": [
+        [
+          {
+            "node": "Generate a video",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Generate audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Download a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Podcast Agent": {
+      "main": [
+        [
+          {
+            "node": "Split Out Video Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-29T12:35:41.932Z",
+  "id": "h4QnCCY17P2CHxlX",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Podcast Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Podcast form",
+        "formDescription": "Create a podcast",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Person 1",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Person 2"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        960,
+        368
+      ],
+      "id": "5218d685-a0be-4470-9d07-8808d13404f0",
+      "name": "On form submission",
+      "webhookId": "d1fc0339-c49f-4a88-b6e3-9df7ddbc3bd0"
+    },
+    {
+      "parameters": {
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "url": "https://us-central1-aiplatform.googleapis.com/v1/projects/YOUR_PROJECT_ID/locations/us-central1/publishers/google/models/veo-2.0-generate-exp:predictLongRunning",
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "804103a9-e210-489d-ac4e-9efe16f86039",
+      "name": "Generate Video with Veo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        -256
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "P3CkcQfBL77gpXLN",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Analyze an image').item.json.content.parts[0].text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Dadas las descripciones genéricas de los personajes, pasalo al formato específico que te pido"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        -208
+      ],
+      "id": "37092a61-3433-4f16-9aa9-3dd134cc7529",
+      "name": "Analyze Image Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1120,
+        -16
+      ],
+      "id": "a3038a20-885c-4d07-bff0-34a7302e570c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "[\n  {\n    \"json\": {\n      \"nombre\": \"Alicia\",\n      \"descripcion\": \"Una joven curiosa y valiente que disfruta explorando mundos imaginarios.\"\n    }\n  },\n  {\n    \"json\": {\n      \"nombre\": \"Bruno\",\n      \"descripcion\": \"Un inventor ingenioso con una pasión por crear máquinas sorprendentes.\"\n    }\n  }\n]\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1264,
+        -16
+      ],
+      "id": "68713a0b-e9f8-450c-a8c2-e7b97f454cbe",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "modelId": {
+          "__rl": true,
+          "value": "models/veo-2.0-generate-001",
+          "mode": "list",
+          "cachedResultName": "models/veo-2.0-generate-001"
+        },
+        "prompt": "=You are a professional video podcast content generator.\nCreate a short, natural video clip for a podcast scene based on the content below:\n\nScene number: {{ $json.escena_num }} of {{ $('Podcast Agent').item.json.output.video_podcast.total_scenes }}\nNarration: {{ $json[\"narrador\"] }}\nVisuals: {{ $json[\"escena\"] }}\n\n# STYLE\n- Tone: professional, educational, conversational.\n- Duration: 6 to 8 seconds.\n- Setting: modern podcast studio with neutral background.\n- Show: professional hosts in business casual attire, clean desk setup, microphones, subtle background elements.\n- Lighting: bright, even, professional studio lighting.\n- Camera: stable shots, gentle movements, professional framing.\n- Atmosphere: positive, informative, welcoming.\n\n# VISUAL REQUIREMENTS\n- Focus on professional presentation and clear communication\n- Use neutral, non-controversial imagery\n- Show diverse, respectful representation of people\n- Avoid dramatic tension, conflict, or intense emotions\n- Keep visuals clean, minimal, and professional\n- Ensure all content is appropriate for general audiences\n- No simulation of real people or specific individuals\n- Generic, stock-footage style presentation\n\n# CONTENT GUIDELINES\n- Avoid: violence, weapons, dangerous activities, alcohol, tobacco, gambling, political content, health misinformation, financial advice as facts\n- Include: educational content, professional discussions, data presentations, neutral business topics\n- Keep everything factual, balanced, and informational\n\n# OUTPUT\nGenerate a single professional video clip (6-8 seconds) for this scene.\nDo not include text overlays, captions, or subtitles.\nMaintain a safe, educational, and professional tone throughout.",
+        "returnAs": "url",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        -32
+      ],
+      "id": "15736e37-b656-4c06-9587-bc8c0d6b7606",
+      "name": "Generate a video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "download",
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2320,
+        -32
+      ],
+      "id": "104f3bbf-3383-4d20-81a0-f5a96894885a",
+      "name": "Download a video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.video_podcast.narration_with_scenes",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1536,
+        80
+      ],
+      "id": "dc1c4631-b6f7-4b71-a68d-d30917b4cc64",
+      "name": "Split Out Video Prompts"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "url",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1968,
+        -32
+      ],
+      "id": "808843de-3b94-4461-af5d-53ef58694d08",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "model": "tts-1-hd",
+        "input": "={{ $json.narrador }}",
+        "voice": "nova",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1760,
+        160
+      ],
+      "id": "70ec01c9-574f-47e8-abf7-bfff87cd01c9",
+      "name": "Generate audio",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nconst videosData = items.map((item, index) => {\n  if (!item.binary || !item.binary.data) {\n    throw new Error(`Video ${index} no tiene binary data`);\n  }\n  \n  return {\n    json: {\n      videoIndex: index,\n      fileName: `video_${index}.mp4`,\n      mimeType: 'video/mp4'\n    },\n    binary: {\n      data: item.binary.data\n    }\n  };\n});\n\nreturn videosData;"
+      },
+      "name": "Extraer Binary Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2544,
+        -32
+      ],
+      "id": "6e508913-f8b6-4883-a622-ebb266f21b84"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1168,
+        448
+      ],
+      "id": "e5a4ff5e-e511-4487-808e-71e89543f14d",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"video_podcast\": {\n    \"title\": \"Título del episodio\",\n    \"personaje_1\": \"Descripción del personaje 1\",\n    \"personaje_2\": \"Descripción del personaje 2\",\n    \"total_scenes\": 2,\n    \"narration_with_scenes\": [\n      {\n        \"escena_num\": 1,\n        \"narrador\": \"Texto narrado de la primera escena, 6–8 segundos.\",\n        \"escena\": \"Descripción visual de la primera escena.\"\n      },\n      {\n        \"escena_num\": 2,\n        \"narrador\": \"Texto narrado de la segunda escena, 6–8 segundos.\",\n        \"escena\": \"Descripción visual de la segunda escena.\"\n      }\n    ]\n  }\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1296,
+        448
+      ],
+      "id": "75903112-f29b-4275-b3bc-d8660b7f7c67",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        960,
+        176
+      ],
+      "id": "56fb5fde-4d1f-4656-985e-aeba6c5079cd",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Video podcast",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "# TASK: GUIÓN DE VIDEO PODCAST DIVIDIDO EN ESCENAS\n1. Analiza el contenido proporcionado.\n2. Escribe únicamente el **texto narrado del podcast**, dividido en escenas de 6–8 segundos.\n3. Cada escena debe tener dos campos:\n   - **NARRADOR**: lo que dice la voz en off.\n   - **ESCENA**: lo que se muestra visualmente (ej. “Plano del presentador en estudio”, “Animación con cifras clave”).\n4. Duración total: entre 1 minuto y 90 segundos.\n5. Estilo narrativo: inmersivo, cinematográfico, pensado para video podcast (frases claras, ritmo ágil).\n6. Inicio: presentar el tema y situar al público.\n7. Desarrollo: incluir 2–3 datos impactantes o visuales.\n8. Cierre: dejar una reflexión, dilema o pregunta abierta.\n9. Responde SOLO con JSON válido siguiendo la estructura indicada.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        1168,
+        224
+      ],
+      "id": "41afc577-62f7-4630-8606-27a217ca526f",
+      "name": "Podcast Agent"
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "Person 1": "https://tse2.mm.bing.net/th/id/OIP.7stwxZm-L1BqyYwVuRKYNgHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+          "Person 2": "https://www.sportal.it/wp-content/uploads/2025/05/cristiano_ronaldo-8.webp",
+          "submittedAt": "2025-09-29T15:04:55.771+02:00",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-29T12:35:41.936Z",
+      "updatedAt": "2025-09-29T12:35:41.936Z",
+      "role": "workflow:owner",
+      "workflowId": "h4QnCCY17P2CHxlX",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-29T13:44:01.000Z",
+  "versionId": "e52b94bf-452e-4941-96c9-c4eec23a8c3a"
+}

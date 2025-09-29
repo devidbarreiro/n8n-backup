@@ -95,11 +95,11 @@
         "resource": "video",
         "modelId": {
           "__rl": true,
-          "value": "models/veo-3.0-fast-generate-preview",
+          "value": "models/veo-2.0-generate-001",
           "mode": "list",
-          "cachedResultName": "models/veo-3.0-fast-generate-preview"
+          "cachedResultName": "models/veo-2.0-generate-001"
         },
-        "prompt": "=You are a cinematic video generator.  \nGenerate a short video clip for a single scene from a trailer, based on the structured content below:  \n\nScene number: {{ $json.escena_num }} of {{ $('AI Writer').item.json.output.trailer.total_scenes }}  \nNarration: {{ $json[\"narrador\"] }}  \nVisuals: {{ $json[\"escena\"] }}  \n\n# STYLE\n- Tone: cinematic, dramatic, immersive.  \n- Duration: around 6 to 8 seconds.  \n- Show realistic environments, office settings, data visualizations, and emotional tension in the protagonist.  \n- Use dynamic camera movements and lighting to increase drama.  \n- Sync visuals with the narration.  \n- The scene must feel like part of a larger MBA case study trailer.  \n\n# OUTPUT\nGenerate a single video clip (6–8 seconds) for this scene only.  \nDo not add captions, text overlays, or subtitles to the video.",
+        "prompt": "=You are a cinematic video generator.  \nGenerate a short video clip for a single scene from a trailer, based on the structured content below:  \n\nScene number: {{ $json.escena_num }} of {{ $('Google Agent').item.json.output.trailer.total_scenes }} \nNarration: {{ $json[\"narrador\"] }}  \nVisuals: {{ $json[\"escena\"] }}  \n\n# STYLE\n- Tone: cinematic, dramatic, immersive.  \n- Duration: around 6 to 8 seconds.  \n- Show realistic environments, office settings, data visualizations, and emotional tension in the protagonist.  \n- Use dynamic camera movements and lighting to increase drama.  \n- Sync visuals with the narration.  \n- The scene must feel like part of a larger MBA case study trailer.  \n\n# OUTPUT\nGenerate a single video clip (6–8 seconds) for this scene only.  \nDo not add captions, text overlays, or subtitles to the video.",
         "returnAs": "url",
         "options": {}
       },
@@ -116,8 +116,7 @@
           "id": "X30UB2LkpOZovf9c",
           "name": "Google Gemini(PaLM) Api account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -139,8 +138,7 @@
           "id": "X30UB2LkpOZovf9c",
           "name": "Google Gemini(PaLM) Api account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -191,8 +189,7 @@
           "id": "nmk2GFM41ZOhRE5f",
           "name": "OpenAi account"
         }
-      },
-      "disabled": true
+      }
     },
     {
       "parameters": {
@@ -219,7 +216,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -1976,
+        -1984,
         496
       ],
       "id": "aff1faf0-b725-48db-8433-1ae11262dea0",
@@ -238,7 +235,7 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        -1848,
+        -1840,
         496
       ],
       "id": "c1719914-48c8-4677-ba1b-d896e9b0efc8",
@@ -261,6 +258,40 @@
       ],
       "id": "969f2384-4d0a-40ac-b361-e59fd6cb1d13",
       "name": "Google Agent"
+    },
+    {
+      "parameters": {
+        "url": "https://api.rendi.dev/ffmpeg",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-Key",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"input_files\": {\n    \"in_1\": \"{{ $json.video_url_1 }}\",\n    \"in_2\": \"{{ $json.video_url_2 }}\",\n    \"in_3\": \"{{ $json.video_url_3 }}\"\n  },\n  \"output_files\": {\n    \"out_1\": \"video_concatenado.mp4\"\n  },\n  \"ffmpeg_command\": \"-i {{in_1}} -i {{in_2}} -i {{in_3}} -filter_complex '[0:v][0:a][1:v][1:a][2:v][2:a]concat=n=3:v=1:a=1[outv][outa]' -map '[outv]' -map '[outa]' {{out_1}}\"\n}",
+        "options": {}
+      },
+      "name": "FFmpeg - Concatenar Videos",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1056,
+        544
+      ],
+      "id": "8d25427d-9b8d-41a4-ad1c-a0123cd00315",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "P3CkcQfBL77gpXLN",
+          "name": "Header Auth account"
+        }
+      }
     }
   ],
   "pinData": {
@@ -287,6 +318,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T11:30:28.000Z",
-  "versionId": "8e20f3ad-af88-4ce7-ba97-7ea410ea7abf"
+  "updatedAt": "2025-09-29T09:59:15.000Z",
+  "versionId": "2862fd85-6296-47b0-a827-087cb5083c12"
 }

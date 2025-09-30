@@ -3,7 +3,13 @@
   "connections": {
     "When chat message received": {
       "main": [
-        []
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Email Agent": {
@@ -90,24 +96,12 @@
     },
     "Telegram Trigger": {
       "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "AI Agent": {
       "main": [
-        [
-          {
-            "node": "Send a text message",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Simple Memory": {
@@ -132,18 +126,23 @@
         ]
       ]
     },
-    "Transcribe a recording": {
-      "main": [
+    "Image Analyzer Agent": {
+      "ai_tool": [
         [
           {
             "node": "AI Agent",
-            "type": "main",
+            "type": "ai_tool",
             "index": 0
           }
         ]
       ]
     },
-    "Image Analyzer Agent": {
+    "Transcribe a recording": {
+      "main": [
+        []
+      ]
+    },
+    "Recipie Agent": {
       "ai_tool": [
         [
           {
@@ -170,8 +169,8 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.3,
       "position": [
-        -192,
-        -336
+        -112,
+        -272
       ],
       "id": "d2ad0186-d901-416f-a3e0-d240ae444737",
       "name": "When chat message received",
@@ -180,7 +179,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $json.message.text }}",
+        "text": "={{ $json.message.text }} {{ $json.chatInput }}",
         "options": {
           "systemMessage": "You are an orchestrator agent, you dont have to do the task.Use your agents outputs.\nJust pass user query to a subagent.\n- If you need contact info or is a Mail request use the Contact Agent\n"
         }
@@ -382,7 +381,7 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -192,
+        -272,
         -128
       ],
       "id": "c722a858-c14b-4ca4-98e2-a9c9b69b6bb8",
@@ -420,7 +419,7 @@
     {
       "parameters": {
         "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.message.chat.id }}"
+        "sessionKey": "={{ $json.message.chat.id }} {{ $json.sessionId }}"
       },
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
@@ -439,7 +438,7 @@
           "value": "vxfdsQZdqixA7XFq",
           "mode": "list",
           "cachedResultUrl": "/workflow/vxfdsQZdqixA7XFq",
-          "cachedResultName": "Sub Chat Agent"
+          "cachedResultName": "Chat Agent"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -454,27 +453,6 @@
       ],
       "id": "d6aa517f-1928-4750-91e0-fde5b1954d2c",
       "name": "Chat Agent"
-    },
-    {
-      "parameters": {
-        "resource": "audio",
-        "operation": "transcribe",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
-      "position": [
-        0,
-        -240
-      ],
-      "id": "1d0a4e90-21eb-4214-b8da-b053db23ef6f",
-      "name": "Transcribe a recording",
-      "credentials": {
-        "openAiApi": {
-          "id": "nmk2GFM41ZOhRE5f",
-          "name": "OpenAi account"
-        }
-      }
     },
     {
       "parameters": {
@@ -499,6 +477,51 @@
       ],
       "id": "e5618001-10fe-4a9f-a9f9-c79233c69d39",
       "name": "Image Analyzer Agent"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        64,
+        -336
+      ],
+      "id": "1d0a4e90-21eb-4214-b8da-b053db23ef6f",
+      "name": "Transcribe a recording",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any recipie action",
+        "workflowId": {
+          "__rl": true,
+          "value": "uozIGPtmE2KWJ6Bt",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/uozIGPtmE2KWJ6Bt",
+          "cachedResultName": "Sub Recipie Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        512,
+        272
+      ],
+      "id": "1624c1ae-6e1c-4a4d-b887-284481ba2a2f",
+      "name": "Recipie Agent"
     }
   ],
   "pinData": {},
@@ -517,6 +540,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2025-09-29T13:41:43.000Z",
-  "versionId": "4424898b-81a1-4667-b666-8a3bd8da8175"
+  "updatedAt": "2025-09-30T15:37:48.000Z",
+  "versionId": "9ab0a0a2-0842-4ba4-9862-394c18e555ab"
 }

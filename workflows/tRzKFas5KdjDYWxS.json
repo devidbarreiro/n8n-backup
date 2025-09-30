@@ -1,0 +1,449 @@
+{
+  "active": false,
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Set Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Analyze video Gemini",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Input": {
+      "main": [
+        [
+          {
+            "node": "Download video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download video": {
+      "main": [
+        [
+          {
+            "node": "Upload video Gemini",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Analyze video",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Transcribe video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload video Gemini": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze video Gemini": {
+      "main": [
+        [
+          {
+            "node": "Get Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Result": {
+      "main": [
+        []
+      ]
+    },
+    "Transcribe video": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Generate a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-30T08:53:42.881Z",
+  "id": "tRzKFas5KdjDYWxS",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Gemini AI Video Analysis",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Curación de contenidos\n\nTranscripción +  Análisis\nAvatar del profesor\nTraducción del vídeo\nClase -> contenido + transcripcion del profesor\n",
+        "height": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        448,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "0e95a6d1-ef0b-4b52-9518-d35f8ed3ba76",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "formTitle": "Video",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Video",
+              "fieldType": "file",
+              "acceptFileTypes": ".mp4, .wav"
+            },
+            {
+              "fieldLabel": "Video url"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        720,
+        320
+      ],
+      "id": "cf163ac5-d1b7-48fd-a6c0-ceec18d3bb83",
+      "name": "On form submission",
+      "webhookId": "3efc3ca5-c31a-4837-9370-afe46e410abb"
+    },
+    {
+      "parameters": {},
+      "id": "ee30e9c0-1f4b-487f-962e-3d331c6b2c5a",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        1616,
+        320
+      ],
+      "webhookId": "7d0cd0c0-ce85-4372-b7a5-b0be061fc2b9",
+      "typeVersion": 1.1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.video_url }}",
+        "options": {}
+      },
+      "id": "f2dab008-9670-4b51-9d63-0f906368e2c7",
+      "name": "Download video",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1168,
+        320
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/upload/v1beta/files?key=AIzaSyAcYXvtzmOwO1FAXZZiKXDu5jwr0telckE",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Goog-Upload-Command",
+              "value": "start, upload, finalize"
+            },
+            {
+              "name": "X-Goog-Upload-Header-Content-Length",
+              "value": "={{ $binary.data.fileSize }}"
+            },
+            {
+              "name": "X-Goog-Upload-Header-Content-Type",
+              "value": "=video/{{ $binary.data.fileExtension }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "video/mp4"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "=data",
+        "options": {}
+      },
+      "id": "1feaaaae-6810-47aa-a9c2-f9bbce4d3dae",
+      "name": "Upload video Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1392,
+        320
+      ],
+      "typeVersion": 4.2,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=AIzaSyAcYXvtzmOwO1FAXZZiKXDu5jwr0telckE",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n    \"contents\": [\n        {\n            \"role\": \"user\",\n            \"parts\": [\n                {\n                    \"fileData\": {\n                        \"fileUri\": \"{{ $json.file.uri }}\",\n                        \"mimeType\": \"{{ $json.file.mimeType }}\"\n                    }\n                },\n                {\n                    \"text\": \"Describe in detail what is visually happening in the video, including key elements, actions, colors, and branding. Note the style, tone, and any notable creative techniques being used.\"\n                }\n            ]\n        }\n    ],\n    \"generationConfig\": {\n        \"temperature\": 1.4,\n        \"topK\": 40,\n        \"topP\": 0.95,\n        \"maxOutputTokens\": 8192,\n        \"responseModalities\": [\"Text\"]\n    }\n}\n",
+        "options": {}
+      },
+      "id": "9dfe8130-c16a-43e9-8ff6-dabdaf800799",
+      "name": "Analyze video Gemini",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1840,
+        320
+      ],
+      "typeVersion": 4.2,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6e1728e0-4749-47b9-92ae-4d1c0b7008c8",
+              "name": "video_url",
+              "type": "string",
+              "value": "={{ $json['Video url'] }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cab65ef1-de92-4d2f-8a74-042e7b77828f",
+      "name": "Set Input",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        944,
+        320
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1ea390b9-3371-4a3a-8741-bd6ec74dc64b",
+              "name": "videoDescription",
+              "type": "string",
+              "value": "={{ $json.candidates[0].content.parts[0].text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "09e1e7e7-7693-4a04-afc2-a91c55befaed",
+      "name": "Get Result",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        2064,
+        320
+      ],
+      "typeVersion": 3.4,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Configuration\nDefine the video URL you want to analyze.\n",
+        "height": 300,
+        "width": 220,
+        "color": 5
+      },
+      "id": "75bddae9-2228-4c31-b609-0c0ade6bd20e",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        896,
+        192
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Video Processing Pipeline\n\nThis section handles the complete video processing workflow:\n\n1. DOWNLOAD: First, we fetch the video from the provided URL, converting it to binary data that Gemini can process\n\n2. UPLOAD: Next, we send the binary video data to Gemini's servers where it's stored temporarily for AI processing\n\n3. ANALYZE: Finally, we request Gemini's AI to analyze the video content. You can customize the prompt in the \"Analyze video Gemini\" node to focus on specific aspects of the video content you're interested in\n\nThe Wait node ensures the video is fully processed before analysis begins.\n",
+        "height": 460,
+        "width": 820,
+        "color": 4
+      },
+      "id": "9d69da56-418c-42b8-bfd0-b759c5b68bab",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1152,
+        32
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "text": "Please provide two things:\n\n- A brief analysis/description of what happens in the video.\n\n- A transcription of the video’s audio, just the transcription of the audio with timestamps.",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        528
+      ],
+      "id": "b09a9cfa-3a51-4c97-9b44-08b45be584e3",
+      "name": "Analyze video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-pro",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-pro"
+        },
+        "text": "Please provide the analysis in this JSON format:\n{\n  \"video_description\": \"string - concise summary of what happens in the video\",\n  \"scene_by_scene_analysis\": [\n    {\n      \"timestamp\": \"HH:MM:SS\",\n      \"description\": \"detailed description of what is happening visually in this scene\"\n    }\n  ],\n  \"audio_transcription\": [\n    {\n      \"timestamp\": \"HH:MM:SS\",\n      \"text\": \"spoken words at this time\"\n    }\n  ]\n}",
+        "inputType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        704
+      ],
+      "id": "51ee20fd-df97-4f7d-b7c6-53b7030c5edc",
+      "name": "Transcribe video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "try {\n  // El input es directamente el array\n  const items = $input.all();\n  \n  // Acceder al texto del primer item\n  const text = items[0].json.content.parts[0].text;\n  \n  // Limpiar y parsear\n  const jsonMatch = text.match(/```json\\n([\\s\\S]*?)\\n```/);\n  \n  if (jsonMatch && jsonMatch[1]) {\n    const parsed = JSON.parse(jsonMatch[1]);\n    \n    // Validar que tenga las 3 propiedades esperadas\n    if (!parsed.video_description || !parsed.scene_by_scene_analysis || !parsed.audio_transcription) {\n      throw new Error('El JSON no contiene todas las propiedades esperadas');\n    }\n    \n    return [{ json: parsed }];\n  }\n  \n  throw new Error('No se encontró JSON válido');\n} catch (error) {\n  throw new Error(`Error parseando JSON: ${error.message}`);\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2064,
+        704
+      ],
+      "id": "0dda4009-cd69-4114-b2ac-6860c7a6bf34",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "modelId": {
+          "__rl": true,
+          "value": "models/veo-3.0-generate-001",
+          "mode": "list",
+          "cachedResultName": "models/veo-3.0-generate-001"
+        },
+        "prompt": "=Recreate this video:\n {{ $json.video_description }}\n{{ $json.scene_by_scene_analysis }}\n{{ $json.audio_transcription }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        2304,
+        704
+      ],
+      "id": "9d421f6a-df78-44f0-8a78-940fb0178e0f",
+      "name": "Generate a video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-30T08:53:42.888Z",
+      "updatedAt": "2025-09-30T08:53:42.888Z",
+      "role": "workflow:owner",
+      "workflowId": "tRzKFas5KdjDYWxS",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-30T09:51:49.000Z",
+  "versionId": "31c6d9e4-d2a8-44ce-a9f0-0d15411354ad"
+}

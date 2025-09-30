@@ -1,0 +1,186 @@
+{
+  "active": false,
+  "connections": {
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Data Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "Google Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-09-30T08:37:54.137Z",
+  "id": "PjDuh7YRhrMrDTsq",
+  "isArchived": false,
+  "meta": null,
+  "name": "RAG",
+  "nodes": [
+    {
+      "parameters": {
+        "notice": "",
+        "dataType": "binary",
+        "binaryMode": "allInputData",
+        "loader": "auto",
+        "textSplittingMode": "simple",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1024,
+        1424
+      ],
+      "id": "e3cb506a-1e4c-4ca5-b6d6-eac508debf36",
+      "name": "Default Data Loader",
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "notice": "",
+        "model": "text-embedding-3-large",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        1424
+      ],
+      "id": "f8f4bfdd-24c5-459e-896b-ccb8321d727d",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      },
+      "disabled": false
+    },
+    {
+      "parameters": {
+        "ragStarterCallout": "",
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Use this knowledge base to answer questions from the user",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        },
+        "topK": 4,
+        "includeDocumentMetadata": true,
+        "useReranker": false,
+        "notice": ""
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        528,
+        1392
+      ],
+      "id": "0194c3c5-88ca-4bc6-8d51-eb0b8bfa17b1",
+      "name": "Query Data Tool",
+      "disabled": false,
+      "issues": {}
+    },
+    {
+      "parameters": {
+        "ragStarterCallout": "",
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        },
+        "embeddingBatchSize": 200,
+        "clearStore": false,
+        "notice": ""
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        1200
+      ],
+      "id": "3c5b2591-20d1-4669-87c9-b75d5b07c381",
+      "name": "Insert Data to Store",
+      "notesInFlow": false,
+      "disabled": false,
+      "issues": {}
+    },
+    {
+      "id": "daac754a-2181-422d-a3b3-f5bfe75273ca",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        688,
+        1200
+      ],
+      "parameters": {
+        "inputSource": "passthrough"
+      }
+    }
+  ],
+  "pinData": null,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-09-30T08:37:54.144Z",
+      "updatedAt": "2025-09-30T08:37:54.144Z",
+      "role": "workflow:owner",
+      "workflowId": "PjDuh7YRhrMrDTsq",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-09-30T08:37:54.137Z",
+  "versionId": "9ca0546b-820b-4e63-98b7-1d0af7659d0c"
+}

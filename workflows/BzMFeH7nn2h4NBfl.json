@@ -23,34 +23,12 @@
         ]
       ]
     },
-    "Chat message": {
-      "main": [
-        [
-          {
-            "node": "Calendar agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Model": {
       "ai_languageModel": [
         [
           {
             "node": "Calendar agent",
             "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Simple Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "Calendar agent",
-            "type": "ai_memory",
             "index": 0
           }
         ]
@@ -89,12 +67,23 @@
         ]
       ]
     },
-    "Delete an event in Google Calendar1": {
+    "Update an event in Google Calendar": {
       "ai_tool": [
         [
           {
             "node": "Calendar agent",
             "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Calendar agent",
+            "type": "main",
             "index": 0
           }
         ]
@@ -127,8 +116,8 @@
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        32,
-        208
+        80,
+        192
       ],
       "credentials": {
         "googleCalendarOAuth2Api": {
@@ -156,8 +145,8 @@
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        144,
-        208
+        208,
+        192
       ],
       "credentials": {
         "googleCalendarOAuth2Api": {
@@ -165,20 +154,6 @@
           "name": "Google Calendar account"
         }
       }
-    },
-    {
-      "parameters": {
-        "options": {}
-      },
-      "id": "719aaeb8-e985-4235-bcff-c2bfbc6a8e5c",
-      "name": "Chat message",
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.3,
-      "position": [
-        -400,
-        -32
-      ],
-      "webhookId": "d0b3a15a-8d1c-437c-8523-00e108af14a4"
     },
     {
       "parameters": {
@@ -194,8 +169,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -304,
-        224
+        -176,
+        192
       ],
       "credentials": {
         "openAiApi": {
@@ -205,18 +180,9 @@
       }
     },
     {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        -176,
-        224
-      ],
-      "id": "56bd33c7-bb31-4957-9f12-fdcc2351880d",
-      "name": "Simple Memory"
-    },
-    {
       "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
         "options": {
           "systemMessage": "=You are a helpful calendar assistant. You can check availability and retrieve events from Google Calendar. When users ask about dates, use the calendar tools to get the information. Always specify date ranges clearly when using the tools.\n\nTodays date is: {{ $now }}",
           "maxIterations": 10,
@@ -231,7 +197,7 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        -160,
+        200,
         -32
       ]
     },
@@ -261,13 +227,21 @@
         },
         "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
         "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
-        "additionalFields": {}
+        "useDefaultReminders": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Use_Default_Reminders', `Recordatorio 15 minutos antes`, 'boolean') }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('attendees0_Attendees', ``, 'string') }}"
+          ],
+          "color": "9",
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "rrule": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('RRULE', ``, 'string') }}"
+        }
       },
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        272,
-        224
+        336,
+        192
       ],
       "id": "bf4f4ec1-cb75-4b1f-8fff-61091215599b",
       "name": "Create an event in Google Calendar",
@@ -293,7 +267,7 @@
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        400,
+        464,
         192
       ],
       "id": "a5c0ca3f-3312-47a5-8dbe-ec98908dddd0",
@@ -321,7 +295,7 @@
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        528,
+        592,
         192
       ],
       "id": "63ee311a-da0d-424b-a4b7-ced624526287",
@@ -335,7 +309,7 @@
     },
     {
       "parameters": {
-        "operation": "delete",
+        "operation": "update",
         "calendar": {
           "__rl": true,
           "value": "david.barreiro@fundacionparentes.org",
@@ -343,27 +317,46 @@
           "cachedResultName": "david.barreiro@fundacionparentes.org"
         },
         "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
-        "options": {
-          "sendUpdates": "all"
-        }
+        "updateFields": {}
       },
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        32,
-        368
+        720,
+        192
       ],
       "id": "9d2cf3e9-160f-4f17-924c-f15a45d90fb3",
-      "name": "Delete an event in Google Calendar1",
+      "name": "Update an event in Google Calendar",
       "credentials": {
         "googleCalendarOAuth2Api": {
           "id": "ekA61KIOT1ohzD6a",
           "name": "Google Calendar account"
         }
       }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        -32
+      ],
+      "id": "29765d0c-c366-4d00-a9d3-1635c33edad4",
+      "name": "When Executed by Another Workflow"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "query": ""
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -379,6 +372,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-02T13:58:39.000Z",
-  "versionId": "5688fbc7-97b0-4332-8af0-bc6bc6dc47b3"
+  "updatedAt": "2025-10-02T14:15:06.000Z",
+  "versionId": "2852e037-0b10-4174-889c-3eacb8ee0b7a"
 }

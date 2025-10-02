@@ -12,55 +12,6 @@
         ]
       ]
     },
-    "Upload your file here": {
-      "main": [
-        [
-          {
-            "node": "Insert Data to Store",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Default Data Loader": {
-      "ai_document": [
-        [
-          {
-            "node": "Insert Data to Store",
-            "type": "ai_document",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Embeddings OpenAI": {
-      "ai_embedding": [
-        [
-          {
-            "node": "Query Data Tool",
-            "type": "ai_embedding",
-            "index": 0
-          },
-          {
-            "node": "Insert Data to Store",
-            "type": "ai_embedding",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Query Data Tool": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "OpenAI Chat Model": {
       "ai_languageModel": [
         [
@@ -99,6 +50,11 @@
         [
           {
             "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Apple Shortcut",
             "type": "main",
             "index": 0
           }
@@ -142,6 +98,50 @@
           }
         ]
       ]
+    },
+    "Calendar Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When called by Apple Shortcut": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "News Researcher": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RAG Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-26T09:44:54.200Z",
@@ -155,7 +155,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "={{ $json.message.text }} {{ $json.chatInput }}",
+        "text": "={{ $json.message.text }}",
         "options": {
           "systemMessage": "You are an orchestrator agent, you dont have to do the task.Use your agents outputs.\nJust pass user query to a subagent.\n- If you need contact info or is a Mail request use the Contact Agent\n"
         }
@@ -163,8 +163,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        160,
-        -128
+        312,
+        -8
       ],
       "id": "acb839b0-963c-46bd-a8b7-5f3cc4f4fdf9",
       "name": "AI Agent"
@@ -191,110 +191,11 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        336,
-        144
+        128,
+        216
       ],
       "id": "ddd6d9d7-122f-4392-8ef3-7a33a9425030",
       "name": "Email Agent"
-    },
-    {
-      "parameters": {
-        "formTitle": "Upload your data to test RAG",
-        "formFields": {
-          "values": [
-            {
-              "fieldLabel": "Upload your file(s)",
-              "fieldType": "file",
-              "acceptFileTypes": ".pdf, .csv",
-              "requiredField": true
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.formTrigger",
-      "typeVersion": 2.2,
-      "position": [
-        128,
-        400
-      ],
-      "id": "eee1c7c7-cbcc-46c2-8aaf-12d3984cfba0",
-      "name": "Upload your file here",
-      "webhookId": "82848bc4-5ea2-4e5a-8bb6-3c09b94a8c5d"
-    },
-    {
-      "parameters": {
-        "dataType": "binary",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
-      "typeVersion": 1.1,
-      "position": [
-        592,
-        608
-      ],
-      "id": "6339864c-e646-4b30-bcc7-2be623ca56c7",
-      "name": "Default Data Loader"
-    },
-    {
-      "parameters": {
-        "mode": "insert",
-        "memoryKey": {
-          "__rl": true,
-          "value": "vector_store_key",
-          "mode": "list",
-          "cachedResultName": "vector_store_key"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
-      "typeVersion": 1.2,
-      "position": [
-        544,
-        400
-      ],
-      "id": "8f4166b0-e0e3-4aef-bf86-5e8f366091cd",
-      "name": "Insert Data to Store",
-      "notesInFlow": false
-    },
-    {
-      "parameters": {
-        "mode": "retrieve-as-tool",
-        "toolName": "knowledge_base",
-        "toolDescription": "Use this knowledge base to answer questions from the user",
-        "memoryKey": {
-          "__rl": true,
-          "mode": "list",
-          "value": "vector_store_key"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
-      "typeVersion": 1.2,
-      "position": [
-        848,
-        208
-      ],
-      "id": "0fef6d60-0720-4ceb-b0c2-cc3a59ff961c",
-      "name": "Query Data Tool"
-    },
-    {
-      "parameters": {
-        "model": "text-embedding-3-large",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        848,
-        512
-      ],
-      "id": "e77c3190-e593-4f80-9536-d7dd04ccfcd7",
-      "name": "Embeddings OpenAI",
-      "credentials": {
-        "openAiApi": {
-          "id": "nmk2GFM41ZOhRE5f",
-          "name": "OpenAi account"
-        }
-      }
     },
     {
       "parameters": {
@@ -309,8 +210,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -48,
-        208
+        -128,
+        216
       ],
       "id": "d23cc177-1f14-4ef5-ae2b-59e1e6fa4088",
       "name": "OpenAI Chat Model",
@@ -339,8 +240,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        224,
-        144
+        256,
+        216
       ],
       "id": "635c2022-739b-418c-9cd6-165f5a46cc8e",
       "name": "Contacts Agent"
@@ -357,8 +258,8 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -272,
-        -128
+        -352,
+        88
       ],
       "id": "c722a858-c14b-4ca4-98e2-a9c9b69b6bb8",
       "name": "Telegram Trigger",
@@ -379,8 +280,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        544,
-        -128
+        1104,
+        88
       ],
       "id": "3e540f91-d4a6-4943-ab55-5df1b4f97431",
       "name": "Send a text message",
@@ -400,8 +301,8 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        80,
-        208
+        0,
+        216
       ],
       "id": "ca4141fa-2e2c-4c0b-9339-82c52d6cc099",
       "name": "Simple Memory"
@@ -424,8 +325,8 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        448,
-        144
+        384,
+        216
       ],
       "id": "d6aa517f-1928-4750-91e0-fde5b1954d2c",
       "name": "Chat Agent"
@@ -439,7 +340,7 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        64,
+        -352,
         -336
       ],
       "id": "1d0a4e90-21eb-4214-b8da-b053db23ef6f",
@@ -469,11 +370,163 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        560,
-        144
+        512,
+        216
       ],
       "id": "249cfc00-5eaa-405c-8456-d2dd836a643a",
       "name": "Linear Agent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any calendar actions",
+        "workflowId": {
+          "__rl": true,
+          "value": "BzMFeH7nn2h4NBfl",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/BzMFeH7nn2h4NBfl",
+          "cachedResultName": "Calendar Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        640,
+        216
+      ],
+      "id": "6d50b4f4-e4ed-4a66-9ca8-cdd7458ab962",
+      "name": "Calendar Agent"
+    },
+    {
+      "parameters": {
+        "content": "![Siri Template Thumbnail](https://uploads.n8n.io/devrel/wf-siri-header.png#full-width)\n## \"Hey Siri, Ask Agent\" workflow\n**Made by [Max Tkacz](https://www.linkedin.com/in/maxtkacz) during the [30 Day AI Sprint](https://30dayaisprint.notion.site/)**\n\nThis template integrates with Apple Shortcuts to trigger an n8n AI Agent via a \"Hey Siri\" command. The shortcut prompts for spoken input, transcribes it, and sends it to the workflow's `When Called by Apple Shortcut` Webhook trigger. The AI Agent processes the input and Siri dictates the response back to you.\n\nThe workflow also passes the current date and time to the `AI Agent`, which you can extend with additional context, like data from an App node, for more customized responses.\n\n",
+        "height": 494.9629292914819,
+        "width": 636.2128494576581,
+        "color": 7
+      },
+      "id": "20fab01b-6d28-43e0-a85e-1ab90f40aa6a",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        64,
+        864
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.output }}",
+        "options": {}
+      },
+      "id": "b38fa4a8-e05e-4956-9535-d6afe25ddc4d",
+      "name": "Respond to Apple Shortcut",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [
+        1104,
+        -104
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "content": "### Set up steps\n1. Add an OpenAI API credential in `OpenAI Chat Model` node, or replace it with another model. Try `Groq` if you want a free alternative (can be used with free Groq account, no CC).\n2. Copy the \"Production URL\" from `When called by Apple Shortcut` node, you'll need this when setting up the shortcut.\n3. Save and activate this n8n workflow.\n4. Download the [Apple Shortcut here](https://uploads.n8n.io/devrel/ask-agent.shortcut), open it on macOS or iOS. This adds the shortcut to your device.\n5. Open the shortcut and swap URL in `Get contents of\" step to the \"Production URL\" you copied from `When called by Apple Shortcut`.\n6. Test it by saying \"Hey Siri, AI Agent\", then ask a question.",
+        "height": 438.5821431288714,
+        "width": 280.2462120317618,
+        "color": 7
+      },
+      "id": "83fbb238-81d3-4ba5-91a1-badfcca8dcbc",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        64,
+        1392
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "### ... or watch set up video [5 min]\n[![Siri Template Thumbnail](https://uploads.n8n.io/devrel/thumb-siri.png#full-width)](https://youtu.be/dewsB-4iGA8)\n",
+        "height": 240.6839895136402,
+        "width": 330.5152611046425,
+        "color": 7
+      },
+      "id": "57d43fc3-c944-4968-8755-ecaf059e5713",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        1392
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "assistant",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "d263d2c7-fc09-4d80-88cd-63f5e8cc924d",
+      "name": "When called by Apple Shortcut",
+      "type": "n8n-nodes-base.webhook",
+      "position": [
+        -352,
+        -96
+      ],
+      "webhookId": "f0224b4b-1644-4d3d-9f12-01a9c04879e4",
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any news research actions",
+        "workflowId": {
+          "__rl": true,
+          "value": "dJaaUu5E60Vif3L0",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/dJaaUu5E60Vif3L0",
+          "cachedResultName": "News Researcher"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        216
+      ],
+      "id": "1feb52cf-a686-478d-a04b-2e85769fdbaf",
+      "name": "News Researcher"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any RAG or document search actions, probably requesting particular information of the user that you wont find online.",
+        "workflowId": {
+          "__rl": true,
+          "value": "m4ObC5zWI2Tr1wW7",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/m4ObC5zWI2Tr1wW7",
+          "cachedResultName": "RAG Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        216
+      ],
+      "id": "090adec6-3489-4154-ad2a-12432907a019",
+      "name": "RAG Agent"
     }
   ],
   "pinData": {},
@@ -492,6 +545,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-10-02T13:51:32.000Z",
-  "versionId": "cc7fdd6e-02c7-4808-aa21-0ea931a996d9"
+  "updatedAt": "2025-10-02T15:51:24.000Z",
+  "versionId": "ab9baad9-4ab3-46c5-8718-68968bbf89b5"
 }

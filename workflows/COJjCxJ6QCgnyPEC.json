@@ -1,17 +1,6 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
-    "When chat message received": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Email Agent": {
       "ai_tool": [
         [
@@ -96,12 +85,24 @@
     },
     "Telegram Trigger": {
       "main": [
-        []
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "AI Agent": {
       "main": [
-        []
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Simple Memory": {
@@ -126,23 +127,12 @@
         ]
       ]
     },
-    "Image Analyzer Agent": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Transcribe a recording": {
       "main": [
         []
       ]
     },
-    "Recipie Agent": {
+    "Linear Agent": {
       "ai_tool": [
         [
           {
@@ -162,20 +152,6 @@
   },
   "name": "Multi Agent",
   "nodes": [
-    {
-      "parameters": {
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
-      "typeVersion": 1.3,
-      "position": [
-        -112,
-        -272
-      ],
-      "id": "d2ad0186-d901-416f-a3e0-d240ae444737",
-      "name": "When chat message received",
-      "webhookId": "607c850a-02bd-4d89-a6b0-9be0fe3b9bb9"
-    },
     {
       "parameters": {
         "promptType": "define",
@@ -201,7 +177,7 @@
           "value": "WCY59Vt63AjhevyY",
           "mode": "list",
           "cachedResultUrl": "/workflow/WCY59Vt63AjhevyY",
-          "cachedResultName": "Sub Gmail Agent"
+          "cachedResultName": "Gmail Agent"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -363,7 +339,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        208,
+        224,
         144
       ],
       "id": "635c2022-739b-418c-9cd6-165f5a46cc8e",
@@ -403,7 +379,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        688,
+        544,
         -128
       ],
       "id": "3e540f91-d4a6-4943-ab55-5df1b4f97431",
@@ -456,30 +432,6 @@
     },
     {
       "parameters": {
-        "description": "Call this tool to take any image actions",
-        "workflowId": {
-          "__rl": true,
-          "value": "t2yNxL19fxsV0LR1",
-          "mode": "list",
-          "cachedResultUrl": "/workflow/t2yNxL19fxsV0LR1",
-          "cachedResultName": "Image Analyzer Agent"
-        },
-        "workflowInputs": {
-          "mappingMode": "defineBelow",
-          "value": {}
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
-      "typeVersion": 2.2,
-      "position": [
-        560,
-        144
-      ],
-      "id": "e5618001-10fe-4a9f-a9f9-c79233c69d39",
-      "name": "Image Analyzer Agent"
-    },
-    {
-      "parameters": {
         "resource": "audio",
         "operation": "transcribe",
         "options": {}
@@ -501,13 +453,13 @@
     },
     {
       "parameters": {
-        "description": "Call this tool to take any recipie action",
+        "description": "Call this tool for any Linear / tickets actions",
         "workflowId": {
           "__rl": true,
-          "value": "uozIGPtmE2KWJ6Bt",
+          "value": "VF2Sjuu3gbWyCamt",
           "mode": "list",
-          "cachedResultUrl": "/workflow/uozIGPtmE2KWJ6Bt",
-          "cachedResultName": "Sub Recipie Agent"
+          "cachedResultUrl": "/workflow/VF2Sjuu3gbWyCamt",
+          "cachedResultName": "Linear Agent"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -517,11 +469,11 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        512,
-        272
+        560,
+        144
       ],
-      "id": "1624c1ae-6e1c-4a4d-b887-284481ba2a2f",
-      "name": "Recipie Agent"
+      "id": "249cfc00-5eaa-405c-8456-d2dd836a643a",
+      "name": "Linear Agent"
     }
   ],
   "pinData": {},
@@ -539,7 +491,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2025-09-30T15:37:48.000Z",
-  "versionId": "9ab0a0a2-0842-4ba4-9862-394c18e555ab"
+  "triggerCount": 2,
+  "updatedAt": "2025-10-02T13:51:32.000Z",
+  "versionId": "cc7fdd6e-02c7-4808-aa21-0ea931a996d9"
 }

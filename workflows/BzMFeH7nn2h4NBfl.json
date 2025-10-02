@@ -55,20 +55,69 @@
           }
         ]
       ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many events in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete an event in Google Calendar1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-29T07:25:55.490Z",
   "id": "BzMFeH7nn2h4NBfl",
   "isArchived": false,
   "meta": {
-    "templateId": "calendar_agent_with_gcal"
+    "templateId": "calendar_agent_with_gcal",
+    "templateCredsSetupCompleted": true
   },
   "name": "Calendar Agent",
   "nodes": [
     {
       "parameters": {
         "resource": "calendar",
-        "calendar": {},
+        "calendar": {
+          "__rl": true,
+          "value": "david.barreiro@fundacionparentes.org",
+          "mode": "id"
+        },
         "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start_Time', `Start date for availability check`, 'string') }}",
         "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End_Time', `End date for availability check`, 'string') }}",
         "options": {}
@@ -78,14 +127,25 @@
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        -32,
-        224
-      ]
+        32,
+        208
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ekA61KIOT1ohzD6a",
+          "name": "Google Calendar account"
+        }
+      }
     },
     {
       "parameters": {
         "operation": "getAll",
-        "calendar": {},
+        "calendar": {
+          "__rl": true,
+          "value": "david.barreiro@fundacionparentes.org",
+          "mode": "list",
+          "cachedResultName": "david.barreiro@fundacionparentes.org"
+        },
         "returnAll": true,
         "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', `Start date for events search`, 'string') }}",
         "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', `End date for events search`, 'string') }}",
@@ -96,9 +156,15 @@
       "type": "n8n-nodes-base.googleCalendarTool",
       "typeVersion": 1.3,
       "position": [
-        112,
-        224
-      ]
+        144,
+        208
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ekA61KIOT1ohzD6a",
+          "name": "Google Calendar account"
+        }
+      }
     },
     {
       "parameters": {
@@ -121,9 +187,7 @@
           "mode": "id",
           "value": "gpt-4o-mini"
         },
-        "options": {
-          "temperature": 0
-        }
+        "options": {}
       },
       "id": "d23e09d0-ff7c-4f1b-8e67-6864801dbc44",
       "name": "Model",
@@ -132,7 +196,13 @@
       "position": [
         -304,
         224
-      ]
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
     },
     {
       "parameters": {},
@@ -180,6 +250,117 @@
       "typeVersion": 1,
       "id": "d3552acd-20f1-40e0-af3c-e2aabdbf3f27",
       "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "david.barreiro@fundacionparentes.org",
+          "mode": "list",
+          "cachedResultName": "david.barreiro@fundacionparentes.org"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', ``, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        224
+      ],
+      "id": "bf4f4ec1-cb75-4b1f-8fff-61091215599b",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ekA61KIOT1ohzD6a",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "david.barreiro@fundacionparentes.org",
+          "mode": "list",
+          "cachedResultName": "david.barreiro@fundacionparentes.org"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        400,
+        192
+      ],
+      "id": "a5c0ca3f-3312-47a5-8dbe-ec98908dddd0",
+      "name": "Delete an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ekA61KIOT1ohzD6a",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "david.barreiro@fundacionparentes.org",
+          "mode": "list",
+          "cachedResultName": "david.barreiro@fundacionparentes.org"
+        },
+        "timeMin": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('After', ``, 'string') }}",
+        "timeMax": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Before', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        528,
+        192
+      ],
+      "id": "63ee311a-da0d-424b-a4b7-ced624526287",
+      "name": "Get many events in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ekA61KIOT1ohzD6a",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "david.barreiro@fundacionparentes.org",
+          "mode": "list",
+          "cachedResultName": "david.barreiro@fundacionparentes.org"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {
+          "sendUpdates": "all"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        32,
+        368
+      ],
+      "id": "9d2cf3e9-160f-4f17-924c-f15a45d90fb3",
+      "name": "Delete an event in Google Calendar1",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ekA61KIOT1ohzD6a",
+          "name": "Google Calendar account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -198,6 +379,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-29T07:25:55.490Z",
-  "versionId": "b8d8be16-9349-4ab8-806f-e1db19d12b06"
+  "updatedAt": "2025-10-02T13:58:39.000Z",
+  "versionId": "5688fbc7-97b0-4332-8af0-bc6bc6dc47b3"
 }

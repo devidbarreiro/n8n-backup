@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Wait": {
       "main": [
@@ -146,7 +146,7 @@
       "name": "Wait",
       "type": "n8n-nodes-base.wait",
       "position": [
-        -176,
+        -192,
         528
       ],
       "webhookId": "7d0cd0c0-ce85-4372-b7a5-b0be061fc2b9",
@@ -168,8 +168,8 @@
       "name": "Download video",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        -624,
-        528
+        -640,
+        720
       ],
       "typeVersion": 4.2
     },
@@ -207,7 +207,7 @@
       "name": "Upload video Gemini",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        -400,
+        -416,
         528
       ],
       "typeVersion": 4.2,
@@ -235,7 +235,7 @@
       "name": "Analyze video Gemini",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        48,
+        32,
         528
       ],
       "typeVersion": 4.2,
@@ -249,7 +249,7 @@
               "id": "6e1728e0-4749-47b9-92ae-4d1c0b7008c8",
               "name": "video_url",
               "type": "string",
-              "value": "={{ $json.body.video_url }}"
+              "value": "="
             }
           ]
         },
@@ -259,8 +259,8 @@
       "name": "Set Input",
       "type": "n8n-nodes-base.set",
       "position": [
-        -848,
-        528
+        -864,
+        720
       ],
       "typeVersion": 3.4
     },
@@ -282,7 +282,7 @@
       "name": "Get Result",
       "type": "n8n-nodes-base.set",
       "position": [
-        272,
+        256,
         528
       ],
       "typeVersion": 3.4,
@@ -299,24 +299,24 @@
       "name": "Sticky Note4",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -896,
-        400
+        -926,
+        580
       ],
       "typeVersion": 1
     },
     {
       "parameters": {
         "content": "## Video Processing Pipeline\n\nThis section handles the complete video processing workflow:\n\n1. DOWNLOAD: First, we fetch the video from the provided URL, converting it to binary data that Gemini can process\n\n2. UPLOAD: Next, we send the binary video data to Gemini's servers where it's stored temporarily for AI processing\n\n3. ANALYZE: Finally, we request Gemini's AI to analyze the video content. You can customize the prompt in the \"Analyze video Gemini\" node to focus on specific aspects of the video content you're interested in\n\nThe Wait node ensures the video is fully processed before analysis begins.\n",
-        "height": 460,
-        "width": 820,
+        "height": 1276,
+        "width": 1140,
         "color": 4
       },
       "id": "7f5dba09-3bde-40cf-8671-c15ec53898be",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -640,
-        240
+        -706,
+        -12
       ],
       "typeVersion": 1
     },
@@ -337,8 +337,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        48,
-        736
+        -416,
+        720
       ],
       "id": "5ff98931-ee62-4171-830c-d8ef0301108e",
       "name": "Analyze video",
@@ -360,14 +360,14 @@
           "mode": "list",
           "cachedResultName": "models/gemini-2.5-pro"
         },
-        "text": "Please provide the analysis in this JSON format:\n{\n  \"title\": \"string - title of the video content\",\n  \"description\": \"string - brief description of the video content\",\n  \"timeline\": [\n    {\n      \"time\": number (seconds),\n      \"title\": \"string - descriptive title with emoji if appropriate\",\n      \"description\": \"string - detailed description of what happens at this moment\"\n    }\n  ]\n}\n\nRequirements:\n- Use \"time\" in seconds (not HH:MM:SS format)\n- Include relevant emojis in titles for visual appeal\n- Provide detailed descriptions for each timeline point\n- Ensure chronological order of timeline points\n- Make titles descriptive and engaging\n- Keep descriptions concise but informative\n- The title and descriptions must be in spanish",
+        "text": "Please provide the analysis in this JSON format:\n{\n  \"title\": \"string - title of the video content\",\n  \"description\": \"string - brief description of the video content\",\n  \"timeline\": [\n    {\n      \"time\": number (seconds),\n      \"title\": \"string - descriptive title with emoji if appropriate\",\n      \"description\": \"string - detailed description of what happens at this moment\"\n    }\n  ]\n}\n\nRequirements:\n- Use \"time\" in seconds (not HH:MM:SS format)\n- Include relevant emojis in titles for visual appeal\n- Provide detailed descriptions for each timeline point\n- Ensure chronological order of timeline points\n- Make titles descriptive and engaging\n- Keep descriptions concise but informative\n- The title and descriptions must be in spanish\n- Don´t include emojis anywhere",
         "inputType": "binary",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        48,
+        -416,
         912
       ],
       "id": "b50ed259-0731-4208-b3ff-2d190e51aded",
@@ -386,7 +386,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        272,
+        -192,
         912
       ],
       "id": "76871a17-76c6-4c1b-b661-498f28763e29",
@@ -407,8 +407,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        512,
-        912
+        32,
+        720
       ],
       "id": "3cd45149-6e0a-4a16-a7ad-8d92aec52fb1",
       "name": "Generate a video",
@@ -430,8 +430,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1104,
-        528
+        -1088,
+        720
       ],
       "id": "12b89205-8976-40fa-a7ec-a42d986b1733",
       "name": "Webhook",
@@ -440,14 +440,14 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={\n  \"title\": \"{{ $json.title }}\",\n  \"description\": \"{{ $json.description }}\",\n  \"timeline\": {{ JSON.stringify($json.timeline) }}\n}",
+        "responseBody": "={{ $json | toJson }}",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        672,
-        1136
+        32,
+        1104
       ],
       "id": "54ea525e-72a5-4d77-a84a-b0ad80a6cacc",
       "name": "Respond to Webhook"
@@ -460,53 +460,14 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        304,
-        1136
+        32,
+        912
       ],
       "id": "303a41eb-5f43-459a-80ce-fa70f41969f6",
       "name": "Split Out"
     }
   ],
-  "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "host": "n8n.nxhumans.com",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
-            "content-length": "113",
-            "accept": "*/*",
-            "accept-encoding": "gzip, deflate, br, zstd",
-            "accept-language": "es-ES,es;q=0.9,en-US;q=0.8,en;q=0.7",
-            "content-type": "application/json",
-            "origin": "http://127.0.0.1:5500",
-            "priority": "u=1, i",
-            "referer": "http://127.0.0.1:5500/",
-            "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
-            "sec-fetch-dest": "empty",
-            "sec-fetch-mode": "cors",
-            "sec-fetch-site": "cross-site",
-            "x-forwarded-for": "195.235.14.170",
-            "x-forwarded-host": "n8n.nxhumans.com",
-            "x-forwarded-port": "443",
-            "x-forwarded-proto": "https",
-            "x-forwarded-server": "a7ed8dae3b46",
-            "x-real-ip": "195.235.14.170"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "video_url": "https://n8n.nxhumans.com/webhook-test/8dab7c35-c207-4269-b4a7-5dfb4525b194",
-            "video_duration": 213.8
-          },
-          "webhookUrl": "https://n8n.nxhumans.com/webhook/8dab7c35-c207-4269-b4a7-5dfb4525b194",
-          "executionMode": "production"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
@@ -522,6 +483,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-03T11:51:16.000Z",
-  "versionId": "d5e1c8c4-65b8-4687-9ff9-f1a21e54a064"
+  "updatedAt": "2025-10-06T11:11:00.000Z",
+  "versionId": "c84e6132-d943-43f1-a2d2-cddac5b506e2"
 }

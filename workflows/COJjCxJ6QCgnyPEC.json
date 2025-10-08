@@ -142,6 +142,17 @@
           }
         ]
       ]
+    },
+    "Stock Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-26T09:44:54.200Z",
@@ -163,7 +174,7 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        312,
+        376,
         -8
       ],
       "id": "acb839b0-963c-46bd-a8b7-5f3cc4f4fdf9",
@@ -280,7 +291,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1104,
+        1232,
         88
       ],
       "id": "3e540f91-d4a6-4943-ab55-5df1b4f97431",
@@ -426,7 +437,7 @@
       "name": "Respond to Apple Shortcut",
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
-        1104,
+        1232,
         -104
       ],
       "typeVersion": 1.1
@@ -475,7 +486,7 @@
       "type": "n8n-nodes-base.webhook",
       "position": [
         -352,
-        -96
+        -104
       ],
       "webhookId": "f0224b4b-1644-4d3d-9f12-01a9c04879e4",
       "typeVersion": 2
@@ -527,6 +538,30 @@
       ],
       "id": "090adec6-3489-4154-ad2a-12432907a019",
       "name": "RAG Agent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any stock actions",
+        "workflowId": {
+          "__rl": true,
+          "value": "GqjrPFI8GOZRzrzn",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/GqjrPFI8GOZRzrzn",
+          "cachedResultName": "Stock Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1024,
+        216
+      ],
+      "id": "789eee01-a7b3-4a6b-a677-c21e0287077b",
+      "name": "Stock Agent"
     }
   ],
   "pinData": {},
@@ -545,6 +580,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-10-02T15:51:24.000Z",
-  "versionId": "ab9baad9-4ab3-46c5-8718-68968bbf89b5"
+  "updatedAt": "2025-10-08T11:51:38.000Z",
+  "versionId": "fb2466ba-f258-48b8-a3b3-635279134b2e"
 }

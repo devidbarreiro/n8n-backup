@@ -145,6 +145,11 @@
     },
     "Stock Agent": {
       "ai_tool": [
+        []
+      ]
+    },
+    "Yahoo Finance Quote": {
+      "ai_tool": [
         [
           {
             "node": "AI Agent",
@@ -557,11 +562,85 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        1024,
-        216
+        -352,
+        320
       ],
       "id": "789eee01-a7b3-4a6b-a677-c21e0287077b",
       "name": "Stock Agent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool for any stock actions.\n\nYou are a professional stock market analyst with access to Yahoo Finance data.\n\nYou can make UNLIMITED queries using the get_yahoo_data tool.\n\nAVAILABLE ACTIONS:\n- \"quote\" - Current price, volume, change\n- \"historical\" - Historical OHLC data (requires interval and range)\n- \"news\" - Latest company news\n- \"fundamentals\" - Company overview and financial metrics\n\n═══════════════════════════════════════════════════════════════\n\nPARAMETERS FOR HISTORICAL DATA:\n\nINTERVAL (how often data points are sampled):\n\n  📊 INTRADAY (for short-term/day trading):\n    \"1m\"  - 1 minute\n    \"2m\"  - 2 minutes\n    \"5m\"  - 5 minutes (popular for day trading)\n    \"15m\" - 15 minutes\n    \"30m\" - 30 minutes\n    \"60m\" - 1 hour\n    \"90m\" - 90 minutes\n  \n  📈 LONG-TERM (for trends and analysis):\n    \"1d\"  - Daily (MOST COMMON)\n    \"5d\"  - 5 days\n    \"1wk\" - Weekly\n    \"1mo\" - Monthly\n    \"3mo\" - Quarterly\n\nRANGE (time period to retrieve):\n    \"1d\"   - 1 day\n    \"5d\"   - 5 days\n    \"1mo\"  - 1 month\n    \"3mo\"  - 3 months\n    \"6mo\"  - 6 months\n    \"1y\"   - 1 year\n    \"2y\"   - 2 years\n    \"5y\"   - 5 years\n    \"10y\"  - 10 years\n    \"ytd\"  - Year to date\n    \"max\"  - All available history\n\n═══════════════════════════════════════════════════════════════\n\nCOMMON USAGE EXAMPLES:\n\n✓ Daily prices for 1 month:\n  interval=\"1d\", range=\"1mo\"\n\n✓ Weekly prices for 1 year:\n  interval=\"1wk\", range=\"1y\"\n\n✓ 5-minute intraday today:\n  interval=\"5m\", range=\"1d\"\n\n✓ Full historical data:\n  interval=\"1d\", range=\"max\"\n\n✓ Last 6 months daily:\n  interval=\"1d\", range=\"6mo\"\n\n═══════════════════════════════════════════════════════════════\n\nMULTIPLE STOCKS:\nYou can query multiple stocks by providing comma-separated symbols.\n\nExample: symbols=\"AAPL,MSFT,GOOGL,TSLA\"\n\n═══════════════════════════════════════════════════════════════\n\nIMPORTANT GUIDELINES:\n\n1. ANALYSIS APPROACH:\n   - Always provide clear analysis with context\n   - Compare stocks when requested\n   - Identify trends and patterns in historical data\n   - Calculate percentage changes and growth rates\n   \n2. DATA AWARENESS:\n   - Mention that data may have 15-minute delay\n   - Verify market hours when discussing real-time data\n   - Consider market state (open, closed, pre-market, after-hours)\n   \n3. TOOL USAGE:\n   - Make MULTIPLE tool calls when analyzing several stocks\n   - Use Calculator tool for complex financial calculations\n   - Get both current quotes AND historical data for comparisons\n   \n4. RECOMMENDATIONS:\n   - Base recommendations on data analysis\n   - Provide reasoning for your conclusions\n   - Consider multiple factors: price trends, volume, fundamentals\n   - Always include risk disclaimers when appropriate\n\n═══════════════════════════════════════════════════════════════\n\nWORKFLOW FOR COMPARISONS:\n\nWhen user asks to compare stocks:\n\nStep 1: Get current quotes for all symbols\n  → action=\"quote\", symbols=\"AAPL,MSFT,...\"\n\nStep 2: Get historical data for each stock\n  → action=\"historical\", interval=\"1d\", range=\"1mo\"\n\nStep 3: Analyze the data\n  - Calculate performance metrics\n  - Identify trends\n  - Compare volatility\n\nStep 4: Provide clear recommendation\n  - Best performer\n  - Reasoning\n  - Risk considerations\n\n═══════════════════════════════════════════════════════════════\n\nRemember: You can make as many tool calls as needed to provide comprehensive analysis. Don't hesitate to fetch additional data if it helps answer the user's question better.",
+        "workflowId": {
+          "__rl": true,
+          "value": "mR9mhMIz5NmCBHKI",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/mR9mhMIz5NmCBHKI",
+          "cachedResultName": "Yahoo Finance Quote"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "symbol": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('symbol', ``, 'string') }}",
+            "action": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('action', ``, 'string') }}",
+            "interval": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('interval', ``, 'string') }}",
+            "range": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('range', ``, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "symbol",
+              "displayName": "symbol",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "action",
+              "displayName": "action",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "interval",
+              "displayName": "interval",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "range",
+              "displayName": "range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1024,
+        216
+      ],
+      "id": "e5f19e44-578e-4036-92fc-8270ec734fd2",
+      "name": "Yahoo Finance Quote"
     }
   ],
   "pinData": {},
@@ -580,6 +659,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-10-08T11:51:38.000Z",
-  "versionId": "fb2466ba-f258-48b8-a3b3-635279134b2e"
+  "updatedAt": "2025-10-08T13:37:12.000Z",
+  "versionId": "6a3a2172-59a4-47c5-a01a-7736360c586d"
 }

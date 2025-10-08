@@ -1,0 +1,91 @@
+{
+  "active": false,
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Alpha Vantage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-08T08:55:40.750Z",
+  "id": "6LwbN5ESx8y5by3l",
+  "isArchived": false,
+  "meta": null,
+  "name": "Alpha Vantage Query",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "175f9f68-800b-41ef-85b4-0f389bc0f49c",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        576,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=AAPL&apikey=",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "function",
+              "value": "GLOBAL_QUOTE"
+            },
+            {
+              "name": "symbol",
+              "value": "={{ $json.symbol }}"
+            },
+            {
+              "name": "apikey",
+              "value": "TKH148ODXKR7TWFO"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        832,
+        624
+      ],
+      "id": "d666988b-5c7c-42f6-a7c4-12c0a36d2abb",
+      "name": "Alpha Vantage"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-08T08:55:40.756Z",
+      "updatedAt": "2025-10-08T08:55:40.756Z",
+      "role": "workflow:owner",
+      "workflowId": "6LwbN5ESx8y5by3l",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-08T09:00:22.000Z",
+  "versionId": "a9717ee5-234f-4ef3-a69c-2143d02286b2"
+}

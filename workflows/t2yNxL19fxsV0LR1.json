@@ -47,7 +47,13 @@
     },
     "Analyze Image Agent": {
       "main": [
-        []
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -206,6 +212,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-29T08:44:58.000Z",
-  "versionId": "0dd3c4a4-5bd8-4d36-91b0-0256a1da61a8"
+  "updatedAt": "2025-09-30T16:25:05.000Z",
+  "versionId": "f4ec3c48-6a93-4dfd-b782-a79caec537be"
 }

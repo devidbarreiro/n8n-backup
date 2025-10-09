@@ -142,7 +142,7 @@
       "type": "n8n-nodes-base.supabaseTool",
       "typeVersion": 1,
       "position": [
-        304,
+        176,
         -16
       ],
       "id": "06a57f30-a86d-4850-8dd5-1f22c1a7fd7c",
@@ -176,7 +176,7 @@
       "type": "n8n-nodes-base.supabaseTool",
       "typeVersion": 1,
       "position": [
-        432,
+        304,
         -16
       ],
       "id": "214b00a3-be19-4246-b5fd-a636245f7dd7",
@@ -196,8 +196,13 @@
           "conditions": [
             {
               "keyName": "name",
-              "condition": "ilike",
+              "condition": "like",
               "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Value', ``, 'string') }}"
+            },
+            {
+              "keyName": "surname",
+              "condition": "like",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions1_Field_Value', ``, 'string') }}"
             }
           ]
         }
@@ -205,8 +210,8 @@
       "type": "n8n-nodes-base.supabaseTool",
       "typeVersion": 1,
       "position": [
-        304,
-        160
+        432,
+        -16
       ],
       "id": "6ec10af5-2035-4c6a-862a-6baed037a52b",
       "name": "Get Contact",
@@ -222,7 +227,7 @@
     "When Executed by Another Workflow": [
       {
         "json": {
-          "query": ""
+          "query": "dime el contacto de Pablo"
         }
       }
     ]
@@ -242,6 +247,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-29T08:41:03.000Z",
-  "versionId": "e4de058f-80c9-4cab-aede-ee06081c7fb1"
+  "updatedAt": "2025-10-02T14:32:18.000Z",
+  "versionId": "358b2ad9-4880-4bbf-a8ce-190452b87a0a"
 }

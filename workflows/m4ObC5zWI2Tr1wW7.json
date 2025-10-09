@@ -1,0 +1,188 @@
+{
+  "active": false,
+  "connections": {
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-02T15:36:50.854Z",
+  "id": "m4ObC5zWI2Tr1wW7",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "RAG Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "dimensions": 1024
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        352,
+        544
+      ],
+      "id": "c20d4eec-045a-4e71-bb09-329885293420",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "3d20e317-d3c1-49a1-8174-dcebd4be16f4",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -80,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "Use my RAG to answr user request"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        176,
+        112
+      ],
+      "id": "737a0eef-7457-4c48-b6f0-7233a0c344fe",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        144,
+        336
+      ],
+      "id": "2afe297e-eaac-4c75-94bf-0a8952137370",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Work with your data in pinecone",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "atenea",
+          "mode": "list",
+          "cachedResultName": "atenea"
+        },
+        "options": {
+          "pineconeNamespace": "base"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        336
+      ],
+      "id": "5c599691-94c9-4ef7-bab0-90511f890e6f",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "46DecRIjn3a8F5m2",
+          "name": "PineconeApi account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Start": [
+      {
+        "json": {
+          "query": "cuentame sobre mi contrato"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-02T15:36:50.859Z",
+      "updatedAt": "2025-10-02T15:36:50.859Z",
+      "role": "workflow:owner",
+      "workflowId": "m4ObC5zWI2Tr1wW7",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-02T15:47:21.000Z",
+  "versionId": "8ae89769-8a1c-4312-b402-ca1174f9cfac"
+}

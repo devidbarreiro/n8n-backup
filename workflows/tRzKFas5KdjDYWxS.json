@@ -73,6 +73,11 @@
             "node": "Get Result",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Create a document",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -426,6 +431,23 @@
           "name": "Google Gemini(PaLM) Api account"
         }
       }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2192,
+        464
+      ],
+      "id": "4fe4efd6-3840-4c5b-af83-5ffbe0f4f69c",
+      "name": "Create a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "E3TIgvlvOvl7551w",
+          "name": "Google Docs account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -444,6 +466,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-30T09:51:49.000Z",
-  "versionId": "31c6d9e4-d2a8-44ce-a9f0-0d15411354ad"
+  "updatedAt": "2025-10-01T07:32:49.000Z",
+  "versionId": "5f181dec-1ffd-4d3c-a5f1-1580ffa516e0"
 }

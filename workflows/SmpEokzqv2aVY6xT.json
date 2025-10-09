@@ -1,0 +1,504 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Configurar Parámetros Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configurar Parámetros Video": {
+      "main": [
+        [
+          {
+            "node": "Vuela AI - Generate Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vuela AI - Generate Video": {
+      "main": [
+        [
+          {
+            "node": "Extraer Video ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer Video ID": {
+      "main": [
+        [
+          {
+            "node": "Esperar 30 segundos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar 30 segundos": {
+      "main": [
+        [
+          {
+            "node": "Obtener Estado del Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Estado del Video": {
+      "main": [
+        [
+          {
+            "node": "¿Video Completado?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Video Completado?": {
+      "main": [
+        [
+          {
+            "node": "Video Listo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Video En Proceso",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Video En Proceso": {
+      "main": [
+        [
+          {
+            "node": "Esperar 30 segundos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-03T09:28:27.609Z",
+  "id": "SmpEokzqv2aVY6xT",
+  "isArchived": false,
+  "meta": null,
+  "name": "Vuela AI",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2080,
+        336
+      ],
+      "id": "3048c6df-4693-4260-826d-a22c85a7756c",
+      "name": "When clicking 'Execute workflow'"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1b2c3d4",
+              "name": "mode",
+              "value": "single_voice",
+              "type": "string"
+            },
+            {
+              "id": "b2c3d4e5",
+              "name": "video_script",
+              "value": "¿Sabías que el café es la segunda bebida más consumida del mundo después del agua?\\n\\nCada día se beben más de 2 mil millones de tazas de café en todo el planeta.\\n\\nPero el café no solo nos despierta por las mañanas. También tiene increíbles beneficios para la salud.\\n\\nEstudios demuestran que puede mejorar la concentración, aumentar el rendimiento físico y hasta reducir el riesgo de algunas enfermedades.\\n\\nAdemás, el proceso de cultivar café sustenta a más de 25 millones de familias agricultoras alrededor del mundo.\\n\\nAsí que la próxima vez que disfrutes tu taza de café, recuerda que estás participando de una tradición global que conecta culturas y personas en todo el mundo.\\n\\n¡Salud por el café!",
+              "type": "string"
+            },
+            {
+              "id": "c3d4e5f6",
+              "name": "language",
+              "value": "es",
+              "type": "string"
+            },
+            {
+              "id": "d4e5f6g7",
+              "name": "country",
+              "value": "ES",
+              "type": "string"
+            },
+            {
+              "id": "e5f6g7h8",
+              "name": "aspect_ratio",
+              "value": "16:9",
+              "type": "string"
+            },
+            {
+              "id": "f6g7h8i9",
+              "name": "animation_type",
+              "value": "ai_video",
+              "type": "string"
+            },
+            {
+              "id": "g7h8i9j0",
+              "name": "voice_id",
+              "value": "21m00Tcm4TlvDq8ikWAM",
+              "type": "string"
+            },
+            {
+              "id": "h8i9j0k1",
+              "name": "media_type",
+              "value": "ai_image",
+              "type": "string"
+            },
+            {
+              "id": "i9j0k1l2",
+              "name": "style",
+              "value": "photorealistic",
+              "type": "string"
+            },
+            {
+              "id": "j0k1l2m3",
+              "name": "quality_tier",
+              "value": "premium",
+              "type": "string"
+            },
+            {
+              "id": "k1l2m3n4",
+              "name": "voice_style",
+              "value": "expressive",
+              "type": "string"
+            },
+            {
+              "id": "l2m3n4o5",
+              "name": "voice_speed",
+              "value": "standard",
+              "type": "string"
+            },
+            {
+              "id": "m3n4o5p6",
+              "name": "images_per_minute",
+              "value": 10,
+              "type": "number"
+            },
+            {
+              "id": "n4o5p6q7",
+              "name": "add_subtitles",
+              "value": true,
+              "type": "boolean"
+            },
+            {
+              "id": "p6q7r8s9",
+              "name": "caption_font",
+              "value": "Roboto",
+              "type": "string"
+            },
+            {
+              "id": "q7r8s9t0",
+              "name": "caption_alignment",
+              "value": "bottom",
+              "type": "string"
+            },
+            {
+              "id": "o5p6q7r8",
+              "name": "add_background_music",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "r8s9t0u1",
+              "name": "avatar_id",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "s9t0u1v2",
+              "name": "avatar_layout",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "t0u1v2w3",
+              "name": "avatar_layout_style",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "u1v2w3x4",
+              "name": "voices",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "50b28b9b-66d7-494c-b18e-b023830fe1e0",
+              "name": "api_key",
+              "value": "19aadb91-15d4-4ca8-a12f-e6f88e75aa74",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b4d81d02-6d96-40fe-82a5-fe584bbd6df0",
+      "name": "Configurar Parámetros Video",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1856,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.vuela.ai/generate/video",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.api_key }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify((() => { const body = { mode: $json.mode, video_script: $json.video_script, language: $json.language, country: $json.country, aspect_ratio: $json.aspect_ratio, animation_type: $json.animation_type, media_type: $json.media_type, quality_tier: $json.quality_tier }; if ($json.mode === 'single_voice') { body.voice_id = $json.voice_id; body.voice_style = $json.voice_style; body.voice_speed = $json.voice_speed; body.style = $json.style; body.images_per_minute = $json.images_per_minute; } if ($json.mode === 'avatar') { body.voice_id = $json.voice_id; body.voice_style = $json.voice_style; body.avatar_id = $json.avatar_id; body.avatar_layout = $json.avatar_layout; if ($json.avatar_layout === 'combined') { body.avatar_layout_style = $json.avatar_layout_style; body.media_type = $json.media_type; body.style = $json.style; body.animation_type = $json.animation_type; } } if ($json.mode === 'scenes') { if ($json.voices) { body.voices = JSON.parse($json.voices); } body.style = $json.style; } if ($json.add_subtitles) { body.add_subtitles = true; body.caption_font = $json.caption_font; body.caption_alignment = $json.caption_alignment; } else { body.add_subtitles = false; } body.add_background_music = $json.add_background_music; return body; })()) }}",
+        "options": {}
+      },
+      "id": "86607be4-a6fc-4941-aca7-72f4ce151ea1",
+      "name": "Vuela AI - Generate Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1632,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "p1q2r3s4",
+              "name": "video_id",
+              "value": "={{ $json.data.id }}",
+              "type": "string"
+            },
+            {
+              "id": "q2r3s4t5",
+              "name": "status",
+              "value": "={{ $json.data.status }}",
+              "type": "string"
+            },
+            {
+              "id": "aa11bb22",
+              "name": "api_key",
+              "value": "19aadb91-15d4-4ca8-a12f-e6f88e75aa74",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "cded6471-2f18-4795-a4d5-666d31bd8831",
+      "name": "Extraer Video ID",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1408,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 30
+      },
+      "id": "6e2ef81c-eef7-4c21-b2ac-0bc7aa171ff7",
+      "name": "Esperar 30 segundos",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1184,
+        336
+      ],
+      "webhookId": "={{ $json.video_id }}"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.vuela.ai/my-videos/{{ $json.video_id }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.api_key }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1ea46cbb-7921-45da-a75b-eee57f2d28c0",
+      "name": "Obtener Estado del Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -960,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "t5u6v7w8",
+              "leftValue": "={{ $json.data.status }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6e2b607f-7f9a-4d06-9d1a-35f80bd77b35",
+      "name": "¿Video Completado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -736,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "u6v7w8x9",
+              "name": "video_url",
+              "value": "={{ $json.data.video_url }}",
+              "type": "string"
+            },
+            {
+              "id": "v7w8x9y0",
+              "name": "thumbnail_url",
+              "value": "={{ $json.data.video_thumbnail }}",
+              "type": "string"
+            },
+            {
+              "id": "w8x9y0z1",
+              "name": "duration",
+              "value": "={{ $json.data.duration }}",
+              "type": "string"
+            },
+            {
+              "id": "x9y0z1a2",
+              "name": "status",
+              "value": "={{ $json.data.status }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4b2e99d7-dd31-4914-b7c8-319ef14ac0d9",
+      "name": "Video Listo",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -512,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "y0z1a2b3",
+              "name": "mensaje",
+              "value": "Video aún en proceso. Reintentando...",
+              "type": "string"
+            },
+            {
+              "id": "z1a2b3c4",
+              "name": "status",
+              "value": "={{ $json.data.status }}",
+              "type": "string"
+            },
+            {
+              "id": "cc11dd22",
+              "name": "video_id",
+              "value": "={{ $json.video_id }}",
+              "type": "string"
+            },
+            {
+              "id": "ee11ff22",
+              "name": "api_key",
+              "value": "19aadb91-15d4-4ca8-a12f-e6f88e75aa74",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "2e99b234-bc05-40a0-b16c-75a983c19835",
+      "name": "Video En Proceso",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -512,
+        432
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-03T09:28:27.618Z",
+      "updatedAt": "2025-10-03T09:28:27.618Z",
+      "role": "workflow:owner",
+      "workflowId": "SmpEokzqv2aVY6xT",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-03T10:24:40.000Z",
+  "versionId": "3ef4790b-dd72-4689-886f-ae938b2603e0"
+}

@@ -1,0 +1,93 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Yahoo Finance - Quote",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Yahoo Finance - Quote": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-10-08T08:43:24.120Z",
+  "id": "mR9mhMIz5NmCBHKI",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Yahoo Finance Quote",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"symbol\": \"AAPL\",\n  \"action\": \"historical\",\n  \"interval\": \"1d\",\n  \"range\": \"1mo\"\n}"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -144,
+        0
+      ],
+      "id": "032f10e1-f879-4bc6-8f9f-a44688e2cc96",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "url": "=https://query1.finance.yahoo.com/v8/finance/chart/{{ $json.symbol }}?interval={{ $json.interval }}&range={{ $json.range }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "interval",
+              "value": "1d"
+            },
+            {
+              "name": "range",
+              "value": "=1mo"
+            },
+            {
+              "name": "symbol",
+              "value": "={{ $json.symbol }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        176,
+        0
+      ],
+      "id": "d8a5294a-b45f-466e-9271-229f02879300",
+      "name": "Yahoo Finance - Quote"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-08T08:43:24.126Z",
+      "updatedAt": "2025-10-08T08:43:24.126Z",
+      "role": "workflow:owner",
+      "workflowId": "mR9mhMIz5NmCBHKI",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-08T13:26:45.000Z",
+  "versionId": "f18f747f-7ac8-4079-8bdb-f76413b3e92b"
+}

@@ -1,0 +1,812 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload your file here": {
+      "main": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Query Data Tool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert Data to Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Data Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Podcast Agent": {
+      "main": [
+        [
+          {
+            "node": "Split Out Video Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out Video Prompts": {
+      "main": [
+        [
+          {
+            "node": "Gemini Audio Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Audio Request": {
+      "main": [
+        [
+          {
+            "node": "Check Generation Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron Polling 15s": {
+      "main": [
+        [
+          {
+            "node": "Check Generation Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Generation Status": {
+      "main": [
+        [
+          {
+            "node": "Check if Completed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if Completed": {
+      "main": [
+        [
+          {
+            "node": "Process Audio Result",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait Before Retry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Before Retry": {
+      "main": [
+        [
+          {
+            "node": "Log Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Audio Result": {
+      "main": [
+        [
+          {
+            "node": "Combine Audio Segments",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-07T15:57:07.299Z",
+  "id": "n5M6xpxQgbAa3oXg",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Gemini Podcast Audio Generation Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2880,
+        -496
+      ],
+      "id": "09ce94d3-86b0-4690-9607-0ee5bd66452b",
+      "name": "When clicking 'Execute workflow'"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You have access to information retrieved from a PDF document, which may include academic, technical, or general knowledge content.\nYour task is to use that information (via RAG retrieval) — together with your own long-term memory and reasoning — to write a full podcast script in Spanish.\nThe podcast should feature two people having a natural and engaging conversation about the topic covered in the PDF.\n\nFormat and Style Guidelines:\n\n1. Clear Narrative Structure:\n\nBrief Introduction (30–60 seconds): Present the topic and both speakers.\n\nMain Body (3–5 sections): Develop the conversation with debate, explanations, or analysis of the PDF content. Add examples, analogies, or short anecdotes to make it engaging.\n\nClosing or Final Reflection: End with a concise conclusion or an inspiring takeaway.\n\n2. Tone and Rhythm:\n\nConversational, dynamic, and easy to follow.\n\nInclude moments of light humor, rhetorical questions, or relatable everyday examples.\n\nAvoid overly academic or dense language — simplify complex ideas so they sound like a real podcast dialogue.\n\n3. Output Format:\n\nUse speaker tags like [HOST] and [GUEST] (or specific names if preferred).\n\nOptionally include short stage directions or tone notes to improve flow, such as [laughs], [pause], [thoughtful tone], etc.\n\n4. Content Requirements:\n\nReference information from the PDF without copying it verbatim. Rephrase and explain in your own words.\n\nIf the PDF contains multiple themes, select the most relevant or engaging ones for the discussion.\n\nIf technical terms appear, make one speaker explain them to the other naturally.\n\n5. Final Goal:\nProduce a ready-to-record podcast script in Spanish that both entertains and educates the listener while accurately reflecting the key ideas from the PDF.\n\n6. Optional Style Preferences:\n\nEstimated length: 8–12 minutes.\n\nTone: Informative yet friendly, with a sense of connection between the speakers.\n\nStyle inspiration: Podcasts like \"Entiende Tu Mente\", \"Radiolab\", or \"The Daily\" (adapted to Spanish).\n\nInput (RAG Context):\n\nUse the text or fragments retrieved from the PDF as your main knowledge source.\n\nYou may also use your stored memory or prior knowledge to provide context, examples, or explanations that make the script more natural and coherent.\n\nIf the provided context is insufficient, clearly state which parts would require additional information.\n\nExpected Output:\nA complete, well-structured podcast script written entirely in Spanish, in dialogue format, fluid and engaging, ready for audio narration or recording.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": ""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -2520,
+        -704
+      ],
+      "id": "71abdd7c-de3e-4671-8455-37349ec46a6b",
+      "name": "Podcast Agent"
+    },
+    {
+      "parameters": {
+        "formTitle": "Upload your data to test RAG",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload your file(s)",
+              "fieldType": "file",
+              "acceptFileTypes": ".pdf, .csv",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -2880,
+        8
+      ],
+      "id": "a676958b-1339-4a2a-93ee-d9ed84f037eb",
+      "name": "Upload your file here",
+      "webhookId": "82848bc4-5ea2-4e5a-8bb6-3c09b94a8c5d"
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-large",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2448,
+        -272
+      ],
+      "id": "4088d23d-a96b-4234-95a8-85a00c28addc",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -2368,
+        232
+      ],
+      "id": "d73488a3-ce22-4399-8571-a2236640cf22",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "memoryKey": {
+          "__rl": true,
+          "value": "vector_store_key",
+          "mode": "list",
+          "cachedResultName": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        -2440,
+        8
+      ],
+      "id": "dd185c40-323d-44c6-9405-56e93d5a9cba",
+      "name": "Insert Data to Store",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolName": "knowledge_base",
+        "toolDescription": "Use this knowledge base to answer questions from the user",
+        "memoryKey": {
+          "__rl": true,
+          "mode": "list",
+          "value": "vector_store_key"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
+      "typeVersion": 1.2,
+      "position": [
+        -2528,
+        -480
+      ],
+      "id": "1cd1ef9a-fe6b-412a-b732-ac0dd32cc581",
+      "name": "Query Data Tool"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2160,
+        -272
+      ],
+      "id": "7f7e7af2-64b4-4af2-9103-fe8d8434180b",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"title\": \"El Misterio de las Pirámides\",\n  \"topic\": \"Cómo el Antiguo Egipto construyó las pirámides y qué simbolizaban.\",\n  \"script\": [\n    {\n      \"timestamp\": \"0:00\",\n      \"speaker\": \"HOST\",\n      \"text\": \"Bienvenidos a Historias del Pasado, el podcast donde exploramos los secretos de la historia antigua.\"\n    },\n    {\n      \"timestamp\": \"0:20\",\n      \"speaker\": \"GUEST\",\n      \"text\": \"Hoy vamos a hablar del enigma de las pirámides egipcias. ¿Cómo lograron construirlas hace más de cuatro mil años?\"\n    },\n    {\n      \"timestamp\": \"1:10\",\n      \"speaker\": \"HOST\",\n      \"text\": \"Algunos creen que fue pura ingeniería, otros piensan que tuvo un significado religioso profundo...\"\n    },\n    {\n      \"timestamp\": \"1:40\",\n      \"speaker\": \"GUEST\",\n      \"text\": \"Exacto. En realidad, los textos del Imperio Antiguo muestran que el faraón era visto como un dios en la Tierra.\"\n    },\n    {\n      \"timestamp\": \"10:50\",\n      \"speaker\": \"HOST\",\n      \"text\": \"Gracias por acompañarnos. Recuerden: cada piedra del pasado guarda una historia.\"\n    }\n  ]\n}\n",
+        "autoFix": true,
+        "customizeRetryPrompt": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -2240,
+        -480
+      ],
+      "id": "cf11a634-fb40-4ea2-a988-97a16aa4d5f2",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.script",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -1872,
+        -496
+      ],
+      "id": "9fc487c4-cdaa-4c62-b609-f230295a7d09",
+      "name": "Split Out Video Prompts"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "o3",
+          "mode": "list",
+          "cachedResultName": "o3"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -2656,
+        -480
+      ],
+      "id": "e9969886-6087-4714-9a08-8ae7facecb1d",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-preview-tts:generateContent",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "x-goog-api-key",
+              "value": "AIzaSyAcYXvtzmOwO1FAXZZiKXDu5jwr0telckE"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": {{ JSON.stringify($json.text) }}\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"responseModalities\": [\"AUDIO\"],\n    \"speechConfig\": {\n      \"voiceConfig\": {\n        \"prebuiltVoiceConfig\": {\n          \"voiceName\": \"achernar\"\n        }\n      },\n      \"languageCode\": \"es-ES\"\n    }\n  }\n}",
+        "options": {
+          "response": {
+            "response": {}
+          },
+          "timeout": 30000
+        }
+      },
+      "id": "198674fa-5a58-4c10-ad3d-992323c16483",
+      "name": "Gemini Audio Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1648,
+        -496
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "26743e4f-9fff-4f5d-8f5a-b3d353bc823c",
+      "name": "Cron Polling 15s",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [
+        -1648,
+        -148
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro-preview-tts:checkStatus",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "operationId",
+              "value": "={{ $('Gemini Audio Request').item.json.operationId || $json.operationId }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "x-goog-api-key",
+              "value": "AIzaSyA7bUY3lIuwtJji8E8HqIie9pm4s3YNxek"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {}
+          },
+          "timeout": 10000
+        }
+      },
+      "id": "7b14023e-34bf-4871-acd9-0db9c456188f",
+      "name": "Check Generation Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1424,
+        -244
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "status-check",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "COMPLETED",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "ac7741a4-4f2b-47a4-8a16-b9927a5ecf6c",
+      "name": "Check if Completed",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1200,
+        -244
+      ]
+    },
+    {
+      "parameters": {
+        "unit": "seconds"
+      },
+      "id": "8529d061-ad21-42af-a67e-e2b990e68b03",
+      "name": "Wait Before Retry",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        -976,
+        -148
+      ],
+      "webhookId": "15314b4e-3e30-4d0c-a63d-2f712d6f34e0"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Procesar el audio generado\nconst audioData = $input.first().json.audioData;\nconst mimeType = $input.first().json.mimeType || 'audio/mpeg';\nconst operationId = $input.first().json.operationId;\nconst speaker = $input.first().json.speaker || 'UNKNOWN';\nconst timestamp = $input.first().json.timestamp || '00:00';\n\n// Decodificar el audio base64 si está disponible\nlet audioBuffer = null;\nif (audioData) {\n  audioBuffer = Buffer.from(audioData, 'base64');\n}\n\n// Generar nombre de archivo único\nconst fileName = `audio_${speaker}_${timestamp.replace(':', '-')}.mp3`;\n\nreturn {\n  operationId: operationId,\n  status: 'COMPLETED',\n  audioData: audioData,\n  audioBuffer: audioBuffer,\n  mimeType: mimeType,\n  fileSize: audioBuffer ? audioBuffer.length : 0,\n  fileName: fileName,\n  speaker: speaker,\n  timestamp: timestamp,\n  processingTime: new Date().toISOString()\n};"
+      },
+      "id": "1f10a69c-458a-45bc-9e58-f2a53d250aaf",
+      "name": "Process Audio Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -976,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Log del estado actual\nconst status = $input.first().json.status;\nconst operationId = $input.first().json.operationId;\nconst timestamp = new Date().toISOString();\n\nconsole.log(`[${timestamp}] Status: ${status}, OperationID: ${operationId}`);\n\n// Si no está completo, programar siguiente verificación\nif (status !== 'COMPLETED') {\n  return {\n    status: status,\n    operationId: operationId,\n    timestamp: timestamp,\n    message: `Audio generation status: ${status}`,\n    nextCheck: new Date(Date.now() + 15000).toISOString() // 15 segundos\n  };\n}\n\nreturn {\n  status: status,\n  operationId: operationId,\n  timestamp: timestamp,\n  message: `Audio generation completed successfully!`\n};"
+      },
+      "id": "29790e8a-3aad-4515-9dcd-80ff14b3149e",
+      "name": "Log Status",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -752,
+        -148
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Combinar todos los archivos de audio generados\nconst allAudioData = $input.all();\nconst combinedAudio = [];\n\n// Ordenar por timestamp\nconst sortedAudio = allAudioData.sort((a, b) => {\n  const timeA = a.json.timestamp || '00:00';\n  const timeB = b.json.timestamp || '00:00';\n  return timeA.localeCompare(timeB);\n});\n\n// Crear estructura del podcast completo\nconst podcastData = {\n  title: 'Podcast Generado con Gemini',\n  totalSegments: sortedAudio.length,\n  segments: sortedAudio.map(item => ({\n    speaker: item.json.speaker,\n    timestamp: item.json.timestamp,\n    fileName: item.json.fileName,\n    fileSize: item.json.fileSize,\n    status: item.json.status\n  })),\n  generatedAt: new Date().toISOString(),\n  totalDuration: 'Estimated 8-12 minutes'\n};\n\nreturn {\n  podcastData: podcastData,\n  message: `Podcast generation completed! ${sortedAudio.length} audio segments created.`,\n  readyForDownload: true\n};"
+      },
+      "id": "222d9c4b-8a7d-409f-9617-b3e0ae2242c5",
+      "name": "Combine Audio Segments",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -752,
+        -340
+      ]
+    }
+  ],
+  "pinData": {
+    "Split Out Video Prompts": [
+      {
+        "json": {
+          "timestamp": "00:00",
+          "speaker": "[HOST – Laura]",
+          "text": "¡Hola, hola! Bienvenidos a “Lecturas que iluminan”, el podcast donde destripamos libros clásicos y los traemos al presente. Yo soy Laura, su anfitriona de confianza."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "00:12",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Y yo soy Marcos, lector compulsivo, cafetera humana en turno permanente y—sobre todo—fan declarado de El Principito. ¿Cómo estás, Laura?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "00:22",
+          "speaker": "[HOST – Laura]",
+          "text": "¡Emocionada! Hoy, como ya insinuaste, nos sumergimos en ese pequeño gran libro de Antoine de Saint-Exupéry. Un cuento para niños—dicen—pero con guiños filosóficos que dejan pensando a más de un adulto."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "00:38",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Exacto. Hablaremos de tres pasajes muy potentes: el zorro y la domesticación, el farolero que enciende y apaga sin parar y, por supuesto, la frase icónica: “Lo esencial es invisible a los ojos.”"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "00:55",
+          "speaker": "[HOST – Laura]",
+          "text": "Agarren su taza de té, café o mate—¡lo que tengan a mano!—porque esto durará unos diez minutos y promete remover corazones. ¿Listo, Marcos?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "01:05",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Dale, despega la nave."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "01:08",
+          "speaker": "[HOST – Laura]",
+          "text": "Sección uno: Vínculos y domesticación. En el capítulo con el zorro, el pequeño príncipe descubre que “domesticar” significa crear lazos. ¿Te acuerdas de la línea que rescatamos del PDF?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "01:22",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Claro: el zorro le dice que, si el principito lo domestica, él será único en el mundo para el pequeño príncipe, y viceversa. Ese intercambio cambia la perspectiva del niño sobre su rosa, ¿no?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "01:36",
+          "speaker": "[HOST – Laura]",
+          "text": "Tal cual. Su rosa deja de ser ‘una flor más’ y se vuelve su rosa. ¿Te pasa con algo parecido en tu vida?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "01:44",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Confesión rápida: tengo una planta medio moribunda en el balcón. Para cualquiera es solo un potus flacucho, pero yo la riego, la giro, le pongo música—¡le hablo!—y, aunque siga triste, es mi potus. Allí entendí lo de ‘único en el mundo’."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "02:00",
+          "speaker": "[HOST – Laura]",
+          "text": "[ríe] Ejemplo perfecto. El libro nos recuerda que el tiempo y el cuidado que dedicamos a alguien o algo lo convierten en irreemplazable."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "02:11",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Y ojo, el zorro advierte: crear lazos implica responsabilidad. En un mundo de ‘unfollow’ instantáneo, suena casi revolucionario, ¿no?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "02:23",
+          "speaker": "[HOST – Laura]",
+          "text": "¡Revolucionario y necesario! Vamos a la segunda parada: el farolero. En la página que leímos, el pobre hombre sigue la consigna de encender y apagar un farol cada minuto porque su planeta gira cada vez más rápido."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "02:38",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Sí, el diálogo dice algo así como: ‘La consigna no cambió, ese es el problema’. ¡Y él ya no tiene ni un segundo de descanso! ¿No se parece a nuestro día a día con notificaciones cada 30 segundos?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "02:52",
+          "speaker": "[HOST – Laura]",
+          "text": "Total. Corremos con agendas que giran más rápido que nuestro propio planeta interno, pero seguimos obedeciendo consignas viejas: ser productivos 24/7, contestar correos a la medianoche..."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "03:05",
+          "speaker": "[GUEST – Marcos]",
+          "text": "El farolero es el héroe trágico del capitalismo moderno. [risas] Se quema manteniendo una rutina absurda que nadie cuestiona."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "03:15",
+          "speaker": "[HOST – Laura]",
+          "text": "Moraleja: cuando el contexto cambia, también deberían cambiar las reglas. ¿Qué pasa si apagamos nuestro ‘farol’ digital un rato?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "03:24",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Quizá descubrimos que el día dura más de un minuto."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "03:27",
+          "speaker": "[HOST – Laura]",
+          "text": "[pausa reflexiva] Y llegamos a la joya de la corona: “Solo se ve bien con el corazón. Lo esencial es invisible a los ojos.” Ese secreto del zorro resuena desde 1943."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "03:41",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Me encanta porque desmonta la lógica de comprar, acumular y presumir. Lo esencial no está en la vitrina de Instagram; está en lo que sentimos."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "03:52",
+          "speaker": "[HOST – Laura]",
+          "text": "Exacto. Y la ciencia lo respalda: estudios de psicología positiva muestran que la calidad de nuestras relaciones predice la felicidad más que el salario o los likes."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "04:04",
+          "speaker": "[GUEST – Marcos]",
+          "text": "¡Mira! Saint-Exupéry haciendo RCT (Randomized Controlled Trials) avant-la-lettre. [risas]"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "04:11",
+          "speaker": "[HOST – Laura]",
+          "text": "Si hoy pudiéramos dar un solo consejo principesco sería: pregunten menos ‘¿qué veo?’ y más ‘¿qué siento?’."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "04:20",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Y añado: cuiden de su rosa, sea persona, proyecto o potus moribundo."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "04:26",
+          "speaker": "[HOST – Laura]",
+          "text": "Vamos cerrando. Marcos, ¿con qué idea te quedas de esta charla?"
+        }
+      },
+      {
+        "json": {
+          "timestamp": "04:31",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Con que domesticar —o vincularnos— es un acto de valentía. Requiere tiempo, sí, pero convierte lo ordinario en único."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "04:40",
+          "speaker": "[HOST – Laura]",
+          "text": "Yo me llevo la necesidad de cuestionar consignas obsoletas antes de que el planeta interno gire tan rápido como el del farolero."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "04:49",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Y a nuestros oyentes: ¿qué es invisible para sus ojos pero vital para su corazón? Piénsenlo mientras apagan el móvil esta noche."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "04:58",
+          "speaker": "[HOST – Laura]",
+          "text": "Gracias por acompañarnos. Si les gustó, compartan el episodio con su ‘rosa’ particular y déjennos un comentario. Yo soy Laura."
+        }
+      },
+      {
+        "json": {
+          "timestamp": "05:05",
+          "speaker": "[GUEST – Marcos]",
+          "text": "Yo, Marcos. Nos escuchamos en el próximo capítulo de “Lecturas que iluminan”. ¡Chau!"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-07T15:57:07.303Z",
+      "updatedAt": "2025-10-07T15:57:07.303Z",
+      "role": "workflow:owner",
+      "workflowId": "n5M6xpxQgbAa3oXg",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-08T09:03:51.000Z",
+  "versionId": "474195a3-c7f9-4603-878a-19da1a27a43e"
+}

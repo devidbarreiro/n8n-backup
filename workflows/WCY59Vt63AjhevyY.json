@@ -28,7 +28,73 @@
         []
       ]
     },
-    "Send Email": {
+    "Mark a message as read in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many messages": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply to a message": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark a message as unread": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add label to message": {
+      "ai_tool": [
+        [
+          {
+            "node": "Email Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove label from message": {
       "ai_tool": [
         [
           {
@@ -46,7 +112,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Sub Gmail Agent",
+  "name": "Gmail Agent",
   "nodes": [
     {
       "parameters": {
@@ -73,8 +139,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -192,
-        192
+        -224,
+        208
       ],
       "id": "7273a7d1-3010-40ad-8329-72bea9ad26d2",
       "name": "OpenAI Chat Model",
@@ -90,13 +156,13 @@
         "promptType": "define",
         "text": "={{ $json.query }}",
         "options": {
-          "systemMessage": "Write the requested email"
+          "systemMessage": "Write the requested email\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        -192,
+        152,
         -16
       ],
       "id": "f1846c86-db42-44e6-97a6-9f6c78bd688c",
@@ -104,27 +170,164 @@
     },
     {
       "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message_ID', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        160,
+        384
+      ],
+      "id": "d129695f-0801-4400-8710-0af4c2173ed8",
+      "name": "Mark a message as read in Gmail",
+      "webhookId": "dde91b59-c334-4cf3-98bb-9929de1991bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PP7RFRmfCERUUczp",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
         "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
         "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
-        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', `- Escribe siempre los email en español.\n- Cierra siempre los emails como David.`, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
         "options": {}
       },
       "type": "n8n-nodes-base.gmailTool",
       "typeVersion": 2.1,
       "position": [
-        -48,
-        192
+        352,
+        384
       ],
-      "id": "2ec9ffbb-6196-4a54-b948-f31e37242da8",
-      "name": "Send Email",
-      "webhookId": "7a11881c-ad98-449f-8f58-7fc01812f44f"
+      "id": "0aff4c1e-ffcc-404f-9d5f-a7b59e15dd4f",
+      "name": "Send a message",
+      "webhookId": "882ce1b9-b08e-4521-9850-462554b9160d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PP7RFRmfCERUUczp",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "d94062a7-937d-4f25-a73e-dfd3b22039e6",
+      "name": "Get many messages",
+      "webhookId": "d82cfafd-b089-4107-89bc-d70f0f42256f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PP7RFRmfCERUUczp",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message_ID', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        256,
+        208
+      ],
+      "id": "1e0551b9-9612-438b-8d66-2f824106eb23",
+      "name": "Reply to a message",
+      "webhookId": "500f3466-9b63-4acb-805d-8537c9ed8930",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PP7RFRmfCERUUczp",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsUnread",
+        "messageId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message_ID', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        448,
+        208
+      ],
+      "id": "a895af88-fbb9-4627-a892-8c6c089f5075",
+      "name": "Mark a message as unread",
+      "webhookId": "6007aa5c-c8f8-45c8-833e-adb20cecbd21",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PP7RFRmfCERUUczp",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message_ID', ``, 'string') }}",
+        "labelIds": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Label_Names_or_IDs', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        624,
+        208
+      ],
+      "id": "169ca1f9-04aa-4552-bdc2-fab9e3549ae4",
+      "name": "Add label to message",
+      "webhookId": "3d414619-d708-4a1b-95ec-9b7786a22a26",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PP7RFRmfCERUUczp",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "removeLabels",
+        "messageId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message_ID', ``, 'string') }}",
+        "labelIds": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Label_Names_or_IDs', ``, 'string') }}"
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        560,
+        384
+      ],
+      "id": "090a4c95-34fb-49f5-a2b4-3557c32736d6",
+      "name": "Remove label from message",
+      "webhookId": "2a2e590d-cfb5-4fdc-b9e3-c6a0f6412e77",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PP7RFRmfCERUUczp",
+          "name": "Gmail account"
+        }
+      }
     }
   ],
   "pinData": {
     "When Executed by Another Workflow": [
       {
         "json": {
-          "query": "Envia un correo a David preguntandole que tal lleva el proyecto de Atenea"
+          "query": "envai un correo a rames.sarwat@proeducasumma.com diciendole que tal va la semana?"
         }
       }
     ]
@@ -144,6 +347,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-09-26T11:46:50.000Z",
-  "versionId": "37ee08f8-fa92-44a4-ac5a-853dcc3b1ef2"
+  "updatedAt": "2025-10-02T14:54:49.000Z",
+  "versionId": "532305a8-3492-4cfa-8ab8-8ceb32a8d4ca"
 }

@@ -1,0 +1,188 @@
+{
+  "active": false,
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an issue in Proeduca": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an issue in Custodio": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-02T08:56:58.486Z",
+  "id": "VF2Sjuu3gbWyCamt",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Linear Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -416,
+        -32
+      ],
+      "id": "23be06c8-9f6e-4433-88ec-7c96898160b9",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "Create the requested issue on the correct workspace, just to options:\n- Proeduca (my principal job) id = fd766a7b-cc21-4379-b107-452a4e4e5e1b\n- Custodio (personal proyect): id = 8b65b150-fc27-4426-bb3d-aeecd70e76ad\n\nPonles siempre una breve descripción detallando lo que pueden ser los pasos para solucionar el ticket (pon saltos de línea)"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -136,
+        -32
+      ],
+      "id": "9ad9c9b2-3d85-4c62-af06-4970044f1ad5",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -192,
+        192
+      ],
+      "id": "a3d95df4-a490-40c3-94f6-968b2ca68ca0",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "teamId": "fd766a7b-cc21-4379-b107-452a4e4e5e1b",
+        "title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title', ``, 'string') }}",
+        "additionalFields": {
+          "assigneeId": "c65b4df2-7129-4dc5-8dac-24828cb21a45",
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "stateId": "cb4f859f-c9bb-40c1-aa74-2e680f80d4f2"
+        }
+      },
+      "type": "n8n-nodes-base.linearTool",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        192
+      ],
+      "id": "2977461a-d779-43e6-91ea-2a1ba9a476d4",
+      "name": "Create an issue in Proeduca",
+      "credentials": {
+        "linearApi": {
+          "id": "c979blQeo8upeg4G",
+          "name": "Linear account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "teamId": "8b65b150-fc27-4426-bb3d-aeecd70e76ad",
+        "title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title', ``, 'string') }}",
+        "additionalFields": {
+          "assigneeId": "c65b4df2-7129-4dc5-8dac-24828cb21a45",
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}",
+          "stateId": "73ced087-2611-40b4-b8f5-498382cfec4b"
+        }
+      },
+      "type": "n8n-nodes-base.linearTool",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        192
+      ],
+      "id": "83f16e48-1b5a-4630-9c56-5a8c6c7218fa",
+      "name": "Create an issue in Custodio",
+      "credentials": {
+        "linearApi": {
+          "id": "c979blQeo8upeg4G",
+          "name": "Linear account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "query": "crea un ticket proeduca: revisar configuración general. y otro ticket en custodio con revisar subscripción cursor"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-02T08:56:58.492Z",
+      "updatedAt": "2025-10-02T08:56:58.492Z",
+      "role": "workflow:owner",
+      "workflowId": "VF2Sjuu3gbWyCamt",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-02T14:46:27.000Z",
+  "versionId": "b9e8eef7-52a1-4d6e-a0cd-140ca47ab505"
+}

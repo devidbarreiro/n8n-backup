@@ -21,7 +21,12 @@
       "main": [
         [
           {
-            "node": "Generate audio",
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Split Out1",
             "type": "main",
             "index": 0
           }
@@ -122,23 +127,56 @@
         ]
       ]
     },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Podcast Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Query Data Tool": {
       "ai_tool": [
         [
           {
             "node": "Podcast Agent",
             "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Presentador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Invitado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Podcast Agent",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -160,8 +198,8 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        1552,
-        144
+        496,
+        128
       ],
       "id": "dc1c4631-b6f7-4b71-a68d-d30917b4cc64",
       "name": "Split Out Video Prompts"
@@ -174,8 +212,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2432,
-        240
+        496,
+        352
       ],
       "id": "6e508913-f8b6-4883-a622-ebb266f21b84"
     },
@@ -184,8 +222,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        960,
-        336
+        496,
+        784
       ],
       "id": "56fb5fde-4d1f-4656-985e-aeba6c5079cd",
       "name": "When clicking ‘Execute workflow’"
@@ -193,17 +231,15 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Video podcast",
+        "text": "=# PROMPT: Generador de Guiones de Podcast\n\nTienes acceso a información proveniente de un PDF (recuperada mediante RAG) que puede contener contenido académico, técnico o divulgativo. Tu misión es transformar ese contenido en un guion de podcast conversacional entre dos personas: un HOST (presentador) y un INVITADO (experto).\n\n## REGLAS CRÍTICAS\n\n### 1. Alternancia Estricta de Turnos\n- NUNCA dos turnos consecutivos del mismo speaker\n- Alternar siempre: host → invitado → host → invitado\n- Cada turno debe estar completo antes del siguiente\n\n### 2. Duración de Turnos\n- **Corto**: 10-20 segundos (preguntas, reacciones)\n- **Medio**: 30-45 segundos (explicaciones, ejemplos)\n- **Largo**: 60-90 segundos (solo narrativas complejas, máximo 2 por episodio)\n- **NUNCA exceder 90 segundos en un turno**\n\n### 3. Timestamps Consecutivos\n- El timestamp_inicio de cada turno debe ser igual al timestamp_fin del turno anterior\n- No puede haber gaps ni solapamientos\n- Pausas naturales de 0.5-1 segundo entre turnos ya incluidas\n\n## ESTRUCTURA NARRATIVA\n\n### INTRODUCCIÓN (30-60 segundos, turnos 1-3)\n1. **Host**: Saludo, presentación del tema y del invitado\n2. **Invitado**: Respuesta cálida, complemento al tema\n3. **Host**: Transición al primer punto clave\n\n### DESARROLLO (8-10 minutos, 3-5 bloques temáticos)\nCada bloque debe seguir este patrón de turnos:\n- Host: Pregunta o planteamiento\n- Invitado: Explicación principal del concepto\n- Host: Ejemplo cotidiano o profundización\n- Invitado: Ampliación, dato curioso o matiz\n- Host: Síntesis y transición al siguiente bloque\n\n### CIERRE (60-90 segundos, últimos 3-4 turnos)\n1. Host: Pregunta reflexiva final\n2. Invitado: Mensaje clave o conclusión inspiradora\n3. Host: Agradecimiento al invitado\n4. Invitado: Despedida breve (opcional)\n5. Host: Llamada a la acción para la audiencia\n\n## DIRECTRICES DE CONTENIDO\n\n### Del PDF al Diálogo\n- ✅ **REFORMULA SIEMPRE**: Nunca copies textualmente del PDF\n- ✅ **Traduce lo técnico**: Convierte jerga en lenguaje conversacional\n- ✅ **Crea analogías**: Usa comparaciones cotidianas para conceptos complejos\n- ✅ **Prioriza**: Selecciona los 3-5 puntos más impactantes del PDF\n- ✅ **Narrativiza**: Transforma datos en historias o ejemplos\n\n### Manejo de Conceptos Técnicos (patrón de 4 turnos)\n1. **Invitado**: Explica el concepto de forma clara\n2. **Host**: Reformula con analogía cotidiana\n3. **Invitado**: Confirma y añade un matiz importante\n4. **Host**: Conecta con la experiencia del oyente\n\n## TONO Y ESTILO\n\n### Características del Diálogo\n- **Conversacional**: Como dos amigos inteligentes charlando en un café\n- **Dinámico**: Ritmo variado, sin monólogos largos ni aburridos\n- **Accesible**: Evita academicismos innecesarios, habla para humanos\n- **Energético pero natural**: Entusiasmo auténtico, no forzado ni artificial\n- **Complicidad**: Los participantes se escuchan, reaccionan, construyen juntos\n\n### Recursos Narrativos\n- Preguntas retóricas para involucrar al oyente\n- Anécdotas breves (15-30 segundos máximo)\n- Comparaciones con situaciones cotidianas\n- Humor ligero y apropiado (sin forzar chistes)\n- Pausas estratégicas para énfasis o reflexión\n- Reacciones naturales (\"wow\", \"exacto\", \"interesante\")\n\n## INDICACIONES DE INTERPRETACIÓN\n\nUsa estas etiquetas cuando sean necesarias:\n- **pausa_corta**: 1 segundo de silencio\n- **pausa_larga**: 2-3 segundos de silencio\n- **rie**: Risa natural de quien habla\n- **ambos_rien**: Risa compartida\n- **tono_reflexivo**: Bajar velocidad, más pensativo\n- **con_enfasis**: Resaltar una palabra o frase importante\n- **sorprendido**: Reacción genuina de sorpresa\n- **inspirador**: Tono motivacional, especialmente en el cierre\n- **entusiasta**: Energía positiva y elevada\n- **cercano**: Intimidad, complicidad con el oyente\n\n## VALIDACIONES OBLIGATORIAS\n\nAntes de generar el JSON, asegúrate de que:\n- ✅ Los speakers alternan perfectamente (host-invitado-host-invitado)\n- ✅ Los timestamps son consecutivos sin gaps ni solapamientos\n- ✅ Ningún turno excede 90 segundos\n- ✅ La diferencia entre turnos del host y del invitado es ≤ 3\n- ✅ Se cubrieron los 3-5 puntos principales del PDF\n- ✅ Hay estructura clara: introducción → desarrollo (3-5 bloques) → cierre\n- ✅ Hay al menos 2 momentos de conexión emocional (humor, analogía, reflexión)\n- ✅ El cierre es memorable y deja un mensaje claro\n\n## OBJETIVO FINAL\n\nCrear un guion que:\n- Pueda grabarse tal cual como episodio de podcast\n- Entretenga y enseñe al oyente simultáneamente\n- Refleje fielmente los puntos clave del PDF\n- Suene natural, no como lectura de un paper académico\n- Tenga ritmo y energía de principio a fin\n\n**Duración objetivo**: 10-12 minutos  \n**Tono general**: Divulgativo, energético, con complicidad entre interlocutores  \n**Inspiración**: \"Entiende Tu Mente\", \"Stuff You Should Know\", \"Radiolab\"\n\n## MANEJO DE CONTEXTO INSUFICIENTE\n\nSi el PDF no proporciona información suficiente sobre algún aspecto, incluye en el campo `advertencias` del JSON una descripción clara de qué falta y cómo impacta el guion.",
         "hasOutputParser": true,
-        "options": {
-          "systemMessage": "Tienes acceso a información proveniente de un PDF, que puede incluir texto académico, técnico o divulgativo. Tu tarea es usar esos datos (recuperados mediante RAG) para escribir el guion de un episodio de podcast entre dos personas que conversan sobre el contenido del PDF.\n\nInstrucciones del formato y estilo:\n\nEstructura narrativa clara:\n\nIntroducción breve (30-60 segundos): Presentación del tema y de los dos interlocutores.\n\nCuerpo central (3-5 secciones): Debate, explicaciones o análisis del contenido del PDF, con ejemplos, comparaciones o anécdotas para hacerlo ameno.\n\nCierre o reflexión final: Conclusión o mensaje que deje una idea clara o inspiradora.\n\nTono y ritmo:\n\nConversacional, dinámico, con ritmo fluido.\n\nIntercalar momentos de humor ligero, preguntas retóricas o ejemplos cotidianos.\n\nEvita lenguaje demasiado académico o denso: traduce conceptos difíciles en algo que suene a charla de podcast.\n\nFormato de salida:\n\nUsa etiquetas como [HOST] y [INVITADO] (o nombres si se prefieren).\n\nIncluye indicaciones breves de entonación o pausas cuando ayuden al ritmo (por ejemplo, [ríe], [pausa], [tono reflexivo]).\n\nRequisitos de contenido:\n\nCita o menciona información del PDF sin copiar textualmente. Reformula y explica con tus propias palabras.\n\nSi el PDF cubre varios temas, elige los más relevantes o interesantes para la conversación.\n\nSi hay términos técnicos, haz que uno de los interlocutores los aclare al otro.\n\nObjetivo final:\nCrear un guion que podría grabarse tal cual como episodio de podcast, que entretenga y enseñe al oyente mientras refleja la información clave del PDF.\n\nEstilo adicional (opcional, ajustable):\n\nDuración estimada: 8–12 minutos.\n\nTono: divulgativo, con energía positiva y complicidad entre los interlocutores.\n\nInspiración: podcasts como “Entiende Tu Mente”, “RadioLab”, o “The Daily” (adaptar al idioma).\n\nEntrada (contexto RAG):\n\nUsa el texto o fragmentos del PDF proporcionados en la base de conocimiento.\n\nSi no hay suficiente contexto, indica claramente qué partes requerirían más información.\n\nSalida esperada:\nUn guion completo del podcast, listo para locución, en formato de diálogo estructurado y fluido."
-        }
+        "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        1184,
-        336
+        856,
+        576
       ],
       "id": "41afc577-62f7-4630-8606-27a217ca526f",
       "name": "Podcast Agent"
@@ -236,8 +272,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1808,
-        688
+        496,
+        1712
       ],
       "id": "57275aec-65ec-422c-b20f-b5fc3ab3616d"
     },
@@ -258,8 +294,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2,
       "position": [
-        2144,
-        736
+        944,
+        1616
       ],
       "id": "cc5c9ef3-3fbf-4719-98bf-84dd47cdd747"
     },
@@ -271,8 +307,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2368,
-        736
+        1168,
+        1616
       ],
       "id": "0dd75a86-b46a-4e54-8e2b-6ea0568ec0f5",
       "webhookId": "a11e28e0-eb41-4f59-b270-a21b45ea8cfa"
@@ -297,8 +333,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        2368,
-        912
+        1168,
+        1808
       ],
       "id": "de8f95fa-9a8b-4b74-a2cb-490cce1e9ad0"
     },
@@ -322,8 +358,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1984,
-        688
+        720,
+        1712
       ],
       "id": "a00522f7-c292-4218-a120-df7e32504ae6"
     },
@@ -345,8 +381,8 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        560,
-        624
+        496,
+        1288
       ],
       "id": "90645130-4bbe-4fe9-8b25-6b2b0a4623dd",
       "name": "Upload your file here",
@@ -360,8 +396,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        768,
-        960
+        928,
+        1008
       ],
       "id": "61765d3c-cded-448d-8ad1-af716d7ffbe1",
       "name": "Embeddings OpenAI",
@@ -380,8 +416,8 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        832,
-        816
+        928,
+        1408
       ],
       "id": "e61d0ad5-447b-45e3-a615-a0ba47ba87fe",
       "name": "Default Data Loader"
@@ -399,8 +435,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        784,
-        624
+        856,
+        1184
       ],
       "id": "a959b517-b6eb-44d1-8334-c67e77fedf90",
       "name": "Insert Data to Store",
@@ -420,29 +456,42 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        1200,
-        912
+        848,
+        800
       ],
       "id": "1af71492-37cd-45bc-9d71-931df9a8c7a1",
       "name": "Query Data Tool"
     },
     {
       "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4o-mini"
-        },
-        "options": {}
+        "jsonSchemaExample": "{\n  \"metadata\": {\n    \"titulo_episodio\": \"string - Título atractivo del episodio\",\n    \"tema_principal\": \"string - Tema central extraído del PDF\",\n    \"duracion_estimada_minutos\": \"number - Duración total en minutos\",\n    \"fecha_generacion\": \"string - Formato YYYY-MM-DD\",\n    \"audiencia_objetivo\": \"string - Descripción del público objetivo\"\n  },\n  \"participantes\": {\n    \"host\": {\n      \"nombre\": \"string - Nombre del presentador\",\n      \"rol\": \"string - Ej: Presentador/Anfitrión\",\n      \"tono_general\": \"string - Descripción del estilo comunicativo\"\n    },\n    \"invitado\": {\n      \"nombre\": \"string - Nombre del experto\",\n      \"rol\": \"string - Ej: Experto en [tema]\",\n      \"tono_general\": \"string - Descripción del estilo comunicativo\"\n    }\n  },\n  \"guion\": [\n    {\n      \"turno\": \"number - Número secuencial del turno\",\n      \"timestamp_inicio\": \"string - Formato MM:SS\",\n      \"timestamp_fin\": \"string - Formato MM:SS\",\n      \"duracion_segundos\": \"number - Duración del turno\",\n      \"speaker\": \"string - 'host' o 'invitado'\",\n      \"texto\": \"string - Diálogo completo del turno\",\n      \"indicaciones_interpretacion\": [\n        \"array de strings - Ej: ['entusiasta', 'pausa_corta']\"\n      ],\n      \"seccion\": \"string - 'introduccion', 'desarrollo' o 'cierre'\",\n      \"notas_produccion\": \"string o null - Notas opcionales para edición\"\n    }\n  ],\n  \"resumen_contenido\": {\n    \"puntos_clave_pdf\": [\n      \"array de strings - Los 3-5 puntos principales del PDF cubiertos\"\n    ],\n    \"conceptos_explicados\": [\n      \"array de strings - Términos técnicos que se explicaron\"\n    ],\n    \"analogias_usadas\": [\n      \"array de strings - Comparaciones cotidianas utilizadas\"\n    ]\n  },\n  \"estadisticas\": {\n    \"total_turnos\": \"number - Total de turnos en el guion\",\n    \"turnos_host\": \"number - Turnos del presentador\",\n    \"turnos_invitado\": \"number - Turnos del invitado\",\n    \"duracion_promedio_turno\": \"number - Promedio en segundos\",\n    \"numero_pausas\": \"number - Cantidad de pausas marcadas\"\n  },\n  \"advertencias\": [\n    {\n      \"tipo\": \"string - Ej: 'contexto_insuficiente'\",\n      \"descripcion\": \"string - Descripción del problema\",\n      \"impacto\": \"string - Cómo afecta al guion\"\n    }\n  ]\n}"
       },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
       "position": [
-        1104,
-        1088
+        1136,
+        800
       ],
-      "id": "4b71b69e-9f4b-4008-8138-d8a752f5e296",
-      "name": "OpenAI Chat Model",
+      "id": "d3bb0d5f-a482-46f9-a8cb-127dd2437c6e",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "input": "={{ $json.output }}",
+        "voice": "echo",
+        "options": {
+          "response_format": "mp3"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1552,
+        512
+      ],
+      "id": "26bfc7d2-0a66-45a8-a753-4e558902e8bc",
+      "name": "Presentador",
       "credentials": {
         "openAiApi": {
           "id": "nmk2GFM41ZOhRE5f",
@@ -462,17 +511,77 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1568,
-        288
+        1552,
+        704
       ],
-      "id": "26bfc7d2-0a66-45a8-a753-4e558902e8bc",
-      "name": "Generate audio",
+      "id": "acca314b-ec0b-46c0-b6ea-16f7820ebfbd",
+      "name": "Invitado",
       "credentials": {
         "openAiApi": {
           "id": "nmk2GFM41ZOhRE5f",
           "name": "OpenAi account"
         }
       }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "={{ $json.output.guion[0].texto }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        512
+      ],
+      "id": "06ce58d0-86c4-4465-9467-39a19746a094",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "sd",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1328,
+        704
+      ],
+      "id": "c8b34bc4-8cfe-4e5b-8368-6d7436c1b8ab",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        720,
+        800
+      ],
+      "id": "40941f3e-20bc-4e50-a88d-147095207c62",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## TODO\n\nHay que indicar que queremos los guiones separados por cada persona"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1376,
+        352
+      ],
+      "id": "faff37da-0888-406e-be60-74bb2b62f45f",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -491,6 +600,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-09T15:58:06.000Z",
-  "versionId": "daaa8aad-62a1-46dc-b60d-85c39b0be23e"
+  "updatedAt": "2025-10-09T16:33:14.000Z",
+  "versionId": "4e1f6947-6528-40cb-94ad-2c16514040d9"
 }

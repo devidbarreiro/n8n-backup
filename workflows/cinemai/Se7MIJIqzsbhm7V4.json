@@ -13,11 +13,6 @@
             "node": "Create Case Summary",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "HTTP Request SUNO",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -196,6 +191,11 @@
           },
           {
             "node": "Split Out",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -978,6 +978,33 @@
       ],
       "id": "eb15f137-d7a3-42ea-a405-776515b2e95e",
       "name": "Get SUNO"
+    },
+    {
+      "parameters": {
+        "url": "https://api.heygen.com/v2/avatars",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "x-api-key",
+              "value": "<your-api-key>"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2736,
+        1648
+      ],
+      "id": "7bc0cdd9-ceff-415b-9b2d-04bd34a08b82",
+      "name": "HTTP Request"
     }
   ],
   "pinData": {},
@@ -1003,6 +1030,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-13T11:47:45.000Z",
-  "versionId": "5f11dd09-990d-4288-813a-e3161cd87661"
+  "updatedAt": "2025-10-13T15:26:15.000Z",
+  "versionId": "f18d3f41-0adb-400a-930e-f483251ef331"
 }

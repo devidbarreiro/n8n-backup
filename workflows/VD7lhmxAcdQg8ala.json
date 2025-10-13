@@ -3,31 +3,14 @@
   "connections": {
     "Schedule Trigger": {
       "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Manual Trigger": {
       "main": [
         [
           {
-            "node": "Read Video File",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Read Video File": {
-      "main": [
-        [
-          {
-            "node": "1. Initialize Upload",
+            "node": "Generate Description for Videos  in Tiktok and Instagram",
             "type": "main",
             "index": 0
           }
@@ -55,28 +38,114 @@
           }
         ]
       ]
+    },
+    "Generate a video": {
+      "main": [
+        [
+          {
+            "node": "Download a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Process Video Data": {
+      "main": [
+        [
+          {
+            "node": "1. Initialize Upload1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for Processing": {
+      "main": [
+        [
+          {
+            "node": "3. Check Upload Status1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1. Initialize Upload1": {
+      "main": [
+        [
+          {
+            "node": "2. Upload Video File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Upload Video File1": {
+      "main": [
+        [
+          {
+            "node": "Wait for Processing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Check Upload Status1": {
+      "main": [
+        [
+          {
+            "node": "Check if Published",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download a video": {
+      "main": [
+        [
+          {
+            "node": "Upload Video and Description to Tiktok",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Upload Video and Description to Instagram",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Upload Video and Description to Youtube",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Description for Videos  in Tiktok and Instagram": {
+      "main": [
+        [
+          {
+            "node": "Generate a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-10T15:00:04.418Z",
   "id": "VD7lhmxAcdQg8ala",
   "isArchived": false,
-  "meta": null,
-  "name": "TikTok - Upload Video",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "gdr",
   "nodes": [
-    {
-      "parameters": {
-        "method": "POST",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        32,
-        -48
-      ],
-      "id": "31083298-c6fe-4ccc-8c2f-cbb8a0490ea9",
-      "name": "HTTP Request"
-    },
     {
       "parameters": {
         "rule": {
@@ -92,7 +161,7 @@
       "typeVersion": 1.2,
       "position": [
         -160,
-        -48
+        160
       ],
       "id": "9aa61cf5-efca-4565-8edb-d43d6286882a",
       "name": "Schedule Trigger"
@@ -105,7 +174,7 @@
       "typeVersion": 1,
       "position": [
         -160,
-        160
+        576
       ]
     },
     {
@@ -117,7 +186,7 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer YOUR_ACCESS_TOKEN_HERE"
+              "value": "Bearer "
             },
             {
               "name": "Content-Type",
@@ -127,7 +196,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"post_info\": {\n    \"title\": \"Mi primer video con n8n 🚀\",\n    \"privacy_level\": \"SELF_ONLY\",\n    \"disable_duet\": false,\n    \"disable_comment\": false,\n    \"disable_stitch\": false,\n    \"video_cover_timestamp_ms\": 1000\n  },\n  \"source_info\": {\n    \"source\": \"FILE_UPLOAD\",\n    \"video_size\": {{ $json.videoSize }},\n    \"chunk_size\": 10000000,\n    \"total_chunk_count\": 1\n  }\n}",
+        "jsonBody": "={\n  \"post_info\": {\n    \"title\": \"Mi primer video con n8n 🚀\",\n    \"privacy_level\": \"SELF_ONLY\",\n    \"disable_duet\": false,\n    \"disable_comment\": false,\n    \"disable_stitch\": false,\n    \"video_cover_timestamp_ms\": 1000\n  },\n  \"source_info\": {\n    \"source\": \"FILE_UPLOAD\",\n    \"video_size\": \"\",\n    \"chunk_size\": 10000000,\n    \"total_chunk_count\": 1\n  }\n}",
         "options": {}
       },
       "id": "f9e747c7-a947-4782-a186-3f7696f6e2a4",
@@ -135,8 +204,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        288,
-        160
+        -160,
+        -64
       ],
       "notes": "Replace YOUR_ACCESS_TOKEN_HERE with token from previous workflow"
     },
@@ -166,8 +235,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        512,
-        160
+        64,
+        -64
       ],
       "notes": "Upload the actual video file"
     },
@@ -198,24 +267,443 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.1,
       "position": [
-        736,
-        160
+        288,
+        -64
       ],
       "notes": "Verify the upload was successful"
     },
     {
       "parameters": {
-        "filePath": "=/path/to/your/video.mp4"
+        "resource": "video",
+        "modelId": {
+          "__rl": true,
+          "value": "models/veo-3.0-generate-001",
+          "mode": "list",
+          "cachedResultName": "models/veo-3.0-generate-001"
+        },
+        "prompt": "Cinematic macro close-up shot of a razor-sharp chef’s knife slowly slicing through a crystalline version of a real fruit (maintaining its original natural colors, shape, and surface texture). The fruit appears as if made of transparent crystal or glass, with intricate internal refraction patterns, subtle bubbles, and prismatic rainbow reflections. Each slice reveals realistic fruit details encapsulated inside the crystal — preserving its vibrant pulp tones and organic gradients within the glassy structure.\n\nThe scene captures ultra-smooth slow-motion motion as the blade glides through. The knife’s polished steel surface reflects the crystal fruit and studio lighting.\n\nRendered in hyper-realistic 3D, 4K Ultra HD, macro photography style, with dramatic soft studio lighting and minimalist wooden cutting board background. The visual tone is satisfying, ASMR-inspired, elegant, and mesmerizing.\n\nComposition optimized for vertical 9:16 TikTok format, depth-of-field focus on the cutting edge, soft bokeh, and cinematic contrast emphasizing clarity, transparency, and color dispersion.",
+        "returnAs": "url",
+        "options": {}
       },
-      "id": "7d36b822-1009-4fa9-81d0-f30b37bf9fce",
-      "name": "Read Video File",
-      "type": "n8n-nodes-base.readBinaryFile",
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        64,
-        160
+        416,
+        576
       ],
-      "notes": "Change /path/to/your/video.mp4 to your actual video file path"
+      "id": "567db8aa-c526-4143-b776-10e50666eb58",
+      "name": "Generate a video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtener el archivo binario del video\nconst binaryData = items[0].binary.data;\n\n// Calcular el tamaño del video\nconst videoSize = binaryData.fileSize;\n\n// Calcular chunks (10MB por chunk)\nconst chunkSize = 10000000;\nconst totalChunks = Math.ceil(videoSize / chunkSize);\n\n// Retornar datos necesarios para TikTok\nreturn {\n  json: {\n    videoSize: videoSize,\n    chunkSize: chunkSize,\n    totalChunks: totalChunks,\n    fileName: binaryData.fileName || 'video.mp4',\n    mimeType: binaryData.mimeType || 'video/mp4'\n  },\n  binary: {\n    data: binaryData\n  }\n};"
+      },
+      "id": "edbb8ec7-bf5e-4a65-af22-865c80ddfcee",
+      "name": "Process Video Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        1216
+      ],
+      "notes": "Calculate video size and prepare data for TikTok"
+    },
+    {
+      "parameters": {},
+      "id": "da64c615-dec6-409d-968b-eb76667070a3",
+      "name": "Wait for Processing",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        512,
+        1216
+      ],
+      "webhookId": "wait-tiktok-processing",
+      "notes": "Wait for TikTok to process the video"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "d4e5f6g7-h8i9-0123-defg-234567890123",
+              "leftValue": "={{ $json.data.status }}",
+              "rightValue": "PUBLISH_COMPLETE",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7bab1b51-56d0-4d06-946b-ea57addd5c6b",
+      "name": "Check if Published",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        960,
+        1216
+      ],
+      "notes": "Check if video was published successfully"
+    },
+    {
+      "parameters": {
+        "content": "✅ Video publicado exitosamente en TikTok!\n\n📊 Detalles:\n- Publish ID: {{ $('1. Initialize Upload').item.json.data.publish_id }}\n- Estado: {{ $json.data.status }}\n- Tamaño: {{ $('Process Video Data').item.json.videoSize }} bytes"
+      },
+      "id": "c43f8419-2a20-4d01-af73-612af341e128",
+      "name": "Success Message",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2128,
+        608
+      ]
+    },
+    {
+      "parameters": {
+        "content": "❌ Error: Video no se publicó correctamente\n\nEstado: {{ $json.data.status }}\nRevisa los logs de TikTok"
+      },
+      "id": "fa423825-4fc7-4e43-b2b0-b52bcb3a46e2",
+      "name": "Error Message",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2128,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.tiktokapis.com/v2/post/publish/video/init/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer "
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=UTF-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"post_info\": {\n    \"title\": \"Video generado con IA 🚀✨ #ai #viral #fyp\",\n    \"privacy_level\": \"SELF_ONLY\",\n    \"disable_duet\": false,\n    \"disable_comment\": false,\n    \"disable_stitch\": false,\n    \"video_cover_timestamp_ms\": 1000\n  },\n  \"source_info\": {\n    \"source\": \"FILE_UPLOAD\",\n    \"video_size\": {{ $json.videoSize }},\n    \"chunk_size\": {{ $json.chunkSize }},\n    \"total_chunk_count\": {{ $json.totalChunks }}\n  }\n}",
+        "options": {}
+      },
+      "id": "34eeb658-7f85-4161-a81d-25c47e456570",
+      "name": "1. Initialize Upload1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        64,
+        1216
+      ],
+      "notes": "Initialize video upload with TikTok"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ $('1. Initialize Upload1').item.json.data.upload_url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "video/mp4"
+            },
+            {
+              "name": "Content-Range",
+              "value": "=bytes 0-{{ $('Process Video Data').item.json.videoSize - 1 }}/{{ $('Process Video Data').item.json.videoSize }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "options": {}
+      },
+      "id": "ffe20c23-921e-483c-a020-ab6452aa95d2",
+      "name": "2. Upload Video File1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        288,
+        1216
+      ],
+      "notes": "Upload the actual video file to TikTok"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://open.tiktokapis.com/v2/post/publish/status/fetch/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_ACCESS_TOKEN_HERE"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=UTF-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"publish_id\": \"{{ $('1. Initialize Upload1').item.json.data.publish_id }}\"\n}",
+        "options": {}
+      },
+      "id": "76835563-f5d3-4ff8-8356-79250ae96dd0",
+      "name": "3. Check Upload Status1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        736,
+        1216
+      ],
+      "notes": "Verify the upload was successful"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "download",
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        640,
+        576
+      ],
+      "id": "6c91c649-123a-4a45-9b25-7e672bce0160",
+      "name": "Download a video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Description\nThis automation allows you to upload a video to a configured Google Drive folder, and it will automatically create descriptions and upload it to Instagram and TikTok.\n\n## How to Use\n1. Generate an API token at upload-post.com and add to Upload to Tiktok and Upload to Instagram nodes\n2. Configure your Google Drive folder\n3. Customize the OpenAI prompt for your specific use case\n4. Optional: Configure Telegram for error notifications\n\n## Requirements\n- upload-post.com account\n- Google Drive account\n- OpenAI API key\n",
+        "height": 260,
+        "width": 860
+      },
+      "id": "690e036b-610e-4171-aff1-d866bdffaf57",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2144,
+        1056
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.upload-post.com/api/upload",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $('Generate Description for Videos  in Tiktok and Instagram').item.json.message.content.replaceAll(\"\\\"\", \"\") }}"
+            },
+            {
+              "name": "platform[]",
+              "value": "tiktok"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "video",
+              "inputDataFieldName": "datavideo"
+            },
+            {
+              "name": "user",
+              "value": "Add user generated in upload-post"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a36fc0ef-6d35-4072-9f72-66a78a7b5318",
+      "name": "Upload Video and Description to Tiktok",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1040,
+        368
+      ],
+      "notesInFlow": true,
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "P3CkcQfBL77gpXLN",
+          "name": "Header Auth account"
+        }
+      },
+      "notes": "Generate in upload-post.com the token and add to the credentials in the header-> Authorization: Apikey (token here)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.upload-post.com/api/upload",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $('Generate Description for Videos  in Tiktok and Instagram').item.json.message.content.replaceAll(\"\\\"\", \"\") }}"
+            },
+            {
+              "name": "platform[]",
+              "value": "instagram"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "video",
+              "inputDataFieldName": "datavideo"
+            },
+            {
+              "name": "user",
+              "value": "Add user generated in upload-post"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ecd74588-fd67-409c-be0c-ebc32a65d9d8",
+      "name": "Upload Video and Description to Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1040,
+        592
+      ],
+      "notesInFlow": true,
+      "typeVersion": 4.2,
+      "notes": "Generate in upload-post.com the token and add to the credentials in the header-> Authorization: Apikey (token here)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.upload-post.com/api/upload",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $('Generate Description for Videos  in Tiktok and Instagram').item.json.message.content.replaceAll(\"\\\"\", \"\").substring(0, 70) }}\n"
+            },
+            {
+              "name": "platform[]",
+              "value": "youtube"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "video",
+              "inputDataFieldName": "datavideo"
+            },
+            {
+              "name": "user",
+              "value": "test2"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6b28184a-73bb-4294-8e96-4eec9e0adf7b",
+      "name": "Upload Video and Description to Youtube",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1040,
+        816
+      ],
+      "notesInFlow": true,
+      "typeVersion": 4.2,
+      "notes": "Generate in upload-post.com the token and add to the credentials in the header-> Authorization: Apikey (token here)"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are an expert assistant in creating engaging social media video titles.",
+              "role": "system"
+            },
+            {
+              "content": "=I'm going to upload a video to social media. Here are some examples of descriptions that have worked well on Instagram:\n\nFollow and save for later. Discover InfluencersDe, the AI tool that automates TikTok creation and publishing to drive traffic to your website. Perfect for entrepreneurs and brands.\n#digitalmarketing #ugc #tiktok #ai #influencersde #contentcreation\n\nDiscover the video marketing revolution with InfluencersDe!\n.\n.\n.\n#socialmedia #videomarketing #ai #tiktok #influencersde #growthhacking\n\nDon't miss InfluencersDe, the tool that transforms your marketing strategy with just one click!\n.\n.\n.\n#ugc #ai #tiktok #digitalmarketing #influencersde #branding\n\nCan you create another title for the Instagram post?\n\n\nIMPORTANT: Reply only with the description, don't add anything else."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4a658105-835c-454d-b53f-8eae168bde03",
+      "name": "Generate Description for Videos  in Tiktok and Instagram",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "position": [
+        64,
+        576
+      ],
+      "notesInFlow": true,
+      "retryOnFail": true,
+      "typeVersion": 1.4,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      },
+      "notes": "Request to OpenAi for generate description with the audio extracted from the video"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "upload",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        176
+      ],
+      "id": "c2f35fce-4301-43ad-802f-736be1f65626",
+      "name": "Upload a video"
     }
   ],
   "pinData": {},
@@ -234,6 +722,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-10T15:02:48.000Z",
-  "versionId": "edb9dd34-3bf8-4f58-ba1f-72dba7998c4e"
+  "updatedAt": "2025-10-13T07:56:35.000Z",
+  "versionId": "23f454e8-1c73-4907-b4af-9ce289e30d69"
 }

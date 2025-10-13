@@ -13,6 +13,11 @@
             "node": "Create Case Summary",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "HTTP Request SUNO",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -272,6 +277,17 @@
           }
         ]
       ]
+    },
+    "HTTP Request SUNO": {
+      "main": [
+        [
+          {
+            "node": "Get SUNO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-24T10:50:33.215Z",
@@ -301,15 +317,15 @@
     {
       "parameters": {
         "mode": "raw",
-        "jsonOutput": "{\n  \"heygen_api_key\": \"ZTY1MzdhODZkMWQ2NGY5OThjYmNiMGI4M2U5ZGI5MjQtMTc1ODgxMDgwNw==\",\n  \"avatar_id\": \"Kristin_public_2_20240108\",\n  \"voice_id\": \"689f48196a9a43c4bbbb67c14fdbb4c6\",\n  \"has_background_video\": true,\n  \"background_video_url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n}\n",
+        "jsonOutput": "{\n  \"heygen_api_key\": \"YTNhNzdlOTQzNWE4NGNiNGJjYTE0ZWQ4MTVhNWY4YWUtMTc2MDM1NDgwNQ==\",\n  \"avatar_id\": \"1727672614\",\n  \"voice_id\": \"7bf3a42a7a3847a586017bcbab105734\",\n  \"has_background_video\": false,\n  \"background_video_url\": \"https://as1.ftcdn.net/v2/jpg/06/19/29/94/1000_F_619299409_jTzGQnM9aNVibWaKfd523kqpI8edMZy0.jpg\"\n}\n",
         "options": {}
       },
       "id": "4308b15d-1105-45dd-9db9-a67dd9b82218",
       "name": "Setup Heygen",
       "type": "n8n-nodes-base.set",
       "position": [
-        2064,
-        1136
+        1856,
+        1312
       ],
       "typeVersion": 3.4
     },
@@ -335,7 +351,7 @@
       "name": "Create Avatar Video WITHOUT Background Video",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        2128,
+        880,
         672
       ],
       "typeVersion": 4.2,
@@ -347,8 +363,8 @@
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        2656,
-        1040
+        2304,
+        1296
       ],
       "typeVersion": 3.2,
       "disabled": true
@@ -362,8 +378,8 @@
       "name": "Wait",
       "type": "n8n-nodes-base.wait",
       "position": [
-        2880,
-        1120
+        2528,
+        1296
       ],
       "webhookId": "d9404622-0a06-4a65-959e-badd4fd87465",
       "typeVersion": 1.1,
@@ -397,8 +413,8 @@
       "name": "Get Avatar Video",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        3104,
-        1056
+        2752,
+        1216
       ],
       "typeVersion": 4.2,
       "disabled": true
@@ -433,8 +449,8 @@
       "name": "If Video Done",
       "type": "n8n-nodes-base.if",
       "position": [
-        3328,
-        1120
+        2976,
+        1296
       ],
       "typeVersion": 2.2,
       "disabled": true
@@ -458,7 +474,7 @@
       "typeVersion": 2.2,
       "position": [
         880,
-        1136
+        1888
       ],
       "id": "3b835d2a-70fe-42b1-bc63-33e7a561bbae",
       "name": "Upload your file here",
@@ -472,8 +488,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1088,
-        1472
+        1280,
+        1616
       ],
       "id": "6fdfb66f-d18f-4e59-8d71-de8caa7a546f",
       "name": "Embeddings OpenAI",
@@ -492,8 +508,8 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        1152,
-        1328
+        1376,
+        2112
       ],
       "id": "c59645ff-3167-454e-95b5-735fabd62412",
       "name": "Default Data Loader"
@@ -507,8 +523,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        912,
-        1040
+        1072,
+        1808
       ],
       "typeVersion": 1,
       "id": "ddd64200-93fb-489a-a87c-658fffb21e75",
@@ -522,13 +538,14 @@
           "value": "vector_store_key",
           "mode": "list",
           "cachedResultName": "vector_store_key"
-        }
+        },
+        "clearStore": true
       },
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        1104,
-        1136
+        1312,
+        1888
       ],
       "id": "fe6f5acb-5ae0-43ac-a1ce-55e96293e8df",
       "name": "Insert Data to Store",
@@ -548,8 +565,8 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStoreInMemory",
       "typeVersion": 1.2,
       "position": [
-        1520,
-        1424
+        1200,
+        1408
       ],
       "id": "0909016e-ca87-4585-b3e5-96595930533f",
       "name": "Query Data Tool"
@@ -566,8 +583,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1424,
-        1600
+        1104,
+        1616
       ],
       "id": "15acc99c-9514-4595-95ef-8f37c6049761",
       "name": "OpenAI Chat Model",
@@ -604,7 +621,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "position": [
         944,
-        1248
+        1808
       ],
       "typeVersion": 1,
       "id": "6397f899-152a-4c72-8b81-52f8dc0e8557",
@@ -615,8 +632,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        1360,
-        912
+        896,
+        1168
       ],
       "id": "382379ae-e244-448c-85ef-ac0f5c934490",
       "name": "When clicking ‘Execute workflow’"
@@ -624,15 +641,17 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "# TASK 1: INTRO DEL AVATAR\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **guion hablado del avatar para la Presentación del Caso** en el **MÓDULO 01: TRAILER**.\n3. Genera además una **descripción breve de la imagen de fondo** que acompañará el video del avatar.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración máxima del guion: 30 segundos al ser leído en voz alta.\n- Primera frase: debe generar curiosidad inmediata (curiosity gap).\n- El guion debe sonar como una presentación académica breve y profesional.\n- Menciona solo lo esencial del caso: nombre, tema central y dilema estratégico clave.\n- Tono: profesional, motivador y con autoridad, invitando al análisis y la reflexión.\n- Finaliza con una transición corta hacia la discusión del caso.\n- La descripción de la **imagen de fondo** debe ser breve, visual, realista y relacionada con el contexto del caso.\n- **NO** incluyas notas técnicas, explicaciones internas ni formato JSON.\n- Devuelve únicamente el guion y la descripción de la imagen.\n\n# OUTPUT\nGuion + descripción de imagen de fondo.\n\n---\n\n# TASK 2: TRAILER CINEMATOGRÁFICO (DIVIDIDO EN ESCENAS DE 8s, mínimo 7 escenas de 8 segundos cada una)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **texto narrado del TRAILER** para el **MÓDULO 01**, incluyendo **indicaciones de escenas**.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración total: mínimo 1 minuto y máximo 90 segundos al ser leído en voz alta.\n- Estilo narrativo, cinematográfico e inmersivo, como un tráiler.\n- Divide el guion en una lista de escenas secuenciales, cada una de aprox. 6–8 segundos.\n- Cada escena debe tener dos campos:\n   - **NARRADOR**: lo que dice la voz en off.\n   - **ESCENA**: lo que se muestra visualmente (ej. “Plano de oficina de madrugada”, “Gráfico animado de crecimiento de ventas”, “Primer plano del protagonista preocupado”).\n- Inicio: situar al protagonista (nombre, edad, cargo) en un momento de tensión.\n- Incluir 2–3 datos duros y espectaculares (ventas, márgenes, cifras clave).\n- Crear contraste entre éxito aparente y conflicto estratégico oculto.\n- Cierre: plantear el dilema en forma de pregunta que deja intriga para los estudiantes.\n- Tono: dramático, frases cortas, ritmo de suspenso.\n- **NO** resumas todo el caso ni expliques soluciones; solo genera tensión.\n- **NO** incluyas notas técnicas.\n- Devuelve únicamente el guion dividido en escenas numeradas.\n- Recuerda que la voz en off del narrador tiene que ocupar prácticamente el total de la escena, así que asegúrate que son lo suficientemente extensos pero sin pasarse (máximo 8 segundos por cada narración de cada escena).\n\n# OUTPUT\nUn guion estructurado como lista de escenas:\n- Escena 1: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 2: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 3: { \"narrador\": \"...\", \"escena\": \"...\" }\n... hasta cubrir el tiempo total.\n\n\n# TASK 3: RESUMEN E INTRODUCCIÓN DEL CASO (AVATAR METODOLÓGICO)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe el **guion hablado del avatar** para el **Resumen e Introducción del Caso**.\n3. Este guion debe preparar a los estudiantes para el análisis y explicar la metodología que se utilizará en el curso.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración: entre 2 y 3 minutos al ser leído en voz alta.\n- Tono: académico, claro, motivador y con autoridad docente.\n- Estilo narrativo: frases cortas, con pausas dramáticas, repeticiones retóricas y enumeraciones que generen énfasis. Debe sonar como un discurso que mezcla explicación académica con storytelling.\n- Inicio: enfatiza que **“esta no es una decisión cualquiera”**, recordando una apuesta estratégica previa de la empresa (ej. inversión de 45 millones en I+D cuando apenas generaba flujo de caja).\n- Desarrollo: describe cómo ahora los competidores reaccionan (menciona nombres concretos de rivales relevantes en la industria).\n- Metodología: explica explícitamente qué herramientas se usarán:\n  - PESTEL (entorno regulatorio y macroeconómico).\n  - Cinco Fuerzas de Porter (competencia e industria).\n  - DAFO (fortalezas, debilidades, oportunidades, amenazas).\n  - Matriz CAME (generación de alternativas estratégicas).\n- Innovación pedagógica: destaca que se usará ChatGPT como apoyo, no para decidir por los estudiantes, sino para generar alternativas estratégicas y nuevas perspectivas.\n- Cierre: debe motivar al estudiante con preguntas retóricas e invitación al reto académico. Termina con un llamado inspirador: **“Comencemos con la historia de…”**.\n- **NO** incluyas notas técnicas ni formato JSON.\n- Devuelve únicamente el guion del avatar, con párrafos cortos y estilo oratorio.\n\n",
+        "text": "# TASK 1: INTRO DEL AVATAR\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe el **guion hablado del avatar para la Presentación del Caso** en el **MÓDULO 01: TRAILER**.\n3. Genera además una **descripción breve de la imagen de fondo** que acompañará el video del avatar.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración máxima del guion: 30 segundos al ser leído en voz alta.\n- Primera frase: debe generar curiosidad inmediata (curiosity gap).\n- El guion debe sonar como una presentación académica breve y profesional.\n- Menciona solo lo esencial del caso: nombre, tema central y dilema estratégico clave.\n- Tono: profesional, motivador y con autoridad, invitando al análisis y la reflexión.\n- Finaliza con una transición corta hacia la discusión del caso.\n- La descripción de la **imagen de fondo** debe ser breve, visual, realista y relacionada con el contexto del caso.\n- **NO** incluyas notas técnicas, explicaciones internas ni formato JSON.\n- Devuelve únicamente el guion y la descripción de la imagen.\n\n# OUTPUT\nGuion + descripción de imagen de fondo.\n\n---\n\n# TASK 2: TRAILER CINEMATOGRÁFICO (DIVIDIDO EN ESCENAS DE 8s, mínimo 7 escenas de 8 segundos cada una)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe únicamente el **texto narrado del TRAILER** para el **MÓDULO 01**, incluyendo **indicaciones de escenas**.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración total: mínimo 1 minuto y máximo 90 segundos al ser leído en voz alta.\n- Estilo narrativo, cinematográfico e inmersivo, como un tráiler.\n- Divide el guion en una lista de escenas secuenciales, cada una de aprox. 6–8 segundos.\n- Cada escena debe tener dos campos:\n   - **NARRADOR**: lo que dice la voz en off.\n   - **ESCENA**: lo que se muestra visualmente (ej. “Plano de oficina de madrugada”, “Gráfico animado de crecimiento de ventas”, “Primer plano del protagonista preocupado”).\n- Inicio: situar al protagonista (nombre, edad, cargo) en un momento de tensión.\n- Incluir 2–3 datos duros y espectaculares (ventas, márgenes, cifras clave).\n- Crear contraste entre éxito aparente y conflicto estratégico oculto.\n- Cierre: plantear el dilema en forma de pregunta que deja intriga para los estudiantes.\n- Tono: dramático, frases cortas, ritmo de suspenso.\n- **NO** resumas todo el caso ni expliques soluciones; solo genera tensión.\n- **NO** incluyas notas técnicas.\n- Devuelve únicamente el guion dividido en escenas numeradas.\n- Recuerda que la voz en off del narrador tiene que ocupar prácticamente el total de la escena, así que asegúrate que son lo suficientemente extensos pero sin pasarse (máximo 8 segundos por cada narración de cada escena).\n\n# OUTPUT\nUn guion estructurado como lista de escenas:\n- Escena 1: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 2: { \"narrador\": \"...\", \"escena\": \"...\" }\n- Escena 3: { \"narrador\": \"...\", \"escena\": \"...\" }\n... hasta cubrir el tiempo total.\n\n\n# TASK 3: RESUMEN E INTRODUCCIÓN DEL CASO (AVATAR METODOLÓGICO)\n1. Analiza cuidadosamente el contenido del PDF proporcionado.\n2. Escribe el **guion hablado del avatar** para el **Resumen e Introducción del Caso**.\n3. Este guion debe preparar a los estudiantes para el análisis y explicar la metodología que se utilizará en el curso.\n\n# DIRECTRICES DE REDACCIÓN\n- Público objetivo: estudiantes de MBA.\n- Duración: entre 2 y 3 minutos al ser leído en voz alta.\n- Tono: académico, claro, motivador y con autoridad docente.\n- Estilo narrativo: frases cortas, con pausas dramáticas, repeticiones retóricas y enumeraciones que generen énfasis. Debe sonar como un discurso que mezcla explicación académica con storytelling.\n- Inicio: enfatiza que **“esta no es una decisión cualquiera”**, recordando una apuesta estratégica previa de la empresa (ej. inversión de 45 millones en I+D cuando apenas generaba flujo de caja).\n- Desarrollo: describe cómo ahora los competidores reaccionan (menciona nombres concretos de rivales relevantes en la industria).\n- Metodología: explica explícitamente qué herramientas se usarán:\n  - PESTEL (entorno regulatorio y macroeconómico).\n  - Cinco Fuerzas de Porter (competencia e industria).\n  - DAFO (fortalezas, debilidades, oportunidades, amenazas).\n  - Matriz CAME (generación de alternativas estratégicas).\n- Innovación pedagógica: destaca que se usará ChatGPT como apoyo, no para decidir por los estudiantes, sino para generar alternativas estratégicas y nuevas perspectivas.\n- Cierre: debe motivar al estudiante con preguntas retóricas e invitación al reto académico. Termina con un llamado inspirador: **“Comencemos con la historia de…”**.\n- **NO** incluyas notas técnicas ni formato JSON.\n- Devuelve únicamente el guion del avatar, con párrafos cortos y estilo oratorio.\n\n",
         "hasOutputParser": true,
-        "options": {}
+        "options": {
+          "systemMessage": "Make sure you are analyzing the pdf content and generating the output base on the input pdf"
+        }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2,
       "position": [
-        1504,
-        1136
+        1136,
+        1184
       ],
       "id": "dc1e2c6e-fbbf-4696-bf36-4353add79f7d",
       "name": "AI Writer"
@@ -646,8 +665,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        1776,
-        1440
+        1488,
+        1408
       ],
       "id": "5beb8904-b70b-426d-99aa-050a2029854a",
       "name": "Structured Output Parser"
@@ -668,8 +687,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        2080,
-        1280
+        2528,
+        1648
       ],
       "id": "d1ba0812-cd89-4734-bebf-71feeb4e8514",
       "name": "Generate a video",
@@ -690,8 +709,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        2368,
-        1520
+        2976,
+        1840
       ],
       "id": "e1d63d61-a110-42be-b98f-52b41c8f9b7d",
       "name": "Download a video",
@@ -707,8 +726,8 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        2608,
-        1472
+        2752,
+        1536
       ],
       "id": "a3edee96-c2b5-4ca6-84e6-bd31cdfb61a2",
       "name": "Merge Video Urls",
@@ -722,8 +741,8 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        1888,
-        1280
+        2304,
+        1648
       ],
       "id": "356620b7-fa8f-4ef9-a18c-850d994d0937",
       "name": "Split Out Video Prompts"
@@ -736,8 +755,8 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        2208,
-        1520
+        2752,
+        1840
       ],
       "id": "0abc7503-409e-4174-a530-73aaa9bd7f24",
       "name": "Split Out"
@@ -753,8 +772,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        2192,
-        1712
+        2976,
+        2032
       ],
       "id": "5ea446b0-efab-4773-9aa6-fad72b7312e3",
       "name": "Generate audio",
@@ -782,8 +801,8 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        1872,
-        992
+        1856,
+        1120
       ],
       "id": "35ae1978-f3ce-4a11-8e22-043bff089a0d",
       "name": "Generate an image",
@@ -802,7 +821,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1648,
+        880,
         896
       ],
       "id": "b28fbbd6-7e75-4e3c-885e-3d5076028327",
@@ -836,8 +855,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3648,
-        1472
+        3200,
+        1616
       ],
       "id": "2ceebb9d-1932-4cd6-8493-c48bc478047b",
       "name": "If Finish",
@@ -865,11 +884,10 @@
       "name": "Create Case Summary",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        2448,
-        1200
+        2080,
+        1488
       ],
-      "typeVersion": 4.2,
-      "disabled": true
+      "typeVersion": 4.2
     },
     {
       "parameters": {
@@ -893,11 +911,73 @@
       "name": "Create Avatar Video",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        2448,
-        960
+        2080,
+        1296
       ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.sunoapi.org/api/v1/generate",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 6caf4784f789c9ee776cc1505489b2c8"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"prompt\": \"An epic cinematic trailer score with orchestral strings, powerful percussion, deep brass, and emotional choirs. Starts softly and builds intensity toward a dramatic climax, evoking a sense of heroism, destiny, and awe. Perfect for movie trailers or epic storytelling.\",\n  \"customMode\": true,\n  \"instrumental\": true,\n  \"model\": \"V3_5\",\n  \"callBackUrl\": \"https://your-server.com/callback\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "disabled": true
+      "position": [
+        1968,
+        1968
+      ],
+      "id": "2fe829c8-0add-4022-8b18-e4c637982f63",
+      "name": "HTTP Request SUNO"
+    },
+    {
+      "parameters": {
+        "url": "https://api.sunoapi.org/api/v1/generate/record-info",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.data.taskId }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 6caf4784f789c9ee776cc1505489b2c8"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2224,
+        1968
+      ],
+      "id": "eb15f137-d7a3-42ea-a405-776515b2e95e",
+      "name": "Get SUNO"
     }
   ],
   "pinData": {},
@@ -923,6 +1003,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-10-09T15:49:26.000Z",
-  "versionId": "f91ee9b9-1b4d-49da-8d07-ed4bf2f2fb79"
+  "updatedAt": "2025-10-13T11:47:45.000Z",
+  "versionId": "5f11dd09-990d-4288-813a-e3161cd87661"
 }

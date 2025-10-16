@@ -98,7 +98,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        -1340,
+        -1344,
         352
       ],
       "id": "91e6cfc9-af1f-44ea-9262-558bab962a5b",
@@ -134,7 +134,7 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        -1272,
+        -1280,
         144
       ],
       "id": "497d1b93-6484-43a2-b80d-77126fa3df80",
@@ -149,7 +149,7 @@
           "mode": "list",
           "cachedResultName": "models/veo-3.0-generate-001"
         },
-        "prompt": "=You are a tiktok video generator.\nCreate a short clip (≤8 seconds) based on the following structured input:\n\nScene Prompt:\n{{ $json[\"output.scenes[0].prompt\"] }}\nGenerate one video clip only, lasting between 2 and 4 seconds, fully based on the given scene prompt.",
+        "prompt": "=You are a tiktok video generator.\nCreate a short clip (≤8 seconds) based on the following structured input:\n\nScene Prompt:\n{{ $json[\"output.scenes[0].prompt\"] }}\nGenerate one video clip only, lasting between 4 and 8 seconds, fully based on the given scene prompt.",
         "options": {
           "durationSeconds": 5,
           "aspectRatio": "9:16",
@@ -159,7 +159,7 @@
       "type": "@n8n/n8n-nodes-langchain.googleGemini",
       "typeVersion": 1,
       "position": [
-        -680,
+        -688,
         -80
       ],
       "id": "761c47d6-ba40-4c9a-8df1-141d66b98bb7",
@@ -201,7 +201,7 @@
       "type": "n8n-nodes-base.splitOut",
       "typeVersion": 1,
       "position": [
-        -904,
+        -912,
         -80
       ],
       "id": "e1c641de-2720-4c96-b8e3-a9335eb16e0f",
@@ -223,7 +223,7 @@
       "type": "n8n-nodes-base.perplexityTool",
       "typeVersion": 1,
       "position": [
-        -1400,
+        -1408,
         144
       ],
       "id": "cd2a2593-81bd-4db8-a7ef-8d2f0cf2f06b",
@@ -263,6 +263,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-16T11:46:18.000Z",
-  "versionId": "0cb7fdc4-021c-4a9b-a42e-f2a226b7b65c"
+  "updatedAt": "2025-10-16T13:57:45.000Z",
+  "versionId": "96289d2e-de72-422e-a16a-b1cbcdee61ae"
 }

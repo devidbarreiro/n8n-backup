@@ -113,7 +113,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "🎯 TASK\n\nGenera un guion de TikTok viral basado en un tema o tendencia detectado automáticamente por una herramienta de búsqueda de temas virales.\nEl resultado debe ser una serie de microescenas cinematográficas (de 3 segundos cada una) que, en conjunto, formen un video intenso y visualmente atrapante de máximo 30 segundos.\n\n🧠 INSTRUCCIONES DE CREACIÓN\n\nDuración total: máximo 30 segundos (ideal: 20–25s).\n\nDuración por escena: exactamente 3 segundos.\n\nCantidad de escenas: de 6 a 10, según el ritmo del guion.\n\nCada escena debe ser compacta, visual y emocionalmente clara, con una acción o imagen que capture atención instantáneamente.\n\nFormato de salida:\n\n{\n  \"scenes\": [\n    { \"prompt\": \"Descripción breve de la escena 1 (acción, emoción, ambiente, tono cinematográfico).\" },\n    { \"prompt\": \"Descripción breve de la escena 2 (continuación o contraste visual con la anterior).\" },\n    { \"prompt\": \"Descripción breve de la escena 3 (clímax o giro visual).\" }\n  ],\n  \"style\": \"Descripción general del estilo visual, ritmo y tono emocional que comparten todas las escenas.\"\n}\n\n⚡️ DIRECTRICES DE ESTILO\n\nPrimeros 3 segundos: deben detener el scroll de inmediato.\nUsá hooks tipo:\n\n“Nadie te contó esto…”\n\n“Mirá lo que pasó en solo 3 segundos…”\n\n“Todo parecía normal… hasta que no lo fue.”\n\n“Esto no debería haber ocurrido, pero pasó.”\n\nRitmo:\n\nCada escena = impacto visual o emocional inmediato.\n\nEvitá cualquier frase o acción que no pueda entenderse en menos de 3 segundos.\n\nEl montaje debe sentirse ágil y cinematográfico, con cortes rítmicos y energía constante.\n\nTono:\nCinemático, emocional o intrigante según el tipo de tendencia (misterio, historia real, motivación, curiosidad, comedia, etc.).\nEl campo \"style\" debe definirlo con precisión (por ejemplo:\n\n“Thriller urbano con luces frías y cámara en mano”\n\n“Motivacional cálido con planos suaves y música ascendente”\n\n“Historia real en formato documental con ritmo rápido”).\n\nLenguaje:\nNatural, oral, con frases cortas.\nTodo debe sentirse como algo que un creador diría a cámara o en voz en off.\n\nContenido:\n\nSin explicaciones ni contexto largo.\n\nEnfocado en impacto, tensión o curiosidad.\n\nCierre con emoción, duda o remate tipo “wow” o “wtf”.",
+        "text": "🎯 TASK\n\nGenera un guion de TikTok viral basado en un tema o tendencia detectado automáticamente por una herramienta de búsqueda de temas virales. El resultado debe ser una serie de microescenas cinematográficas (de 4 a 8 segundos cada una) que, en conjunto, formen un video intenso y visualmente atrapante de máximo 30 segundos.\n\n🧠 INSTRUCCIONES DE CREACIÓN\n\nDuración total: máximo 30 segundos (ideal: 20–25s).\n\nDuración por escena: entre 4 y 8 segundos.\n\nCantidad de escenas: de 3 a 7, según el ritmo del guion y respetando la duración total.\n\nCada escena debe ser compacta, visual y emocionalmente clara, con una acción o imagen que capture atención instantáneamente.\n\n⚡️ DIRECTRICES DE ESTILO\n\nPrimeros 4-8 segundos: deben detener el scroll de inmediato. Usá hooks tipo:\n\n“Nadie te contó esto…”\n\n“Mirá lo que pasó en solo 4 segundos…”\n\n“Todo parecía normal… hasta que no lo fue.”\n\n“Esto no debería haber ocurrido, pero pasó.”\n\nRitmo:\n\nCada escena = impacto visual o emocional inmediato.\n\nEvitá cualquier frase o acción que no pueda entenderse en menos de 4-8 segundos.\n\nEl montaje debe sentirse ágil y cinematográfico, con cortes rítmicos y energía constante.\n\nTono: Cinemático, emocional o intrigante según el tipo de tendencia (misterio, historia real, motivación, curiosidad, comedia, etc.). El campo \"style\" debe definirlo con precisión (por ejemplo:\n\n“Thriller urbano con luces frías y cámara en mano”\n\n“Motivacional cálido con planos suaves y música ascendente”\n\n“Historia real en formato documental con ritmo rápido”).\n\nLenguaje: Natural, oral, con frases cortas. Todo debe sentirse como algo que un creador diría a cámara o en voz en off.\n\nContenido:\n\nSin explicaciones ni contexto largo.\n\nEnfocado en impacto, tensión o curiosidad.\n\nCierre con emoción, duda o remate tipo “wow” o “wtf”.\n",
         "hasOutputParser": true,
         "options": {}
       },
@@ -128,7 +128,7 @@
     },
     {
       "parameters": {
-        "jsonSchemaExample": "{\n  \"scenes\": [\n    { \"prompt\": \"Prompt para generar la escena 1 (≤8s, describe acción, emoción y ritmo).\" },\n    { \"prompt\": \"Prompt para generar la escena 2 (≤8s, mantiene coherencia con la anterior).\" },\n    { \"prompt\": \"Prompt para generar la escena 3 (≤8s, conduce al clímax o cierre).\" }\n  ],\n  \"style\": \"Descripción del estilo general del video (tono, ritmo, color, atmósfera o enfoque narrativo que comparten todas las escenas).\"\n}\n",
+        "jsonSchemaExample": "{\n  \"scenes\": [\n    { \n      \"prompt\": \"Prompt para generar la escena 1 (describe acción, emoción y ritmo).\",\n      \"duration\": \"4s\" \n    },\n    { \n      \"prompt\": \"Prompt para generar la escena 2 (mantiene coherencia con la anterior).\",\n      \"duration\": \"8s\"\n    },\n    { \n      \"prompt\": \"Prompt para generar la escena 3 (conduce al clímax o cierre).\",\n      \"duration\": \"5s\"\n    }\n  ],\n  \"style\": \"Descripción del estilo general del video (tono, ritmo, color, atmósfera o enfoque narrativo que comparten todas las escenas).\"\n}",
         "autoFix": true
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
@@ -151,7 +151,7 @@
         },
         "prompt": "=You are a tiktok video generator.\nCreate a short clip (≤8 seconds) based on the following structured input:\n\nScene Prompt:\n{{ $json[\"output.scenes[0].prompt\"] }}\nGenerate one video clip only, lasting between 4 and 8 seconds, fully based on the given scene prompt.",
         "options": {
-          "durationSeconds": 5,
+          "durationSeconds": 8,
           "aspectRatio": "9:16",
           "personGeneration": "allow_all"
         }
@@ -263,6 +263,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-16T13:57:45.000Z",
-  "versionId": "96289d2e-de72-422e-a16a-b1cbcdee61ae"
+  "updatedAt": "2025-10-16T14:02:55.000Z",
+  "versionId": "79ba923a-47e3-454c-9090-d038fba607b1"
 }

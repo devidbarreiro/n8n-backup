@@ -1,0 +1,268 @@
+{
+  "active": false,
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Writer": {
+      "main": [
+        [
+          {
+            "node": "Split Out Video Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Writer",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate a video": {
+      "main": [
+        []
+      ]
+    },
+    "Split Out Video Prompts": {
+      "main": [
+        [
+          {
+            "node": "Generate a video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model in Perplexity": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Writer",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "AI Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-16T10:43:24.729Z",
+  "id": "0p8qmi9lW0392OSO",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1340,
+        352
+      ],
+      "id": "91e6cfc9-af1f-44ea-9262-558bab962a5b",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "🎯 TASK\n\nGenera un guion de TikTok viral basado en un tema o tendencia detectado automáticamente por una herramienta de búsqueda de temas virales.\nEl resultado debe ser una serie de microescenas cinematográficas (de 3 segundos cada una) que, en conjunto, formen un video intenso y visualmente atrapante de máximo 30 segundos.\n\n🧠 INSTRUCCIONES DE CREACIÓN\n\nDuración total: máximo 30 segundos (ideal: 20–25s).\n\nDuración por escena: exactamente 3 segundos.\n\nCantidad de escenas: de 6 a 10, según el ritmo del guion.\n\nCada escena debe ser compacta, visual y emocionalmente clara, con una acción o imagen que capture atención instantáneamente.\n\nFormato de salida:\n\n{\n  \"scenes\": [\n    { \"prompt\": \"Descripción breve de la escena 1 (acción, emoción, ambiente, tono cinematográfico).\" },\n    { \"prompt\": \"Descripción breve de la escena 2 (continuación o contraste visual con la anterior).\" },\n    { \"prompt\": \"Descripción breve de la escena 3 (clímax o giro visual).\" }\n  ],\n  \"style\": \"Descripción general del estilo visual, ritmo y tono emocional que comparten todas las escenas.\"\n}\n\n⚡️ DIRECTRICES DE ESTILO\n\nPrimeros 3 segundos: deben detener el scroll de inmediato.\nUsá hooks tipo:\n\n“Nadie te contó esto…”\n\n“Mirá lo que pasó en solo 3 segundos…”\n\n“Todo parecía normal… hasta que no lo fue.”\n\n“Esto no debería haber ocurrido, pero pasó.”\n\nRitmo:\n\nCada escena = impacto visual o emocional inmediato.\n\nEvitá cualquier frase o acción que no pueda entenderse en menos de 3 segundos.\n\nEl montaje debe sentirse ágil y cinematográfico, con cortes rítmicos y energía constante.\n\nTono:\nCinemático, emocional o intrigante según el tipo de tendencia (misterio, historia real, motivación, curiosidad, comedia, etc.).\nEl campo \"style\" debe definirlo con precisión (por ejemplo:\n\n“Thriller urbano con luces frías y cámara en mano”\n\n“Motivacional cálido con planos suaves y música ascendente”\n\n“Historia real en formato documental con ritmo rápido”).\n\nLenguaje:\nNatural, oral, con frases cortas.\nTodo debe sentirse como algo que un creador diría a cámara o en voz en off.\n\nContenido:\n\nSin explicaciones ni contexto largo.\n\nEnfocado en impacto, tensión o curiosidad.\n\nCierre con emoción, duda o remate tipo “wow” o “wtf”.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        -1472,
+        -80
+      ],
+      "id": "f17fb0e8-60ec-4362-b4a7-bcef1deb7a63",
+      "name": "AI Writer"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"scenes\": [\n    { \"prompt\": \"Prompt para generar la escena 1 (≤8s, describe acción, emoción y ritmo).\" },\n    { \"prompt\": \"Prompt para generar la escena 2 (≤8s, mantiene coherencia con la anterior).\" },\n    { \"prompt\": \"Prompt para generar la escena 3 (≤8s, conduce al clímax o cierre).\" }\n  ],\n  \"style\": \"Descripción del estilo general del video (tono, ritmo, color, atmósfera o enfoque narrativo que comparten todas las escenas).\"\n}\n",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1272,
+        144
+      ],
+      "id": "497d1b93-6484-43a2-b80d-77126fa3df80",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "modelId": {
+          "__rl": true,
+          "value": "models/veo-3.0-generate-001",
+          "mode": "list",
+          "cachedResultName": "models/veo-3.0-generate-001"
+        },
+        "prompt": "=You are a tiktok video generator.\nCreate a short clip (≤8 seconds) based on the following structured input:\n\nScene Prompt:\n{{ $json[\"output.scenes[0].prompt\"] }}\nGenerate one video clip only, lasting between 2 and 4 seconds, fully based on the given scene prompt.",
+        "options": {
+          "durationSeconds": 5,
+          "aspectRatio": "9:16",
+          "personGeneration": "allow_all"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        -80
+      ],
+      "id": "761c47d6-ba40-4c9a-8df1-141d66b98bb7",
+      "name": "Generate a video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "video",
+        "operation": "download",
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1696,
+        -512
+      ],
+      "id": "5b610300-5bce-47a0-a2d9-c4760cdef570",
+      "name": "Download a video",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.scenes[0].prompt",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -904,
+        -80
+      ],
+      "id": "e1c641de-2720-4c96-b8e3-a9335eb16e0f",
+      "name": "Split Out Video Prompts"
+    },
+    {
+      "parameters": {
+        "messages": {
+          "message": [
+            {
+              "content": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('message0_Text', ``, 'string') }}"
+            }
+          ]
+        },
+        "simplify": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Simplify_Output', ``, 'boolean') }}",
+        "options": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexityTool",
+      "typeVersion": 1,
+      "position": [
+        -1400,
+        144
+      ],
+      "id": "cd2a2593-81bd-4db8-a7ef-8d2f0cf2f06b",
+      "name": "Message a model in Perplexity",
+      "credentials": {
+        "perplexityApi": {
+          "id": "1db6Y4SRmhm0qZLS",
+          "name": "Perplexity account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1696,
+        -80
+      ],
+      "id": "93f0eb05-65b1-4893-8603-239c29162a11",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-16T10:43:24.736Z",
+      "updatedAt": "2025-10-16T10:43:24.736Z",
+      "role": "workflow:owner",
+      "workflowId": "0p8qmi9lW0392OSO",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-16T11:46:18.000Z",
+  "versionId": "0cb7fdc4-021c-4a9b-a42e-f2a226b7b65c"
+}

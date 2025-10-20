@@ -1,0 +1,147 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-20T11:41:29.895Z",
+  "id": "ejfESvevjMbjxYm1",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Guion -> Escenas",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -64
+      ],
+      "id": "752c5518-000a-42b3-bb36-4941764b6635",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"guion\": \"Imaginen por un momento que están de pie frente a la Gran Pirámide de Keops en Guiza. El sol del desierto golpea sus rostros mientras contemplan esos bloques de piedra perfectamente tallados que han desafiado al tiempo durante más de 4.500 años. ¿Qué piensan que sintieron los primeros exploradores europeos cuando se encontraron cara a cara con estas maravillas? Hoy vamos a emprender juntos ese mismo viaje de descubrimiento. Soy Alberto Martin, y durante los próximos 30 minutos les voy a contar una historia extraordinaria: la historia de cómo una civilización creció a orillas del Nilo y creó algunas de las obras de arte más impresionantes que ha conocido la humanidad. Una civilización que, literalmente, construía para la eternidad. ¿Saben qué hace único a Egipto? No es solo que esté en África, sino que el Nilo - ese río majestuoso que atraviesa el desierto de sur a norte - lo convirtió en algo completamente diferente al resto del continente. Cada año, como un reloj cósmico, el Nilo se desbordaba y depositaba en sus orillas limos fertilísimos. Los egipcios no tenían que luchar contra la naturaleza, sino que aprendieron a danzar con ella. Esta dependencia del ciclo del río los convirtió en observadores extraordinarios. Sabían cuándo vendrían las crecidas, cuándo plantar, cuándo cosechar. Y esta obsesión por los ciclos naturales, por el orden cósmico, se reflejará de manera espectacular en su arte. Porque para los egipcios, el arte no era decoración - era comunicación directa con los dioses y con la eternidad. Pero aprovechar esta fuente de riqueza no era tarea sencilla. Para dominar las crecidas anuales del Nilo fue necesario crear un sistema complejo de canalizaciones que permitiera recoger el agua en épocas secas y contener las devastadoras inundaciones en época de crecidas. Imaginen la magnitud de estas obras: kilómetros y kilómetros de canales, diques, embalses... Era una empresa titánica que ninguna ciudad-estado podía acometer en solitario. Y aquí está uno de los secretos del nacimiento de Egipto como gran civilización: estas obras de canalización del Nilo, junto con la necesidad de defenderse de enemigos exteriores como libios y nubios, fueron el factor decisivo que creó la cohesión necesaria entre los habitantes de la región. Se unieron, se organizaron, y dieron lugar a un reino poderoso bajo una figura visible y divina: el faraón. Sin el Nilo y sin la necesidad de trabajar juntos para dominarlo, tal vez nunca habría existido el Egipto que conocemos. Y aquí entra en escena uno de los protagonistas más fascinantes de nuestra historia: el faraón. No era simplemente un rey - era un dios viviente. Imaginen el poder psicológico de esa figura: eres un campesino trabajando bajo el sol abrasador del desierto, y de repente aparece ante ti alguien que es, literalmente, divino. Alguien que lleva en su frente el ureus - esa cobra sagrada - y sobre su cabeza las coronas del Alto y Bajo Egipto unificadas. Esta divinidad del faraón explica algo que veremos una y otra vez en el arte egipcio: todo, absolutamente todo, está al servicio de transmitir poder, orden y eternidad. No hay nada casual, no hay nada puramente estético. Cada símbolo, cada gesto, cada proporción tiene un significado profundo. Y cuando el faraón moría, su cuerpo divino merecía un receptáculo a su altura. Aquí entra en juego el sarcófago - una palabra que significa literalmente \\\"devora-carne\\\". Era un receptáculo de piedra o terracota que albergaba los restos del difunto, pero no era simplemente una caja: era una morada eterna, un hogar definitivo para un ser que había sido divino en vida y seguiría siéndolo en la muerte. Pero si hay algo que define a los egipcios es su relación extraordinaria con la muerte. Para ellos, la muerte no era el final - era una transición. La vida continuaba en el más allá exactamente igual que en la tierra, con las mismas necesidades, los mismos placeres, las mismas ocupaciones. Por eso momificaban los cuerpos, por eso llenaban las tumbas de objetos cotidianos, por eso pintaban en las paredes escenas de la vida diaria. Y aquí está la clave de todo el arte egipcio: si vas a vivir para siempre, todo lo que construyas debe durar para siempre. Por eso usaban piedra en lugar de adobe para las tumbas, por eso las pirámides tienen esas proporciones monumentales, por eso las esculturas parecen inmutables. Los vivos podían vivir en casas de paja y barro, pero los muertos y los dioses necesitaban moradas eternas. Pero hay otro aspecto fascinante de la cultura egipcia que se refleja poderosamente en su arte: su extraordinario naturalismo. Los egipcios eran observadores meticulosos de la naturaleza porque de ella dependía literalmente su supervivencia. Cuando contemplamos la pintura mural de la princesa Itet en el Museo de El Cairo, del año 2700 antes de Cristo, nos quedamos asombrados por la frescura y la atención al detalle. Esos patos, esas plantas acuáticas, esa representación tan viva del entorno del Nilo... Es naturalismo puro, una celebración de la vida que les rodeaba y que querían conservar para siempre. Pero antes de llegar a las grandes pirámides, tenemos que hablar de los orígenes, de cómo nació realmente Egipto como potencia. Desde época neolítica, Egipto era un mosaico de ciudades-estado dispersas - lo que llamamos el Egipto predinástico. Imaginen pequeñas ciudades con casas de adobe en torno a calles estrechas, cada una gobernada por su propio reyezuelo local, cada una luchando por controlar su trozo de orilla del Nilo. El sistema constructivo era sencillo: principalmente adintelado, aunque ya usaban arcos y bóvedas para elementos subterráneos, sótanos, almacenes y desagües. Era un mundo fragmentado, sin la grandeza monumental que vendría después. Las dos primeras dinastías de Egipto reciben el nombre de período tinita, porque la capital del país se hallaba en Tinis. Posteriormente, la capital se trasladaría a Menfis, en el Bajo Egipto, pero situada estratégicamente muy cerca del límite entre el Alto y el Bajo Egipto. Y aquí llegamos a uno de los momentos más decisivos de la historia de la humanidad: el surgimiento de la primera dinastía coincide con la unificación entre el Alto Egipto - al sur - y el Bajo Egipto - la zona del delta del Nilo. Esta unificación, que más bien parece que fue una conquista por parte de los reyes del Alto Egipto, se atribuye a Narmer, el primer faraón de Egipto, hacia el año 3000 antes de Cristo. Desde entonces, el faraón se convirtió en la principal autoridad política y religiosa del país y, como símbolo perfecto de esa unidad, portaba algo fascinante: las coronas de ambos reinos unificadas. La corona blanca, de forma compacta y cónica, era típica del Alto Egipto y recordaba las montañas donde nacía el río. La corona roja, con decoración en espiral, era propia del Bajo Egipto y evocaba el color rojizo y las plantas que poblaban el Nilo en su desembocadura. Tras la unificación, se hizo frecuente que el faraón llevase un tocado que unía ambas coronas, pero también podía combinarse con el nemes - ese tocado de tela con rayas azules y blancas que todos reconocemos, que se colocaba tras las orejas y se recogía en una trenza en la espalda. Era más que moda: era la representación visual del poder absoluto sobre un territorio unificado. Ahora los invito a hacer un viaje en el tiempo. Estamos en los primeros siglos del Imperio Antiguo, alrededor del año 3000 antes de Cristo. Los primeros faraones se entierran en construcciones que llamamos mastabas - imaginen una especie de mesa gigante de piedra, con una capilla arriba para las ofrendas, un pozo para acceder desde la entrada a la cámara sepulcral, que se utilizaba únicamente para depositar el cadáver y luego se sellaba para siempre, y una cámara sepulcral excavada en el subsuelo, decorada con pinturas y relieves que acompañarían al difunto en su viaje eterno. Pero entonces aparece un personaje extraordinario: el faraón Zoser y su genial arquitecto Imhotep - el primer arquitecto de la historia cuyo nombre conocemos. Imhotep no se conformó con una mastaba... ¡apiló seis mastabas una encima de otra! Y así nació la primera pirámide escalonada de Saqqara. Imaginen el impacto visual: de repente, el paisaje egipcio se alzaba hacia el cielo con una estructura de 60 metros de altura, toda en piedra perfectamente tallada. Y luego viene la revolución definitiva: las pirámides perfectas de Guiza. Keops, Kefrén y Micerinos. A partir de la cuarta dinastía, decidieron que esos escalones sobraban - querían formas puras, geométricas, perfectas. La pirámide de Keops, con sus 146 metros originales de altura, fue el edificio más alto del mundo durante más de 3800 años. ¡Imaginen! Desde su construcción hasta las catedrales góticas del siglo XIV, nada la superó. La pirámide de Kefrén es la única que conserva en el remate parte de la decoración original de piedra caliza pulida y la pirámide de Micerinos se acompaña de otras tres pirámides menores, dedicadas tal vez a tres reinas. Y como guardiana eterna de todo este conjunto se alza la esfinge de Guiza, esa escultura monumental en roca caliza que representa un cuerpo de león con el rostro del faraón Kefrén, tocado con el nemes. Es la imagen misma del poder divino convertido en guardián eterno, con esa mirada enigmática perdida en el horizonte del desierto. Pero las pirámides no eran monumentos aislados. Se situaban en necrópolis - auténticas ciudades de los muertos - que incluían varios templos, otras pirámides menores y una gran avenida procesional. Estos templos, con carácter funerario, se caracterizaban por su escasa ornamentación, a pesar de la riqueza de los materiales utilizados: granito y alabastro. Pero no todo era monumentalidad bruta. Los egipcios desarrollaron un lenguaje arquitectónico de una sutileza extraordinaria. Sus columnas son auténticas joyas: las protodóricas, con sus fustes acanalados que imitan atadillos de juncos; las papiriformes, que reproducen los tallos del papiro... Era como si hubieran trasladado todo el paisaje del Nilo al interior de sus templos. Cuando uno camina entre estas columnas - y yo he tenido la suerte de hacerlo - siente que está en un bosque petrificado, en un jardín eterno donde la naturaleza se ha transformado en arquitectura para no morir jamás. Y ahora llegamos a uno de mis aspectos favoritos del arte egipcio: la escultura. Porque aquí los egipcios desarrollaron una idea revolucionaria: la escultura no es solo representación, es presencia real. Creían que parte del alma del representado se quedaba atrapada en la piedra. Por eso las esculturas tenían que ser perfectas, duraderas, hechas en materiales nobles como el basalto o la diorita. Esta concepción sagrada de la escultura le otorgaba una doble función fascinante. Primero, transmitir una presencia: en el caso de los faraones, se realizaban esculturas que sirvieran para ejercer la protección del faraón en una ciudad determinada. Un ejemplo extraordinario son las tríadas de Micerinos - una colección de esculturas en basalto que representan al faraón con la diosa Hathor y distintas ciudades de Egipto personificadas en forma de mujer, cada una diferente, con el atributo de la ciudad sobre la cabeza. Destacan por el brillo impresionante de la piedra y por el cuidadoso tratamiento de la anatomía. La segunda función era acoger el alma del difunto. Se pensaba que, en caso de que el alma de un difunto - su ka - no pudiera reposar en su cuerpo momificado por haber sido dañado o robado, podría refugiarse en una escultura que lo representara. De ahí la importancia vital de que las esculturas estuvieran realizadas en materiales duros y que los miembros del cuerpo estuvieran firmemente fijados al bloque de piedra para que no pudieran romperse jamás. Miren por ejemplo la escultura del faraón Zoser: está sentado, con esa mirada perdida en la eternidad, tocado con el nemes, la barba postiza... Es la imagen misma de la divinidad. Pero fíjense en algo curioso: los ojos están muy abiertos, la sonrisa es tenue, la expresión serena pero distante. Es lo que llamamos hieratismo - la representación de lo sagrado, alejado de las emociones humanas. Pero cuando los egipcios esculpían a personas que no eran divinas, ¡todo cambiaba! El famoso Escriba Sentado es un ejemplo perfecto: aquí tenemos realismo puro, incluso ese pequeño michelin en el vientre que delata una vida cómoda. La mirada es inteligente, alerta, humana. Los materiales son más sencillos - caliza en lugar de basalto - pero la expresividad es mucho mayor. Y en el Imperio Medio aparece algo nuevo y conmovedor: los ushebtis, pequeñas esculturas que reproducen servidores, las cuales se colocaban en las tumbas junto al sarcófago. Se pensaba que estos ushebtis podían volver a la vida y servir al faraón en su vida de ultratumba. Habitualmente son representados como figuritas momiformes, aunque también existen ushebtis realizando tareas manuales con una viveza y realismo extraordinarios. Ahora quiero contarles sobre una pieza extraordinaria: la paleta de Narmer. Esta pequeña obra de arte en pizarra conmemora la unificación de Egipto bajo el primer faraón. Y aquí vemos ya todos los elementos que definirán el arte egipcio durante tres milenios. Fíjense en la perspectiva jerárquica: Narmer es gigantesco comparado con sus enemigos. Y fíjense en esa perspectiva \\\"torcida\\\" tan característica: la cabeza de perfil pero con el ojo de frente, el torso de frente pero los brazos de perfil... Era una forma genial de mostrar cada parte del cuerpo desde su ángulo más reconocible. No era torpeza - era sofisticación conceptual. Y llegamos a la pintura, que para mí es lo más emotivo del arte egipcio. Porque mientras las esculturas y las arquitecturas nos hablan de poder y eternidad, las pinturas nos susurran secretos de la vida diaria. Las famosas \\\"Ocas de Meidum\\\" son un ejemplo perfecto: una naturalidad, una frescura, una observación tan precisa que parece que las aves van a echar a volar en cualquier momento. Los egipcios pintaban estas escenas en las tumbas para que el alma del difunto recordara los placeres de la vida: los banquetes, la caza, la pesca, las cosechas... La técnica era principalmente el fresco: yeso húmedo pintado con pigmentos naturales. Los colores eran simbólicos: el dorado para lo divino, el azul para el cielo y el agua, el verde para la vegetación y la regeneración... Y no puedo hablar de arte egipcio sin mencionar los jeroglíficos. \\\"La representación de lo sagrado\\\" - eso significa la palabra. Porque para los egipcios, escribir era un acto sagrado, artístico. Cada símbolo era una pequeña obra de arte: el halcón, la serpiente, el ojo... Pero con el tiempo evolucionó hacia una escritura silábica, donde los símbolos que representan una sílaba se combinaban para crear palabras más complejas. Los símbolos se basaban en formas de la naturaleza: plantas, animales, figuras humanas, lugares, objetos del día a día... Y aquí viene lo verdaderamente extraordinario: los jeroglíficos tenían un orden a la vez estricto y flexible. Los símbolos podían leerse de derecha a izquierda o de izquierda a derecha, podían situarse horizontalmente o agruparse verticalmente... Era un sistema completamente adaptable a las necesidades artísticas de cada superficie. Los elementos más importantes, como los nombres de los faraones, se encerraban en cartuchos - esos óvalos que vemos en tantas inscripciones. Después del colapso del Imperio Antiguo, llegó el Imperio Medio, y aquí vemos cambios sutiles pero significativos. Los retratos de faraones como Sesostris III nos muestran rostros cansados, melancólicos, profundamente humanos. Ya no son solo dioses - son dioses que han sufrido, que conocen el peso del poder. Las pirámides siguen construyéndose, pero son más pequeñas, más íntimas. Y aparece algo nuevo y conmovedor: los ushebtis, esas pequeñas figuritas de servidores que acompañaban al difunto para servirle en la otra vida. Hay algo profundamente humano en esta idea - incluso en la eternidad, nadie quiere estar solo. Y aquí llegamos al final de nuestro viaje, pero también al principio de algo eterno. Porque lo que los egipcios consiguieron fue algo extraordinario: crear un arte que trasciende el tiempo. Cuando Napoleón llegó a Egipto en 1798 y sus soldados vieron por primera vez las pirámides, uno de ellos gritó: \\\"¡Soldados, desde lo alto de estas pirámides, cuarenta siglos os contemplan!\\\" Cuarenta siglos... y ahí siguen, contemplándonos. Porque los egipcios entendieron algo fundamental: que el arte verdadero no es decoración, es comunicación. Cada pirámide nos dice \\\"aquí vivió un dios\\\", cada escultura nos dice \\\"yo soy eterno\\\", cada pintura nos dice \\\"la vida es hermosa y merece ser recordada\\\". En películas como \\\"Los Diez Mandamientos\\\" de Cecil B. DeMille o \\\"Cleopatra\\\" con Elizabeth Taylor, Hollywood ha intentado capturar esa majestuosidad egipcia. Pero la realidad supera cualquier ficción. Porque cuando uno está frente a la esfinge de Guiza, con esa mirada enigmática perdida en el horizonte, entiende que no está ante una obra de arte - está ante un misterio hecho piedra. Los egipcios nos enseñaron que el arte puede ser vehículo de eternidad. Que una civilización puede hablar a través de los siglos mediante formas, colores y símbolos. Que la belleza y el significado pueden fundirse en una sola expresión. Y por eso, cada vez que contemplamos una obra egipcia - ya sea la majestuosa pirámide de Keops, la serena escultura de Zoser, o las delicadas ocas de Meidum - no estamos simplemente viendo arte antiguo. Estamos participando en un diálogo de cuatro milenios, escuchando las voces de una civilización que se negó a morir y que sigue hablándonos desde la eternidad. Muchas gracias. El Nilo sigue fluyendo, y el arte egipcio sigue emocionándonos.\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -16,
+        -64
+      ],
+      "id": "331955af-8711-4ec6-80c2-187f9d974cb2",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        -64
+      ],
+      "id": "85e8cac7-e0fb-4f60-b27a-b943f7e0a237",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        216,
+        160
+      ],
+      "id": "a5d9fabf-5b27-4d8a-a288-52e831bd3a08",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "X30UB2LkpOZovf9c",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        344,
+        160
+      ],
+      "id": "5411d056-1840-4b4f-b831-bf8a502d5c1b",
+      "name": "Structured Output Parser"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-20T11:41:29.905Z",
+      "updatedAt": "2025-10-20T11:41:29.905Z",
+      "role": "workflow:owner",
+      "workflowId": "ejfESvevjMbjxYm1",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-20T11:59:41.000Z",
+  "versionId": "4d391ab3-3df8-4fd0-879e-df8e72afbbed"
+}

@@ -49,6 +49,17 @@
           }
         ]
       ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-20T11:41:29.895Z",
@@ -183,6 +194,17 @@
       ],
       "id": "5411d056-1840-4b4f-b831-bf8a502d5c1b",
       "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        448,
+        -176
+      ],
+      "id": "35f27d17-1477-4183-b0f7-4114300cd421",
+      "name": "Think"
     }
   ],
   "pinData": {},
@@ -201,6 +223,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-10-20T14:56:40.000Z",
-  "versionId": "8efe3f5e-6e2d-4c10-9b8e-1ec9e885c005"
+  "updatedAt": "2025-10-21T08:01:13.000Z",
+  "versionId": "dbcf63bd-13b0-43d7-9ac1-d89a3962da5f"
 }

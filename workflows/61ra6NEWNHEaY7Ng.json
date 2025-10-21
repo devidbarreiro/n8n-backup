@@ -100,13 +100,7 @@
     },
     "Webhook": {
       "main": [
-        [
-          {
-            "node": "Set Input",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Respond to Webhook": {
@@ -117,6 +111,17 @@
     "Split Out": {
       "main": [
         []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Set Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -249,7 +254,7 @@
               "id": "6e1728e0-4749-47b9-92ae-4d1c0b7008c8",
               "name": "video_url",
               "type": "string",
-              "value": "="
+              "value": "=https://storage.googleapis.com/gweb-gemini-cdn/gemini/uploads/75088d96aa687a6dedcd6e3fc4e0795c5253cad0.compressed.mp4"
             }
           ]
         },
@@ -299,8 +304,8 @@
       "name": "Sticky Note4",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -926,
-        580
+        -928,
+        592
       ],
       "typeVersion": 1
     },
@@ -315,8 +320,8 @@
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -706,
-        -12
+        -704,
+        -16
       ],
       "typeVersion": 1
     },
@@ -430,7 +435,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1088,
+        -1184,
         720
       ],
       "id": "12b89205-8976-40fa-a7ec-a42d986b1733",
@@ -465,6 +470,17 @@
       ],
       "id": "303a41eb-5f43-459a-80ce-fa70f41969f6",
       "name": "Split Out"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1104,
+        576
+      ],
+      "id": "75b4b5be-b5b8-44cc-9e36-5e812c3c51eb",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "pinData": {},
@@ -483,6 +499,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-10-06T11:11:00.000Z",
-  "versionId": "c84e6132-d943-43f1-a2d2-cddac5b506e2"
+  "updatedAt": "2025-10-21T13:27:38.000Z",
+  "versionId": "66a8ad11-3596-40a3-be32-e2bf597b7bb5"
 }

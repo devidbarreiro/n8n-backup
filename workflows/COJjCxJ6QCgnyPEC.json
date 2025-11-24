@@ -158,6 +158,17 @@
           }
         ]
       ]
+    },
+    "TikTok Juanchos Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-09-26T09:44:54.200Z",
@@ -179,8 +190,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        376,
-        -8
+        384,
+        -16
       ],
       "id": "acb839b0-963c-46bd-a8b7-5f3cc4f4fdf9",
       "name": "AI Agent"
@@ -208,7 +219,7 @@
       "typeVersion": 2.2,
       "position": [
         128,
-        216
+        224
       ],
       "id": "ddd6d9d7-122f-4392-8ef3-7a33a9425030",
       "name": "Email Agent"
@@ -227,7 +238,7 @@
       "typeVersion": 1.2,
       "position": [
         -128,
-        216
+        224
       ],
       "id": "d23cc177-1f14-4ef5-ae2b-59e1e6fa4088",
       "name": "OpenAI Chat Model",
@@ -257,7 +268,7 @@
       "typeVersion": 2.2,
       "position": [
         256,
-        216
+        224
       ],
       "id": "635c2022-739b-418c-9cd6-165f5a46cc8e",
       "name": "Contacts Agent"
@@ -275,7 +286,7 @@
       "typeVersion": 1.2,
       "position": [
         -352,
-        88
+        96
       ],
       "id": "c722a858-c14b-4ca4-98e2-a9c9b69b6bb8",
       "name": "Telegram Trigger",
@@ -297,7 +308,7 @@
       "typeVersion": 1.2,
       "position": [
         1232,
-        88
+        96
       ],
       "id": "3e540f91-d4a6-4943-ab55-5df1b4f97431",
       "name": "Send a text message",
@@ -318,7 +329,7 @@
       "typeVersion": 1.3,
       "position": [
         0,
-        216
+        224
       ],
       "id": "ca4141fa-2e2c-4c0b-9339-82c52d6cc099",
       "name": "Simple Memory"
@@ -342,7 +353,7 @@
       "typeVersion": 2.2,
       "position": [
         384,
-        216
+        224
       ],
       "id": "d6aa517f-1928-4750-91e0-fde5b1954d2c",
       "name": "Chat Agent"
@@ -387,7 +398,7 @@
       "typeVersion": 2.2,
       "position": [
         512,
-        216
+        224
       ],
       "id": "249cfc00-5eaa-405c-8456-d2dd836a643a",
       "name": "Linear Agent"
@@ -411,7 +422,7 @@
       "typeVersion": 2.2,
       "position": [
         640,
-        216
+        224
       ],
       "id": "6d50b4f4-e4ed-4a66-9ca8-cdd7458ab962",
       "name": "Calendar Agent"
@@ -443,7 +454,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "position": [
         1232,
-        -104
+        -112
       ],
       "typeVersion": 1.1
     },
@@ -491,7 +502,7 @@
       "type": "n8n-nodes-base.webhook",
       "position": [
         -352,
-        -104
+        -112
       ],
       "webhookId": "f0224b4b-1644-4d3d-9f12-01a9c04879e4",
       "typeVersion": 2
@@ -515,7 +526,7 @@
       "typeVersion": 2.2,
       "position": [
         768,
-        216
+        224
       ],
       "id": "1feb52cf-a686-478d-a04b-2e85769fdbaf",
       "name": "News Researcher"
@@ -539,7 +550,7 @@
       "typeVersion": 2.2,
       "position": [
         896,
-        216
+        224
       ],
       "id": "090adec6-3489-4154-ad2a-12432907a019",
       "name": "RAG Agent"
@@ -637,10 +648,53 @@
       "typeVersion": 2.2,
       "position": [
         1024,
-        216
+        224
       ],
       "id": "e5f19e44-578e-4036-92fc-8270ec734fd2",
       "name": "Yahoo Finance Quote"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool when the user specifies to create a TiKTok video of Juancho.\nCuando lo hagas notifica al usuario que la generación del vídeo tardará por lo menos 3 minutos.",
+        "workflowId": {
+          "__rl": true,
+          "value": "oQRechOQ0UaL9TZK",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/oQRechOQ0UaL9TZK",
+          "cachedResultName": "Juanchos Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "input": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('input', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "input"
+          ],
+          "schema": [
+            {
+              "id": "input",
+              "displayName": "input",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1136,
+        224
+      ],
+      "id": "4a982ccf-7f73-4db9-ad60-7fef9263bf67",
+      "name": "TikTok Juanchos Agent"
     }
   ],
   "pinData": {},
@@ -659,6 +713,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-10-08T13:37:12.000Z",
-  "versionId": "6a3a2172-59a4-47c5-a01a-7736360c586d"
+  "updatedAt": "2025-10-23T07:21:55.000Z",
+  "versionId": "1e08d5d4-5563-487b-a88f-b9adff310d24"
 }

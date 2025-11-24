@@ -1,0 +1,771 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "News Researcher Agent": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Message a model in Perplexity": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Writer Agent",
+            "type": "ai_tool",
+            "index": 0
+          },
+          {
+            "node": "Message a model",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Writer Agent": {
+      "main": [
+        [
+          {
+            "node": "Log posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Writer Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Structured Output Parser1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log ideas": {
+      "main": [
+        []
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Writer Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get rows": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Log ideas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-10-21T14:41:50.347Z",
+  "id": "b7vkwDqS6LOzMDdC",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Auto news",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        96
+      ],
+      "id": "6237ac6c-e74c-40c2-b1a1-25ffa0c5b15c",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Task:\nGet the most recent and relevant information in Artificial Intelligence from trusted and verified sources worldwide.\nClassify the results into four categories:\n\n1. Broad-impact AI news\n\nFocus on how AI affects different industries (healthcare, education, finance, energy, government, etc.).\n\nInclude developments that shape public policy, ethics, regulation, or large-scale adoption.\n\nMention the target audience (general public, business leaders, policymakers, etc.).\n\nHighlight societal, ethical, or economic implications.\n\n2. Technical or research-focused AI updates\n\nAimed at engineers, researchers, and AI practitioners.\n\nInclude research breakthroughs, model releases, benchmarks, framework innovations, and technical reports.\n\nPrioritize updates from OpenAI, Google DeepMind, Anthropic, Meta, Mistral, Hugging Face, and leading AI labs.\n\nMention datasets, evaluation metrics, or architecture details if relevant.\n\n3. Developer-focused AI updates\n\nAimed at software developers, ML engineers, and data scientists.\n\nInclude SDKs, APIs, frameworks, open-source libraries, new integrations, LangChain / LLMOps tools, and tutorials.\n\nFocus on practical and applicable tools for building or deploying AI systems.\n\nMention startups or platforms offering new developer-centric AI resources.\n\n4. Academic AI papers\n\nInclude recent AI research papers from top universities and conferences (e.g., MIT, Stanford, Berkeley, Oxford, ETH, CMU, NeurIPS, ICML, ICLR, CVPR, ACL).\n\nFocus on papers that introduce new models, algorithms, or theoretical contributions.\n\nProvide the title, authors, affiliation, publication date, and link (preferably arXiv or DOI).\n\nInclude a short summary (2–3 sentences) explaining the main contribution or finding.\n\nMention field or subdomain (e.g., reinforcement learning, NLP, computer vision, generative AI, robotics, interpretability...).",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Don´t stop until you have at least 25 news.\nLook only for news on the past 7 days"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        96
+      ],
+      "id": "0163e542-67ce-4042-b0f8-89a2fa166166",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to take any reasearch actions",
+        "workflowId": {
+          "__rl": true,
+          "value": "dJaaUu5E60Vif3L0",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/dJaaUu5E60Vif3L0",
+          "cachedResultName": "News Researcher Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        -400,
+        1328
+      ],
+      "id": "f083fbd4-efa7-4798-9816-6b3f2fff7eb1",
+      "name": "News Researcher Agent"
+    },
+    {
+      "parameters": {
+        "messages": {
+          "message": [
+            {
+              "content": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('message0_Text', ``, 'string') }}"
+            }
+          ]
+        },
+        "options": {
+          "searchRecency": "day"
+        },
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexityTool",
+      "typeVersion": 1,
+      "position": [
+        96,
+        320
+      ],
+      "id": "41dd9725-1fc2-425f-a2df-62c9e76af4ad",
+      "name": "Message a model in Perplexity",
+      "credentials": {
+        "perplexityApi": {
+          "id": "1db6Y4SRmhm0qZLS",
+          "name": "Perplexity account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"num_news\": 1,\n  \"news\": [\n    {\n      \"titulo\": \"Ejemplo de noticia\",\n      \"medio\": \"El País\",\n      \"fecha_publicacion\": \"2025-10-21\",\n      \"pais\": \"España\",\n      \"region\": \"Europa\",\n      \"publico_objetivo\": \"Adultos interesados en actualidad política\",\n      \"etiquetas\": [\"política\", \"economía\"],\n      \"url\": \"https://elpais.com/noticia-ejemplo\",\n      \"resumen\": \"El gobierno anuncia nuevas medidas económicas para 2026.\",\n      \"autor\": \"Redacción El País\",\n      \"idioma\": \"es\",\n      \"fuente_tipo\": \"periódico digital\",\n      \"sentimiento\": \"neutral\",\n      \"relevancia\": 8,\n      \"recomendaciones\": [\n        \"Comparar esta noticia con medios de distinta línea editorial.\",\n        \"Ver impacto en el contexto internacional.\"\n      ]\n    }\n  ]\n}\n",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        320
+      ],
+      "id": "e56c68b3-b420-44ba-b2ac-bf9fb479c432",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        224,
+        320
+      ],
+      "id": "4d2e1c4f-ede8-4f66-8aee-c0d3087c71f4",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.news",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        656,
+        96
+      ],
+      "id": "ad61e1a2-d364-4a12-bb8e-06e6126d65c9",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -400,
+        -128
+      ],
+      "id": "27801bfb-1205-4232-97b1-607a34d6b365",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iGj66V20MUsxJSiI",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analiza el siguiente JSON de noticias sobre inteligencia artificial. Selecciona las 5 noticias más relevantes basándote en el campo 'relevance' y en su impacto actual. Luego, genera un post profesional para LinkedIn que comience con una frase impactante como 'La IA está cambiando más rápido que nunca' o 'Las novedades de IA de hoy están redefiniendo lo posible'.\nEl post debe:\n\nIncluir las 5 noticias seleccionadas con un emoji diferente para cada una\nResumir cada noticia en 1-2 líneas de forma accesible\nMantener un tono profesional pero entusiasta\nTerminar con una pregunta que invite a la conversación\nIncluir hashtags relevantes (#IA #InteligenciaArtificial #Innovación #Tecnología)\nTener una extensión ideal de 250-350 palabras\n\nJSON de noticias:\n{{ JSON.stringify($('Get rows').all()) }}\n\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Importante, solo quiero un único post"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        112,
+        752
+      ],
+      "id": "8e386005-49b6-4804-ade1-cc2e1387ed0b",
+      "name": "Writer Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5",
+          "mode": "list",
+          "cachedResultName": "gpt-5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        224,
+        576
+      ],
+      "id": "7f87353c-b87a-4302-9b5d-d5a818e8bccc",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1QPkUwnMy5ZruJmb4Qeg9aPQnEjgpiw8lbv03YvNuMEo",
+          "mode": "list",
+          "cachedResultName": "linkedin <> n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QPkUwnMy5ZruJmb4Qeg9aPQnEjgpiw8lbv03YvNuMEo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Sheet1",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "==ROW()-1",
+            "title": "={{ $json.titulo }}",
+            "media": "={{ $json.medio }}",
+            "date": "={{ $json.fecha_publicacion }}",
+            "country": "={{ $json.pais }}",
+            "region": "={{ $json.region }}",
+            "tags": "={{ $json.etiquetas }}",
+            "audience": "={{ $json.publico_objetivo }}",
+            "url": "={{ $json.url }}",
+            "summary": "={{ $json.resumen }}",
+            "author": "={{ $json.autor }}",
+            "language": "={{ $json.idioma }}",
+            "sentiment": "={{ $json.sentimiento }}",
+            "relevance": "={{ $json.relevancia }}",
+            "recommendations": "={{ $json.recomendaciones }}",
+            "iteration": "1"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "iteration",
+              "displayName": "iteration",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "media",
+              "displayName": "media",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "country",
+              "displayName": "country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "region",
+              "displayName": "region",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "audience",
+              "displayName": "audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tags",
+              "displayName": "tags",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "summary",
+              "displayName": "summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "author",
+              "displayName": "author",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "language",
+              "displayName": "language",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sentiment",
+              "displayName": "sentiment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "relevance",
+              "displayName": "relevance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "recommendations",
+              "displayName": "recommendations",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1104,
+        96
+      ],
+      "id": "59910bc3-144d-49b9-bd6b-8a3c7b69e55d",
+      "name": "Log ideas",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iGj66V20MUsxJSiI",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1xJsQZavrzCmol0MgDWuHwhjO0MG96wghdQaBcGiM6y8/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xJsQZavrzCmol0MgDWuHwhjO0MG96wghdQaBcGiM6y8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "news_ids",
+              "displayName": "news_ids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "post",
+              "displayName": "post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        496,
+        752
+      ],
+      "id": "4d6d3891-6d81-46e8-a7b1-3fe9cf56fb8e",
+      "name": "Log posts",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iGj66V20MUsxJSiI",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "https://docs.google.com/spreadsheets/d/1QPkUwnMy5ZruJmb4Qeg9aPQnEjgpiw8lbv03YvNuMEo/edit?gid=0#gid=0",
+          "__regex": "https:\\/\\/(?:drive|docs)\\.google\\.com(?:\\/.*|)\\/d\\/([0-9a-zA-Z\\-_]+)(?:\\/.*|)"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QPkUwnMy5ZruJmb4Qeg9aPQnEjgpiw8lbv03YvNuMEo/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "iteration",
+              "lookupValue": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -304,
+        992
+      ],
+      "id": "21497b41-3294-45be-b6db-c29b1d034037",
+      "name": "Get rows",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "iGj66V20MUsxJSiI",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"id\": \"linkedin_post_001\",\n  \"news_ids\": [\"ai_news_001\", \"ai_news_002\", \"ai_news_003\", \"ai_news_004\", \"ai_news_005\"],\n  \"post\": \"La IA está cambiando más rápido que nunca, redefiniendo industrias y posibilidades. Aquí van las 5 noticias más relevantes del momento:\\n\\n🌍 **Avance en IA para la salud**: Un nuevo modelo de Google DeepMind predice con precisión enfermedades raras a partir de datos genómicos, prometiendo acelerar diagnósticos. Impacto: más vidas salvadas.\\n\\n🚀 **Lanzamiento de Mistral Codex**: Mistral AI presentó una herramienta que genera código en tiempo real, integrándose con VS Code. Ideal para desarrolladores que buscan eficiencia.\\n\\n📊 **Regulación de IA en la UE**: La Unión Europea aprobó un marco ético para IA, exigiendo transparencia en modelos de alto riesgo. Esto redefine el desarrollo responsable.\\n\\n🤖 **Robot autónomo para logística**: xAI y Tesla colaboran en un robot impulsado por IA que optimiza almacenes, reduciendo costos operativos en un 20%. Un salto para la industria.\\n\\n📜 **Paper revolucionario en NLP**: Investigadores de MIT publicaron un modelo de lenguaje que reduce el sesgo en un 30%, según su evaluación en datasets públicos. Un paso hacia una IA más justa.\\n\\nEstas innovaciones muestran el poder transformador de la IA, pero también plantean preguntas éticas y prácticas. ¿Cómo crees que estas novedades impactarán tu industria? Únete a la conversación. #IA #InteligenciaArtificial #Innovación #Tecnología\"\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        496
+      ],
+      "id": "65045386-9490-4e38-ba43-525253801bc9",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Analiza el siguiente JSON de noticias sobre inteligencia artificial. Selecciona las 5 noticias más relevantes basándote en el campo 'relevance' y en su impacto actual. Luego, genera un post profesional para LinkedIn que comience con una frase impactante como 'La IA está cambiando más rápido que nunca' o 'Las novedades de IA de hoy están redefiniendo lo posible'.\nEl post debe:\n\nIncluir las 5 noticias seleccionadas con un emoji diferente para cada una\nResumir cada noticia en 1-2 líneas de forma accesible\nMantener un tono profesional pero entusiasta\nTerminar con una pregunta que invite a la conversación\nIncluir hashtags relevantes (#IA #InteligenciaArtificial #Innovación #Tecnología)\nTener una extensión ideal de 250-350 palabras\n\nJSON de noticias:\n{{ JSON.stringify($('Get rows').all()) }}\n\n\nJson output format:\n{\n  \"id\": \"linkedin_post_001\",\n  \"news_ids\": [\"ai_news_001\", \"ai_news_002\", \"ai_news_003\", \"ai_news_004\", \"ai_news_005\"],\n  \"post\": \"La IA está cambiando más rápido que nunca, redefiniendo industrias y posibilidades. Aquí van las 5 noticias más relevantes del momento:\\n\\n🌍 **Avance en IA para la salud**: Un nuevo modelo de Google DeepMind predice con precisión enfermedades raras a partir de datos genómicos, prometiendo acelerar diagnósticos. Impacto: más vidas salvadas.\\n\\n🚀 **Lanzamiento de Mistral Codex**: Mistral AI presentó una herramienta que genera código en tiempo real, integrándose con VS Code. Ideal para desarrolladores que buscan eficiencia.\\n\\n📊 **Regulación de IA en la UE**: La Unión Europea aprobó un marco ético para IA, exigiendo transparencia en modelos de alto riesgo. Esto redefine el desarrollo responsable.\\n\\n🤖 **Robot autónomo para logística**: xAI y Tesla colaboran en un robot impulsado por IA que optimiza almacenes, reduciendo costos operativos en un 20%. Un salto para la industria.\\n\\n📜 **Paper revolucionario en NLP**: Investigadores de MIT publicaron un modelo de lenguaje que reduce el sesgo en un 30%, según su evaluación en datasets públicos. Un paso hacia una IA más justa.\\n\\nEstas innovaciones muestran el poder transformador de la IA, pero también plantean preguntas éticas y prácticas. ¿Cómo crees que estas novedades impactarán tu industria? Únete a la conversación. #IA #InteligenciaArtificial #Innovación #Tecnología\"\n}\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        112,
+        992
+      ],
+      "id": "b9c253b4-5a2e-4625-8073-6a198047d4ad",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filtrar solo noticias de la última semana\nconst now = new Date();\nconst oneWeekAgo = new Date(now.getTime() - 10 * 24 * 60 * 60 * 1000);\n\nreturn items.filter(item => {\n  const fecha = new Date(item.json.fecha_publicacion);\n  return !isNaN(fecha) && fecha >= oneWeekAgo && fecha <= now;\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        880,
+        96
+      ],
+      "id": "c028c211-d91b-41ea-b477-877bef307e6c",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-21T14:41:50.351Z",
+      "updatedAt": "2025-10-21T14:41:50.351Z",
+      "role": "workflow:owner",
+      "workflowId": "b7vkwDqS6LOzMDdC",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-22T10:15:45.000Z",
+  "versionId": "5b95885a-cc8b-47dc-88bc-18ce3a813c01"
+}

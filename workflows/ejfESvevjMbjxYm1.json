@@ -1,42 +1,9 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Edit Fields": {
       "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "OpenAI Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          },
-          {
-            "node": "Structured Output Parser",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Structured Output Parser": {
@@ -60,6 +27,49 @@
           }
         ]
       ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        []
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-10-20T11:41:29.895Z",
@@ -68,19 +78,8 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Guion -> Escenas",
+  "name": "Modo Híbrido",
   "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -168,
-        -64
-      ],
-      "id": "752c5518-000a-42b3-bb36-4941764b6635",
-      "name": "When clicking ‘Execute workflow’"
-    },
     {
       "parameters": {
         "mode": "raw",
@@ -90,8 +89,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        128,
-        -64
+        64,
+        160
       ],
       "id": "331955af-8711-4ec6-80c2-187f9d974cb2",
       "name": "Edit Fields"
@@ -99,7 +98,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=La duración del vídeo en minutos es de: {{ $json.duracion }} minutos.\nEl guión del video es: {{ $json.guion }}\nERES UN EDITOR DE VIDEO Y PRODUCTOR ESPECIALIZADO EN CONTENIDO EDUCATIVO\n\nRecibirás un JSON con:\n- duracion: duración total en MINUTOS\n- guion: texto completo del guión\n\nTu tarea es DIVIDIR el guión en ESCENAS coherentes optimizadas para producción con IA.\n\n---\n\n## REGLAS DE DURACIÓN Y PLATAFORMA\n\n**Duración por escena:** máximo 60 segundos\n- HeyGen: ideal 45-60 s para avatar + voz sincronizada\n- Hedra: ideal ≤40 s para narración corta + B-roll\n- ElevenLabs: narración de voz flexible (sin límite de duración)\n\n**Tipo de escena:**\n- \"avatar\": \"si\" → escenas con presentador frente a cámara (HeyGen)\n- \"avatar\": \"no\" → documentales/narración en off (Hedra/ElevenLabs)\n\n---\n\n## ASIGNACIÓN AUTOMÁTICA DE PLATAFORMA\n\n- **HeyGen**: Introducción, presentación, bloques de concepto clave, cierres (avatar visible)\n- **Hedra**: Descripciones, narrativas, datos, B-roll con voz en off\n- **ElevenLabs**: Cuando solo generes voz (montaje externo)\n\n---\n\n## ESTRUCTURA JSON DE SALIDA\n\n{\n  \"project\": {\n    \"platform_mode\": \"mixto|heygen|hedra\",\n    \"max_scene_seconds\": 60,\n    \"language\": \"es\",\n    \"total_estimated_duration_min\": [numero original]\n  },\n  \"scenes\": [\n    {\n      \"id\": \"ESCENA_01\",\n      \"duration_sec\": 55,\n      \"summary\": \"Resumen breve (1-2 frases) del contenido\",\n      \"script_text\": \"Texto LITERAL y COMPLETO del guion para esta escena\",\n      \"avatar\": \"si|no\",\n      \"broll\": [\"elemento visual 1\", \"elemento visual 2\", \"elemento visual 3\"],\n      \"transition\": \"corte|fundido|deslizamiento|zoom|panorámica|fundido_a_negro\",\n      \"text_on_screen\": \"Título o sobreimpreso breve\",\n      \"audio_notes\": \"Indicaciones de tono, ritmo, pausa, música o efectos\",\n      \"platform\": \"HeyGen|Hedra|ElevenLabs\"\n    }\n  ]\n}\n\n---\n\n## REGLAS CRÍTICAS\n\n1. **script_text debe ser LITERAL** del guion original. NO resumas, NO parafrasees. Copia exacto.\n   - EXCEPTO: expande todos los acrónimos y abreviaturas (AC → aire acondicionado, pm → Post Meridiem, etc.)\n   - No deben aparecer siglas como \"AC\", \"pm\", \"AD\", \"BCE\" en el texto final\n   - Escribe palabras completas para máxima claridad en voz y legibilidad\n2. Una escena = un cambio temático o de locación natural\n3. Si una frase pertenece a dos escenas, duplícala para continuidad\n4. Mantén la narrativa fluida: corta solo en pausas o cambios naturales\n5. broll: sugerencias de 2-5 recursos visuales para cada escena\n6. audio_notes: especifica pausas, música, énfasis, tipo de voz\n7. Suma total de duraciones ≈ duración original (con margen de ±2-3%)\n8. Devuelve SOLO JSON válido, sin explicaciones\n\n---\n\n## CRITERIOS DE CORTE\n\nBusca cambios naturales para dividir:\n- Cambios de tema narrativo\n- Cambios de locación o contexto\n- Transiciones entre conceptos principales\n- Pausas naturales o puntos de enfoque\n\nSi una sección es muy larga, subdivídela en 2-3 escenas cortas manteniendo coherencia temática.",
+        "text": "=## 1. Perfil y Misión\n\n**Perfil:** Eres un productor y editor de vídeo experto, especializado en la creación de contenido cinematográfico utilizando plataformas de IA generativa (Sora, Gemini Veo, HeyGen).\n\n**Objetivo:** Tu objetivo principal es transformar el guion de texto plano en una estructura de producción de vídeo JSON detallada y lista para la API.\n\n**Misión:** Actúa como un director de fotografía y un editor, no solo como un formateador de texto. Tu tarea es analizar el guion, dividirlo en escenas lógicas y coherentes, y para CADA escena, definir todos los parámetros de producción: la plataforma de IA correcta, una duración válida, el texto del guion y, fundamentalmente, un `visual_prompt` de nivel cinematográfico.\n\nLa duración del vídeo en minutos es de: `{{ $json.body.duracion_minutos }}` minutos.\nEl guión del video es: `{{ $json.body.guion }}`\n\n---\n\n## 2. Plataformas y Restricciones Técnicas\n\nCada escena debe asignarse a una plataforma. Estas son las reglas **no negociables** basadas en las limitaciones de la API:\n\n| Plataforma | Avatar | Uso Principal | Duraciones Permitidas (`duration_sec`) |\n| :--- | :--- | :--- | :--- |\n| **HeyGen** | `\"si\"` | Presentador, explicaciones, intros/cierres. | Cualquier valor entre **30 y 60** segundos. |\n| **Gemini Veo** | `\"no\"` | B-roll cinematográfico, documental, realista. | Cualquier valor entre **5 y 8** segundos (Máx 8). |\n| **Sora** | `\"no\"` | Escenas complejas, acción, efectos visuales, movimientos de cámara creativos. | **Exactamente 4, 8, o 12** segundos. |\n\n**Errores Comunes a Evitar (Inválido):**\n* `\"platform\": \"sora\", \"duration_sec\": 10` (Sora no acepta 10)\n* `\"platform\": \"gemini_veo\", \"duration_sec\": 9` (Veo tiene un máximo de 8)\n\n---\n\n## 3. Reglas de Creación de Escenas\n\n### A. Guion (`script_text`)\n\n1.  **Literal:** El `script_text` debe ser un corte **literal** del guion original. No resumas ni parafrasees.\n2.  **Sin Abreviaturas:** Expande **TODOS** los acrónimos (Ej: \"IA\" → \"inteligencia artificial\", \"EE.UU.\" → \"Estados Unidos\", \"etc.\" → \"etcétera\").\n3.  **Duración del Texto:** La longitud del texto debe ser apropiada para la duración de la escena. Usa esto como guía:\n    * **5 segundos:** 10-11 palabras\n    * **8 segundos:** 16-18 palabras\n    * **12 segundos:** 22-25 palabras\n\n### B. Asignación de Plataforma y Dinamismo\n\n1.  **Avatar \"si\" (Presentador):**\n    * Usa **HeyGen** (`platform: \"heygen\"`).\n    * Ideal para: Introducciones, conclusiones, explicaciones directas.\n    * Divide el contenido en escenas de 30-60 segundos. Si un monólogo dura 90s, divídelo en dos escenas (ej: 45s y 45s).\n2.  **Avatar \"no\" (Visuales/B-roll):**\n    * Usa **Gemini Veo** (`platform: \"gemini_veo\"`) para b-roll cinematográfico y descriptivo (5-8s).\n    * Usa **Sora** (`platform: \"sora\"`) para escenas creativas, acción o movimientos de cámara complejos (4s, 8s, o 12s).\n3.  **Dinamismo:** Alterna entre escenas con avatar (HeyGen) y escenas visuales (Veo/Sora) para mantener el interés. Evita más de 2 escenas de HeyGen consecutivas.\n\n### C. Duración Total\n\n* La suma de todas las `duration_sec` de las escenas debe aproximarse al total de `duracion_minutos * 60` (con un margen de ±10%).\n\n---\n\n## 4. Requisitos Detallados del `visual_prompt` (CRÍTICO)\n\nEste campo es fundamental para la generación visual. **Debe ser un objeto JSON anidado**, no un simple string. **Más detalle = mejores resultados**. Sé extremadamente descriptivo y cinematográfico.\n\nTu `visual_prompt` **debe** contener las siguientes claves:\n\n* `description` (string): Descripción general y detallada del entorno, objetos principales, elementos visuales clave, texturas, colores dominantes.\n* `camera` (string): Instrucciones técnicas de cámara. Incluye: tipo de plano (ej: \"Plano medio\", \"Plano detalle\"), movimiento (ej: \"suave dolly-in\", \"cámara en mano estable\", \"plano cenital estático\"), lente (ej: \"lente 35mm\"), y estilo (ej: \"cinematográfico 4K\", \"estética RED camera\").\n* `lighting` (string): Descripción completa del esquema de iluminación. Incluye: fuentes (ej: \"luz natural cálida de atardecer\"), dirección (ej: \"iluminación lateral desde la izquierda\"), temperatura de color (ej: \"5000K\"), tipo de sombras (ej: \"sombras suaves\").\n* `composition` (string): Estructura visual y organización del encuadre. Incluye: regla de tercios, líneas guía, espacios negativos, balance (ej: \"balance asimétrico\"), punto focal.\n* `atmosphere` (string): Ambiente emocional y sensorial de la escena. Incluye: mood (ej: \"profesional y enfocado\", \"misterioso\", \"optimista\"), tono emocional, energía (ej: \"calma y concentrada\").\n* `style_reference` (string): Referencias cinematográficas, artísticas o de estilo visual (ej: \"Estilo keynote de Apple\", \"Cinematografía de Blade Runner 2049\", \"Estética de vídeo corporativo de Microsoft\").\n* `continuity_notes` (string): Notas para mantener la consistencia con escenas adyacentes (ej: \"Misma ropa que en Escena 1\", \"La luz progresa de la mañana a la tarde\", \"Mantener el mismo prop en el escritorio\").\n* `characters_in_scene` (array de strings): IDs de los personajes presentes en esta escena (ej: `[\"char_1\"]` o `[]` si no hay personajes).\n\n---\n\n## 5. Estructura de Salida JSON Requerida\n\nTu respuesta debe ser **únicamente** un objeto JSON válido. El objeto JSON de nivel superior debe contener claves como `status`, `script_id`, `message`, `project`, `characters`, y `scenes`.\n\nTu tarea principal es generar el array `scenes`. Cada objeto de escena dentro de ese array debe tener esta estructura:\n\n* `id` (string): Identificador único (ej: \"Escena 1\").\n* `duration_sec` (number): Duración **válida** según la plataforma.\n* `summary` (string): Resumen corto de la escena.\n* `script_text` (string): Texto literal del guion, sin acrónimos.\n* `visual_prompt` (object): El objeto JSON anidado y detallado como se definió en la Sección 4.\n* `avatar` (string): Exactamente `\"si\"` o `\"no\"`.\n* `broll` (array de strings): 2-5 sugerencias de elementos visuales (ej: [\"manos escribiendo\", \"gráfico animado\"]).\n* `transition` (string): Transición de entrada (ej: \"corte\", \"fundido\", \"deslizamiento\").\n* `text_on_screen` (string): Texto superpuesto en la escena (ej: \"Conceptos Clave\").\n* `audio_notes` (string): Tono de voz, música de fondo, efectos de sonido (ej: \"Tono entusiasta. Música corporativa suave.\").\n* `platform` (string): Exactamente `\"heygen\"`, `\"gemini_veo\"`, o `\"sora\"`.\n\n---\n\n## 6. Checklist de Validación Final (Crítico)\n\nAntes de responder, revisa cada escena para asegurar que:\n\n1.  **Sora:** CUALQUIER escena con `platform: \"sora\"` tiene `duration_sec` que es **exactamente 4, 8, o 12**.\n2.  **Gemini Veo:** CUALQUIER escena con `platform: \"gemini_veo\"` tiene `duration_sec` **menor o igual a 8**.\n3.  **HeyGen:** CUALQUIER escena con `platform: \"heygen\"` tiene `duration_sec` **entre 30 y 60**.\n4.  **Coherencia Avatar:** `avatar: \"si\"` SIEMPRE usa `platform: \"heygen\"`. `avatar: \"no\"` SIEMPRE usa `gemini_veo` o `sora`.\n5.  **Guion:** `script_text` es literal y **no contiene acrónimos** o abreviaturas.\n6.  **Visual Prompt:** `visual_prompt` es un **objeto JSON** detallado con todas las claves (description, camera, lighting, etc.), no un simple string.\n\n**RESPONDE ÚNICAMENTE CON EL JSON VÁLIDO. SIN EXPLICACIONES ADICIONALES.**",
         "hasOutputParser": true,
         "options": {}
       },
@@ -111,34 +110,6 @@
       ],
       "id": "85e8cac7-e0fb-4f60-b27a-b943f7e0a237",
       "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "model": {
-          "__rl": true,
-          "value": "gpt-4o",
-          "mode": "list",
-          "cachedResultName": "gpt-4o"
-        },
-        "options": {
-          "responseFormat": "json_object",
-          "maxRetries": 5
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
-      "position": [
-        432,
-        416
-      ],
-      "id": "5da49079-eb2e-4e1c-8f77-7398a96d6b7a",
-      "name": "OpenAI Chat Model",
-      "credentials": {
-        "openAiApi": {
-          "id": "nmk2GFM41ZOhRE5f",
-          "name": "OpenAi account"
-        }
-      }
     },
     {
       "parameters": {
@@ -183,7 +154,7 @@
     },
     {
       "parameters": {
-        "jsonSchemaExample": "{\n  \"project\": {\n    \"platform_mode\": \"mixto\",\n    \"num_scenes\": 3,\n    \"language\": \"es\",\n    \"total_estimated_duration_min\": 4\n  },\n  \"scenes\": [\n    {\n      \"id\": \"ESCENA_01\",\n      \"duration_sec\": 45,\n      \"summary\": \"Introducción visual con presentador invitando al viaje narrativo.\",\n      \"script_text\": \"Texto literal completo del guion para esta escena\",\n      \"avatar\": \"si\",\n      \"broll\": [\"elemento visual 1\", \"elemento visual 2\", \"elemento visual 3\"],\n      \"transition\": \"fundido\",\n      \"text_on_screen\": \"Título principal\",\n      \"audio_notes\": \"Pausa 1 segundo; tono narrativo; música épica suave.\",\n      \"platform\": \"HeyGen\"\n    },\n    {\n      \"id\": \"ESCENA_02\",\n      \"duration_sec\": 50,\n      \"summary\": \"Desarrollo narrativo con explicación y B-roll documental.\",\n      \"script_text\": \"Texto literal completo del guion para esta escena\",\n      \"avatar\": \"no\",\n      \"broll\": [\"recurso visual 1\", \"recurso visual 2\", \"recurso visual 3\", \"recurso visual 4\"],\n      \"transition\": \"deslizamiento\",\n      \"text_on_screen\": \"Subtítulo o frase clave\",\n      \"audio_notes\": \"Voz en off profunda; énfasis natural; música ambiental.\",\n      \"platform\": \"Hedra\"\n    },\n    {\n      \"id\": \"ESCENA_03\",\n      \"duration_sec\": 55,\n      \"summary\": \"Cierre temático con reflexión y avatar para conclusión.\",\n      \"script_text\": \"Texto literal completo del guion para esta escena\",\n      \"avatar\": \"si\",\n      \"broll\": [\"elemento reflexivo 1\", \"elemento reflexivo 2\"],\n      \"transition\": \"fundido_a_negro\",\n      \"text_on_screen\": \"Reflexión final\",\n      \"audio_notes\": \"Tono reflexivo; pausa estratégica; música épica.\",\n      \"platform\": \"HeyGen\"\n    }\n  ]\n}",
+        "jsonSchemaExample": "{\n  \"project\": {\n    \"project_name\": \"Nombre del proyecto o producción audiovisual.\",\n    \"platform_mode\": \"Modo de generación del proyecto. Valores posibles: 'mixto', 'avatar', 'b-roll', 'cinematic', etc.\",\n    \"num_scenes\": \"Número total de escenas del video.\",\n    \"language\": \"Idioma principal del diálogo y narración. Ejemplo: 'es', 'en', 'fr'.\",\n    \"total_estimated_duration_min\": \"Duración total estimada del proyecto en minutos.\",\n    \"visual_style_reference\": \"Referencia o descripción general del estilo visual. Ejemplo: 'realismo cinematográfico', 'estilo anime', 'look documental', etc.\",\n    \"color_palette\": \"Descripción o lista de los tonos y colores dominantes que definirán la estética global.\",\n    \"tone_and_mood\": \"Tono y atmósfera emocional del video. Ejemplo: 'inspirador', 'dramático', 'introspectivo', 'esperanzador'.\"\n  },\n  \"characters\": [\n    {\n      \"id\": \"Identificador único del personaje (string, e.g. 'char_1').\",\n      \"name\": \"Nombre del personaje.\",\n      \"role\": \"Rol narrativo del personaje (protagonista, antagonista, secundario, narrador, etc.).\",\n      \"age\": \"Edad aproximada o rango de edad.\",\n      \"gender\": \"Género del personaje (opcional o descriptivo).\",\n      \"visual_description\": \"Descripción física y visual del personaje. Incluir detalles como rasgos faciales, vestimenta, postura, estilo general.\",\n      \"personality\": \"Descripción breve del carácter o rasgos psicológicos principales.\",\n      \"voice_reference\": \"Referencia de tono, timbre, o acento de voz para síntesis de voz o avatar.\",\n      \"style_reference\": \"Referencia visual o cinematográfica del personaje (puede incluir nombres de películas, artistas o estilos fotográficos).\"\n    }\n  ],\n  \"scenes\": [\n    {\n      \"id\": \"Identificador de la escena (e.g. 'Escena 1').\",\n      \"duration_sec\": \"Duración aproximada en segundos de la escena.\",\n      \"summary\": \"Resumen breve de lo que sucede en la escena.\",\n      \"script_text\": \"Texto narrativo o diálogo que será usado para generar el audio. Debe estar redactado para lectura natural (TTS o voz de avatar).\",\n      \"visual_prompt\": {\n        \"description\":\"Descripción general y cinematográfica de la escena. Detalla el entorno, la acción, el tono visual y los elementos clave que deben aparecer.\", \n        \"camera\": \"Instrucciones de cámara. Ejemplo: 'wide shot', 'close-up', 'handheld', 'drone aerial', incluyendo movimiento y lente.\",\n        \"lighting\": \"Tipo y dirección de iluminación. Ejemplo: 'soft natural daylight', 'harsh neon backlight', 'golden hour glow'.\",\n        \"composition\": \"Composición visual. Ejemplo: 'rule of thirds', 'symmetrical framing', 'over-the-shoulder', etc.\",\n        \"atmosphere\": \"Descripción del ambiente emocional o físico. Ejemplo: 'misty and nostalgic', 'tense and dark', 'peaceful and bright'.\",\n        \"style_reference\": \"Referencia estilística o cinematográfica. Ejemplo: 'inspired by Blade Runner 2049', 'Studio Ghibli soft color style'.\",\n        \"continuity_notes\": \"Notas sobre continuidad visual o narrativa respecto a escenas previas (iluminación, localización, vestuario, tono).\",\n        \"characters_in_scene\": [\n          \"Array con los IDs de los personajes presentes en esta escena. Ejemplo: ['char_1', 'char_2'].\"\n        ]\n      },\n      \"avatar\": \"Indica si esta escena usa un avatar generado por IA. Valores: 'si' o 'no'.\",\n      \"broll\": [\n        \"Lista de elementos o referencias visuales adicionales (b-roll) que complementan la escena. Ejemplo: ['paisaje', 'ciudad', 'detalles del laboratorio'].\"\n      ],\n      \"transition\": \"Tipo de transición entre escenas. Ejemplo: 'fundido', 'corte', 'zoom', 'deslizamiento', etc.\",\n      \"text_on_screen\": \"Texto que aparece en pantalla (subtítulo, rótulo, título, o elemento narrativo visual).\",\n      \"audio_notes\": \"Notas específicas para la producción de audio. Ejemplo: tono de voz, ritmo, pausas, tipo de música o efectos sonoros.\",\n      \"platform\": \"Plataforma o motor de generación para esta escena. Ejemplo: 'heygen_v2', 'sora', 'runway_gen3', 'gemini_veo'.\"\n    }\n  ]\n}\n",
         "autoFix": true
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
@@ -201,13 +172,105 @@
       "typeVersion": 1.1,
       "position": [
         448,
-        -176
+        -224
       ],
       "id": "35f27d17-1477-4183-b0f7-4114300cd421",
       "name": "Think"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6e03a7df-1812-446e-a776-9a5b4ab543c8",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        96,
+        -64
+      ],
+      "id": "81364430-a805-4625-b559-567cb6b03d43",
+      "name": "Webhook",
+      "webhookId": "6e03a7df-1812-446e-a776-9a5b4ab543c8"
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "=script_result:{{ $('Webhook').item.json.body.script_id }}",
+        "value": "={{ JSON.stringify({\n  \"status\": \"success\",\n  \"message\": \"Guión procesado correctamente\",\n  \"script_id\": $('Webhook').item.json.body.script_id,\n  \"project\": $json.output.project,\n  \"scenes\": $json.output.scenes\n}) }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -64
+      ],
+      "id": "ef4ccdb2-31f9-47b4-a4bd-b6d3940493e8",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "JtuezSP5P3Qpc1oQ",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        368,
+        288
+      ],
+      "id": "c895fb69-10de-4f8a-a352-cd04f486798a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "nmk2GFM41ZOhRE5f",
+          "name": "OpenAi account"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.nxhumans.com",
+            "user-agent": "python-requests/2.32.5",
+            "content-length": "3177",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, zstd",
+            "content-type": "application/json",
+            "x-forwarded-for": "195.235.14.173",
+            "x-forwarded-host": "n8n.nxhumans.com",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "7b72481c90c0",
+            "x-real-ip": "195.235.14.173"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "script_id": 117,
+            "guion": "Bienvenidos a esta masterclass sobre Historia Contemporánea.\nHoy vamos a hablar de uno de los conflictos más devastadores y decisivos de la humanidad: la Primera Guerra Mundial.\n\nTodo comenzó en 1914, cuando el archiduque Francisco Fernando de Austria fue asesinado en Sarajevo.\nEse atentado encendió la chispa de una tensión que llevaba años acumulándose entre las grandes potencias europeas.\nDetrás del crimen, había mucho más que un disparo: había rivalidades imperiales, nacionalismos, alianzas militares y una carrera armamentística sin precedentes.\n\nEuropa estaba dividida en dos grandes bloques.\nPor un lado, la Triple Entente, formada por Francia, Rusia y Reino Unido.\nPor otro, la Triple Alianza, con Alemania, Austria-Hungría e Italia, aunque Italia cambiaría de bando más adelante.\nLo que debía ser un conflicto local se convirtió rápidamente en una guerra mundial.\n\nLas potencias creían que la guerra sería corta, pero se equivocaron.\nDurante cuatro años, el continente quedó atrapado en una guerra de trincheras, especialmente en el frente occidental, entre Francia y Alemania.\nMillones de soldados vivieron meses enteros bajo la lluvia, el barro, el frío y el miedo constante.\nLas condiciones eran horribles: hambre, enfermedades y una sensación de desesperanza absoluta.\n\nFue también una guerra de innovación tecnológica.\nPor primera vez se usaron ametralladoras, tanques, aviones de combate, gases venenosos y submarinos.\nLa industria moderna había llegado al campo de batalla, y eso hizo que la escala de destrucción fuera inmensa.\n\nEn 1917, dos eventos cambiaron el curso del conflicto.\nPrimero, Estados Unidos entró en la guerra, aportando recursos frescos y un enorme poder económico.\nY segundo, Rusia se retiró tras la Revolución Bolchevique, que llevó a Lenin al poder.\n\nFinalmente, en 1918, Alemania colapsó, agotada por los frentes y por la crisis interna.\nEl 11 de noviembre de 1918, se firmó el armisticio.\nEuropa estaba destruida.\nMás de 16 millones de personas murieron, y una generación entera quedó marcada para siempre.\n\nEl tratado de Versalles, firmado en 1919, puso fin oficialmente al conflicto, pero también sembró las semillas del siguiente.\nLas duras condiciones impuestas a Alemania —reparaciones económicas, pérdida de territorios y humillación nacional— alimentaron el resentimiento que, años después, daría lugar al ascenso del nazismo y a la Segunda Guerra Mundial.\n\nLa Primera Guerra Mundial cambió todo:\nlos mapas, las sociedades, la política y la forma de entender la guerra misma.\nFue el fin de una era y el inicio del siglo XX tal como lo conocemos: un siglo de avances, pero también de heridas profundas.\n\nRecordar la Primera Guerra Mundial no es mirar al pasado,\nes recordar lo que puede ocurrir cuando la ambición, el miedo y el orgullo pesan más que la razón.",
+            "duracion_minutos": 3
+          },
+          "webhookUrl": "https://n8n.nxhumans.com/webhook/6e03a7df-1812-446e-a776-9a5b4ab543c8",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -222,7 +285,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-10-21T08:01:13.000Z",
-  "versionId": "dbcf63bd-13b0-43d7-9ac1-d89a3962da5f"
+  "triggerCount": 1,
+  "updatedAt": "2025-11-17T10:52:30.000Z",
+  "versionId": "97d7a35d-ca6d-4e1c-b280-d4799efce490"
 }

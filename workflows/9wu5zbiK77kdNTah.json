@@ -1,0 +1,107 @@
+{
+  "active": false,
+  "connections": {
+    "HTTP Request Image OpenAI": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "createdAt": "2025-10-21T13:57:00.426Z",
+  "id": "9wu5zbiK77kdNTah",
+  "isArchived": false,
+  "meta": null,
+  "name": "OpenAI Sandbox",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/images/generations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "gpt-image-1"
+            },
+            {
+              "name": "prompt",
+              "value": "un gato astronauta flotando en el espacio, estilo dibujo animado"
+            },
+            {
+              "name": "size",
+              "value": "1024x1024"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -368,
+        -160
+      ],
+      "id": "6beb0b9d-369b-4dc5-9579-118469478ef3",
+      "name": "HTTP Request Image OpenAI"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openai.com/v1/models",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            },
+            {
+              "name": "OpenAI-Organization",
+              "value": "org-UG2hr80CJPhsQWkfHVHcmF3S"
+            },
+            {
+              "name": "OpenAI-Project",
+              "value": "proj_eT6x4rLmDQirqFmJAXSdAoyu"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -368,
+        64
+      ],
+      "id": "665a1427-ccac-460a-8aac-5819abc6016c",
+      "name": "HTTP Request1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "createdAt": "2025-10-21T13:57:00.431Z",
+      "updatedAt": "2025-10-21T13:57:00.431Z",
+      "role": "workflow:owner",
+      "workflowId": "9wu5zbiK77kdNTah",
+      "projectId": "k1NZeG3qHb8L8scP"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-21T13:59:55.000Z",
+  "versionId": "3526fa3a-467f-475f-a7c1-ac60eaee9493"
+}
